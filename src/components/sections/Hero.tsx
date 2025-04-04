@@ -9,7 +9,6 @@ export function Hero() {
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
               Chat with your <span className="text-gradient">customer feedback</span><br />
-              Discover what to build next
             </h1>
             <p className="text-slate-700 md:text-xl max-w-[720px] mx-auto lg:mx-0">
               autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.

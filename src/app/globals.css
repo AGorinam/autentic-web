@@ -222,3 +222,13 @@
   @apply transform scale-[1.02] bg-slate-50 dark:bg-slate-700;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
