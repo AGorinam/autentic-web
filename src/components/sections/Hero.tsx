@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
+import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
@@ -68,7 +70,7 @@ export function Hero() {
               
               <div className="flex h-[450px]">
                 {/* Sidebar with integrations */}
-                <div className={`border-r bg-gray-50 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'w-[50px]' : 'w-[180px]'}`}>
+                <div className={`border-r bg-gray-50 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
                   {/* Sidebar header with collapse toggle */}
                   <div className="p-2 border-b flex items-center justify-between">
                     {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
@@ -108,7 +110,7 @@ export function Hero() {
                     {/* Integration items */}
                     <div className="space-y-2">
                       {/* Zendesk */}
-                      <div className={`bg-white rounded-md border ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2'}`}>
+                      <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
                         {sidebarCollapsed ? (
                           <div className="w-5 h-5 bg-black rounded-sm flex items-center justify-center">
                             <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,30 +119,28 @@ export function Hero() {
                           </div>
                         ) : (
                           <>
-                            <div className="flex justify-between items-center">
-                              <div className="flex items-center">
-                                <div className="w-4 h-4 mr-1.5 bg-black rounded-sm flex items-center justify-center">
-                                  <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div className="flex justify-between items-center mb-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 bg-black rounded-sm flex items-center justify-center">
+                                  <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 21L21 3M3 3L21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                                   </svg>
                                 </div>
-                                <div className="font-medium text-sm">Zendesk</div>
+                                <div className="font-medium text-base">Zendesk</div>
                               </div>
-                              <div className="relative w-8 h-4 bg-gray-200 rounded-full">
-                                <div className="absolute right-0 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
-                              </div>
+                              <Switch defaultChecked />
                             </div>
                             <div className="flex items-center mt-1">
-                              <div className="h-2 w-2 bg-green-400 rounded-full mr-1.5"></div>
-                              <div className="text-[10px] text-gray-500">synchronized · 189 calls</div>
+                              <div className="h-2 w-2 bg-green-500 rounded-full mr-1.5"></div>
+                              <div className="text-xs text-green-500 font-medium">sincronized · 189 calls</div>
                             </div>
-                            <div className="text-[10px] text-gray-400">Last sync: 02/03 · 12:37</div>
+                            <div className="text-xs text-gray-500">Last sync: 02/03 · 12:37</div>
                           </>
                         )}
                       </div>
                       
                       {/* Gong */}
-                      <div className={`bg-white rounded-md border ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2'}`}>
+                      <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
                         {sidebarCollapsed ? (
                           <div className="w-5 h-5 bg-purple-600 rounded-sm flex items-center justify-center">
                             <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -149,30 +149,33 @@ export function Hero() {
                           </div>
                         ) : (
                           <>
-                            <div className="flex justify-between items-center">
-                              <div className="flex items-center">
-                                <div className="w-4 h-4 mr-1.5 bg-purple-600 rounded-sm flex items-center justify-center">
-                                  <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 7V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                  </svg>
-                                </div>
-                                <div className="font-medium text-sm">Gong</div>
+                            <div className="flex justify-between items-center mb-2">
+                              <div className="flex items-center gap-2">
+                                <img 
+                                  src="/images/gong-logo.png" 
+                                  alt="Gong" 
+                                  className="w-6 h-6 object-contain"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgN1YxMkwxNSAxNU0yMSAxMkMyMSAxNi45NzA2IDE2Ljk3MDYgMjEgMTIgMjFDNy4wMjk0NCAyMSAzIDE2Ljk3MDYgMyAxMkMzIDcuMDI5NDQgNy4wMjk0NCAzIDEyIDNDMTYuOTcwNiAzIDIxIDcuMDI5NDQgMjEgMTJaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==";
+                                    target.classList.add("bg-purple-600", "rounded-sm");
+                                  }}
+                                />
+                                <div className="font-medium text-xl leading-6">Gong</div>
                               </div>
-                              <div className="relative w-8 h-4 bg-gray-200 rounded-full">
-                                <div className="absolute right-0 top-0 w-4 h-4 bg-blue-600 rounded-full"></div>
-                              </div>
+                              <Switch defaultChecked />
                             </div>
                             <div className="flex items-center mt-1">
-                              <div className="h-2 w-2 bg-green-400 rounded-full mr-1.5"></div>
-                              <div className="text-[10px] text-gray-500">synchronized · 360 calls</div>
+                              <div className="h-2 w-2 bg-green-500 rounded-full mr-1.5"></div>
+                              <div className="text-xs text-green-500 font-medium">sincronized · 360 calls</div>
                             </div>
-                            <div className="text-[10px] text-gray-400">Last sync: 01/04 · 14:23</div>
+                            <div className="text-xs text-gray-500">Last sync: 01/04 · 11:23</div>
                           </>
                         )}
                       </div>
                       
                       {/* Intercom */}
-                      <div className={`bg-white rounded-md border ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2'}`}>
+                      <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
                         {sidebarCollapsed ? (
                           <div className="w-5 h-5 bg-blue-800 rounded-sm flex items-center justify-center">
                             <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -181,24 +184,22 @@ export function Hero() {
                           </div>
                         ) : (
                           <>
-                            <div className="flex justify-between items-center">
-                              <div className="flex items-center">
-                                <div className="w-4 h-4 mr-1.5 bg-blue-800 rounded-sm flex items-center justify-center">
-                                  <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div className="flex justify-between items-center mb-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 bg-blue-800 rounded-sm flex items-center justify-center">
+                                  <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
                                 </div>
-                                <div className="font-medium text-sm">Intercom</div>
+                                <div className="font-medium text-base">Intercom</div>
                               </div>
-                              <div className="relative w-8 h-4 bg-gray-200 rounded-full">
-                                <div className="absolute left-0 top-0 w-4 h-4 bg-white border border-gray-300 rounded-full"></div>
-                              </div>
+                              <Switch />
                             </div>
                             <div className="flex items-center mt-1">
-                              <div className="h-2 w-2 bg-green-400 rounded-full mr-1.5"></div>
-                              <div className="text-[10px] text-gray-500">synchronized · 360 calls</div>
+                              <div className="h-2 w-2 bg-gray-400 rounded-full mr-1.5"></div>
+                              <div className="text-xs text-gray-500">disconnected</div>
                             </div>
-                            <div className="text-[10px] text-gray-400">Last sync: 30/03 · 14:00</div>
+                            <div className="text-xs text-gray-500">Last sync: never</div>
                           </>
                         )}
                       </div>
