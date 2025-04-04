@@ -1,6 +1,27 @@
+"use client";
+
 import Link from "next/link";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 
 export function Hero() {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("submitted");
+  };
+  
+  // Placeholders for the input field
+  const placeholders = [
+    "What do users think about our pricing?",
+    "Show me recent feedback about the mobile app",
+    "What features are most requested?",
+    "Summarize feedback from enterprise customers",
+    "What are the top pain points users mention?",
+  ];
+  
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden gradient-background">
       <div className="container px-4 md:px-6 mx-auto">
@@ -75,30 +96,12 @@ export function Hero() {
                   </button>
                 </div>
                 
-                {/* Input field mockup */}
-                <div className="relative mt-6 border rounded-lg">
-                  <input
-                    type="text"
-                    placeholder="Ask about your feedback..."
-                    className="w-full p-3 pr-10 text-sm focus:outline-none rounded-lg"
-                    disabled
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                  >
-                    <path d="M22 2L11 13" />
-                    <path d="M22 2l-7 20-4-9-9-4 20-7z" />
-                  </svg>
-                </div>
+                {/* Replace the input field mockup with the fancy animated input */}
+                <PlaceholdersAndVanishInput
+                  placeholders={placeholders}
+                  onChange={handleChange}
+                  onSubmit={handleSubmit}
+                />
               </div>
             </div>
           </div>
