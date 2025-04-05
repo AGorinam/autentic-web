@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [activePeriod, setActivePeriod] = useState("28D");
-  const [chatVisible, setChatVisible] = useState(false);
+  const [chatVisible, setChatVisible] = useState(true);
   const heroRef = useRef<HTMLDivElement>(null);
   const [bounds, setBounds] = useState<{ top: number; left: number; right: number; bottom: number } | null>(null);
   
@@ -55,15 +55,6 @@ export function Hero() {
     calculateInitialPosition();
     window.addEventListener('resize', calculateInitialPosition);
     return () => window.removeEventListener('resize', calculateInitialPosition);
-  }, []);
-  
-  // Show chat with a small delay for a nice entrance
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setChatVisible(true);
-    }, 500);
-    
-    return () => clearTimeout(timer);
   }, []);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
