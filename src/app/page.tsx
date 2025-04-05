@@ -5,11 +5,11 @@ import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col bg-white">
       <Hero />
-      <div className="w-full overflow-hidden">
-        <svg className="w-full h-16 -mt-1" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <path d="M0 0L1440 0V50C1440 50 1252.94 100 720 100C187.06 100 0 50 0 50V0Z" fill="white" className="dark:fill-slate-950" />
+      <div className="w-full overflow-hidden -mt-20">
+        <svg className="w-full h-20" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0 0L1440 0V50C1440 50 1252.94 100 720 100C187.06 100 0 50 0 50V0Z" fill="white" />
         </svg>
       </div>
       <FeatureTabs />

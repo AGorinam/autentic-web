@@ -100,7 +100,7 @@ export function Draggable({
         userSelect: "none",
         width: "100%",
         maxWidth: "560px",
-        zIndex: isDragging ? 1000 : 100,
+        zIndex: isDragging ? 40 : 30,
         touchAction: "none",
       }}
       onMouseDown={handleMouseDown}

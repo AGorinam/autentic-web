@@ -75,27 +75,27 @@ export function Hero() {
   ];
   
   return (
-    <section ref={heroRef} className="w-full py-12 md:py-24 lg:py-32 overflow-hidden gradient-background relative">
+    <section ref={heroRef} className="w-full pt-24 pb-12 md:pb-24 lg:pb-32 overflow-hidden bg-gradient-to-br from-purple-200 to-purple-300 relative">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
-              Chat with your <span className="text-gradient">customer feedback</span><br />
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black">
+              Chat with your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">customer feedback</span>
             </h1>
-            <p className="text-slate-700 md:text-xl max-w-[720px] mx-auto lg:mx-0">
+            <p className="text-gray-700 md:text-xl max-w-[720px] mx-auto lg:mx-0">
               autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
               <Link 
                 href="#demo" 
-                className="luma-button luma-button-primary px-8 py-4 text-base"
+                className="bg-black text-white px-8 py-4 text-base font-medium rounded-md"
               >
                 Start for free
               </Link>
               <Link 
                 href="#video"
-                className="luma-button luma-button-secondary px-8 py-4 text-base"
+                className="bg-white text-black px-8 py-4 text-base font-medium rounded-md border border-gray-300"
               >
                 Watch video
               </Link>
@@ -103,18 +103,18 @@ export function Hero() {
           </div>
           
           {/* Right column with the chat mockup */}
-          <div className="lg:ml-auto flex items-center justify-center relative h-[550px] w-full">
+          <div className="lg:ml-auto flex items-center justify-center relative h-[550px] w-full" style={{ zIndex: 30 }}>
             {/* Draggable chat mockup */}
             {chatVisible && (
               <Draggable
                 bounds={bounds}
                 dragHandleSelector=".drag-handle"
                 initialPosition={initialPosition}
-                className="transition-opacity duration-500 opacity-100 w-full max-w-[560px]"
+                className="transition-opacity duration-500 opacity-100 w-full max-w-[560px] z-40"
               >
                 <div className="w-full rounded-xl overflow-hidden border shadow-xl bg-white">
                   {/* Top navigation bar - macOS style - make it work with draggable */}
-                  <div className="bg-gray-50 p-3 border-b flex justify-between items-center drag-handle cursor-grab select-none hover:bg-gray-100 transition-colors">
+                  <div className="bg-white p-3 border-b flex justify-between items-center drag-handle cursor-grab select-none hover:bg-gray-50 transition-colors">
                     <div className="flex space-x-2">
                       <div className="h-2.5 w-2.5 bg-red-400 rounded-full"></div>
                       <div className="h-2.5 w-2.5 bg-yellow-400 rounded-full"></div>
@@ -128,13 +128,13 @@ export function Hero() {
                   
                   <div className="flex h-[450px]">
                     {/* Sidebar with integrations */}
-                    <div className={`border-r bg-gray-50 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
+                    <div className={`border-r bg-white flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
                       {/* Sidebar header with collapse toggle */}
                       <div className="p-2 border-b flex items-center justify-between">
                         {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
                         <button 
                           className={cn(
-                            "p-1 rounded-md hover:bg-gray-200 text-gray-500 cursor-pointer",
+                            "p-1 rounded-md hover:bg-gray-100 text-gray-500 cursor-pointer",
                             sidebarCollapsed ? "w-full flex justify-center" : ""
                           )}
                           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -326,11 +326,11 @@ export function Hero() {
                     
                     {/* Main chat area */}
                     <div className="flex-1 flex flex-col">                  
-                      <div className="flex-1 p-4 overflow-y-auto space-y-4">
+                      <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-white">
                         {/* User query */}
                         <div className="flex justify-end">
                           <div className="bg-gray-100 rounded-lg p-3 max-w-[80%]">
-                            <p className="text-sm">What do users say about onboarding?</p>
+                            <p className="text-sm text-gray-800">What do users say about onboarding?</p>
                           </div>
                         </div>
                         
@@ -347,7 +347,7 @@ export function Hero() {
                           
                           {/* Sources section */}
                           <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div className="text-xs font-medium text-gray-600 mb-2">Sources</div>
+                            <div className="text-xs font-medium text-gray-800 mb-2">Sources</div>
                             <div className="space-y-2">
                               <div className="flex items-start">
                                 <div className="bg-purple-100 rounded-md p-1 mr-2">
@@ -357,10 +357,10 @@ export function Hero() {
                                 </div>
                                 <div>
                                   <div className="flex items-center">
-                                    <div className="text-xs font-medium">Marco P. (Customer)</div>
+                                    <div className="text-xs font-medium text-gray-800">Marco P. (Customer)</div>
                                     <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded ml-2">Gong Call</div>
                                   </div>
-                                  <p className="text-xs text-gray-600 mt-0.5">
+                                  <p className="text-xs text-gray-700 mt-0.5">
                                     "I spent nearly an hour trying to configure the workflow. The setup process wasn't intuitive at all."
                                   </p>
                                   <button className="flex items-center text-[10px] text-blue-600 hover:text-blue-800 mt-1">
@@ -383,10 +383,10 @@ export function Hero() {
                                 </div>
                                 <div>
                                   <div className="flex items-center">
-                                    <div className="text-xs font-medium">Sarah J. (Support)</div>
+                                    <div className="text-xs font-medium text-gray-800">Sarah J. (Support)</div>
                                     <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded ml-2">Zendesk Ticket</div>
                                   </div>
-                                  <p className="text-xs text-gray-600 mt-0.5">
+                                  <p className="text-xs text-gray-700 mt-0.5">
                                     "Could you please provide more documentation on the initial setup? I'm struggling to understand how to configure my workspace."
                                   </p>
                                 </div>
@@ -397,7 +397,7 @@ export function Hero() {
                       </div>
                       
                       {/* Input area */}
-                      <div className="p-3 border-t">
+                      <div className="p-3 border-t bg-white">
                         <PlaceholdersAndVanishInput
                           placeholders={placeholders}
                           onChange={handleChange}

@@ -189,15 +189,15 @@ export function PlaceholdersAndVanishInput({
         repeatDelay: 1
       }}
       className={cn(
-        "w-full relative max-w-xl mx-auto bg-white/90 dark:bg-zinc-800/90 h-12 rounded-full overflow-hidden shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),_0px_1px_0px_0px_rgba(25,28,33,0.02),_0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus-within:ring-2 focus-within:ring-gray-200 dark:focus-within:ring-gray-700",
-        value && "bg-gray-50 dark:bg-zinc-800 border-gray-200 dark:border-zinc-700",
+        "w-full relative max-w-xl mx-auto bg-white h-12 rounded-full overflow-hidden shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),_0px_1px_0px_0px_rgba(25,28,33,0.02),_0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200 border border-gray-200 hover:border-gray-300 focus-within:ring-2 focus-within:ring-gray-200",
+        value && "bg-gray-50 border-gray-200",
         className
       )}
       onSubmit={handleSubmit}
     >
       <canvas
         className={cn(
-          "absolute pointer-events-none text-base transform scale-50 top-[20%] left-2 sm:left-6 origin-top-left filter invert dark:invert-0 pr-20",
+          "absolute pointer-events-none text-base transform scale-50 top-[20%] left-2 sm:left-6 origin-top-left filter invert pr-20",
           !animating ? "opacity-0" : "opacity-100"
         )}
         ref={canvasRef}
@@ -215,15 +215,15 @@ export function PlaceholdersAndVanishInput({
         type="text"
         placeholder=""
         className={cn(
-          "w-full relative text-sm sm:text-base z-50 border-none dark:text-white bg-transparent text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-8 pr-20",
-          animating && "text-transparent dark:text-transparent"
+          "w-full relative text-sm sm:text-base z-50 border-none text-gray-900 bg-transparent h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-8 pr-20",
+          animating && "text-transparent"
         )}
       />
 
       <button
         disabled={!value}
         type="submit"
-        className="absolute right-2 top-1/2 z-50 -translate-y-1/2 h-8 w-8 rounded-full disabled:bg-gray-100 gradient-background dark:disabled:bg-zinc-800 transition duration-200 flex items-center justify-center"
+        className="absolute right-2 top-1/2 z-50 -translate-y-1/2 h-8 w-8 rounded-full disabled:bg-gray-100 bg-black transition duration-200 flex items-center justify-center"
       >
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
@@ -278,7 +278,7 @@ export function PlaceholdersAndVanishInput({
                 duration: 0.3,
                 ease: "linear",
               }}
-              className="text-sm sm:text-base font-normal pl-4 sm:pl-8 text-left w-[calc(100%-2rem)] truncate text-gradient"
+              className="text-sm sm:text-base font-normal pl-4 sm:pl-8 text-left w-[calc(100%-2rem)] truncate text-gray-500"
             >
               {placeholders[currentPlaceholder]}
             </motion.p>
