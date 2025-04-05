@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { PanelLeft, PanelLeftClose } from "lucide-react";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
+  const [activePeriod, setActivePeriod] = useState("28D");
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
@@ -20,11 +22,10 @@ export function Hero() {
   
   // Placeholders for the input field with explicit instructions to try it
   const placeholders = [
-    "Type a question about user feedback... (try it!)",
-    "Ask me about mobile app feedback...",
-    "What features do users want most? (try typing here)",
-    "Ask: What do enterprise customers think?",
-    "Try asking about user pain points...",
+    "What users think about the new mobile app?",
+    "What mobile features do users want most?",
+    "What do enterprise customers think?",
+    "What users think about the new sidebar?",
   ];
   
   return (
@@ -75,24 +76,18 @@ export function Hero() {
                   <div className="p-2 border-b flex items-center justify-between">
                     {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
                     <button 
-                      className="p-1 rounded-md hover:bg-gray-200 text-gray-500"
+                      className={cn(
+                        "p-1 rounded-md hover:bg-gray-200 text-gray-500 cursor-pointer",
+                        sidebarCollapsed ? "w-full flex justify-center" : ""
+                      )}
                       onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                       title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
-                      <svg 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className="text-gray-700"
-                      >
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <line x1="9" y1="3" x2="9" y2="21" />
-                      </svg>
+                      {sidebarCollapsed ? (
+                        <PanelLeft className="h-4 w-4 text-gray-700" />
+                      ) : (
+                        <PanelLeftClose className="h-4 w-4 text-gray-700" />
+                      )}
                     </button>
                   </div>
                   
@@ -101,9 +96,39 @@ export function Hero() {
                     {/* Time period filters */}
                     {!sidebarCollapsed && (
                       <div className="flex gap-1 mb-2">
-                        <div className="text-xs bg-white border px-2 py-1 rounded-md">7D</div>
-                        <div className="text-xs bg-white border px-2 py-1 rounded-md text-blue-600 font-medium border-blue-200 bg-blue-50">28D</div>
-                        <div className="text-xs bg-white border px-2 py-1 rounded-md">90D</div>
+                        <button 
+                          onClick={() => setActivePeriod("7D")}
+                          className={cn(
+                            "text-xs border px-2 py-1 rounded-md transition-colors cursor-pointer", 
+                            activePeriod === "7D" 
+                              ? "text-blue-600 font-medium border-blue-200 bg-blue-50" 
+                              : "bg-white hover:bg-gray-50"
+                          )}
+                        >
+                          7D
+                        </button>
+                        <button 
+                          onClick={() => setActivePeriod("28D")}
+                          className={cn(
+                            "text-xs border px-2 py-1 rounded-md transition-colors cursor-pointer", 
+                            activePeriod === "28D" 
+                              ? "text-blue-600 font-medium border-blue-200 bg-blue-50" 
+                              : "bg-white hover:bg-gray-50"
+                          )}
+                        >
+                          28D
+                        </button>
+                        <button 
+                          onClick={() => setActivePeriod("90D")}
+                          className={cn(
+                            "text-xs border px-2 py-1 rounded-md transition-colors cursor-pointer", 
+                            activePeriod === "90D" 
+                              ? "text-blue-600 font-medium border-blue-200 bg-blue-50" 
+                              : "bg-white hover:bg-gray-50"
+                          )}
+                        >
+                          90D
+                        </button>
                       </div>
                     )}
                     
@@ -112,20 +137,30 @@ export function Hero() {
                       {/* Zendesk */}
                       <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
                         {sidebarCollapsed ? (
-                          <div className="w-5 h-5 bg-black rounded-sm flex items-center justify-center">
-                            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M3 21L21 3M3 3L21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                            </svg>
-                          </div>
+                          <img 
+                            src="/images/integrations/zendesk-logo.png" 
+                            alt="Zendesk" 
+                            className="w-5 h-5 object-contain"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
+                              target.classList.add("bg-black", "rounded-sm");
+                            }}
+                          />
                         ) : (
                           <>
                             <div className="flex justify-between items-center mb-2">
                               <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 bg-black rounded-sm flex items-center justify-center">
-                                  <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 21L21 3M3 3L21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                                  </svg>
-                                </div>
+                                <img 
+                                  src="/images/integrations/zendesk-logo.png" 
+                                  alt="Zendesk" 
+                                  className="w-6 h-6 object-contain"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
+                                    target.classList.add("bg-black", "rounded-sm");
+                                  }}
+                                />
                                 <div className="font-medium text-base">Zendesk</div>
                               </div>
                               <Switch defaultChecked />
@@ -142,17 +177,22 @@ export function Hero() {
                       {/* Gong */}
                       <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
                         {sidebarCollapsed ? (
-                          <div className="w-5 h-5 bg-purple-600 rounded-sm flex items-center justify-center">
-                            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 7V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </div>
+                          <img 
+                            src="/images/integrations/gong-logo.png" 
+                            alt="Gong" 
+                            className="w-5 h-5 object-contain"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgN1YxMkwxNSAxNU0yMSAxMkMyMSAxNi45NzA2IDE2Ljk3MDYgMjEgMTIgMjFDNy4wMjk0NCAyMSAzIDE2Ljk3MDYgMyAxMkMzIDcuMDI5NDQgNy4wMjk0NCAzIDEyIDNDMTYuOTcwNiAzIDIxIDcuMDI5NDQgMjEgMTJaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==";
+                              target.classList.add("bg-purple-600", "rounded-sm");
+                            }}
+                          />
                         ) : (
                           <>
                             <div className="flex justify-between items-center mb-2">
                               <div className="flex items-center gap-2">
                                 <img 
-                                  src="/images/gong-logo.png" 
+                                  src="/images/integrations/gong-logo.png" 
                                   alt="Gong" 
                                   className="w-6 h-6 object-contain"
                                   onError={(e) => {
@@ -177,20 +217,30 @@ export function Hero() {
                       {/* Intercom */}
                       <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
                         {sidebarCollapsed ? (
-                          <div className="w-5 h-5 bg-blue-800 rounded-sm flex items-center justify-center">
-                            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </div>
+                          <img 
+                            src="/images/integrations/intercom-logo.png" 
+                            alt="Intercom" 
+                            className="w-5 h-5 object-contain"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
+                              target.classList.add("bg-blue-800", "rounded-sm");
+                            }}
+                          />
                         ) : (
                           <>
                             <div className="flex justify-between items-center mb-2">
                               <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 bg-blue-800 rounded-sm flex items-center justify-center">
-                                  <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                  </svg>
-                                </div>
+                                <img 
+                                  src="/images/integrations/intercom-logo.png" 
+                                  alt="Intercom" 
+                                  className="w-6 h-6 object-contain"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
+                                    target.classList.add("bg-blue-800", "rounded-sm");
+                                  }}
+                                />
                                 <div className="font-medium text-base">Intercom</div>
                               </div>
                               <Switch />
@@ -205,7 +255,7 @@ export function Hero() {
                       </div>
                       
                       {/* Add Integration */}
-                      <div className={`border border-dashed rounded-md ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 mt-2 flex justify-center items-center'}`}>
+                      <div className={`border border-dashed rounded-md cursor-pointer hover:bg-gray-50 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 mt-2 flex justify-center items-center'}`}>
                         <div className={`${sidebarCollapsed ? '' : 'text-xs'} text-gray-500 flex items-center`}>
                           <svg className={`${sidebarCollapsed ? 'w-3 h-3' : 'w-3 h-3 mr-1'}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 4V20M4 12H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -295,6 +345,7 @@ export function Hero() {
                       placeholders={placeholders}
                       onChange={handleChange}
                       onSubmit={handleSubmit}
+                      className="w-full"
                     />
                   </div>
                 </div>
