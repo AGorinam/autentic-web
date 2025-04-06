@@ -97,12 +97,12 @@ export function Hero() {
   };
   
   return (
-    <section ref={heroRef} className="w-full pt-24 pb-12 md:pb-24 lg:pb-32 overflow-hidden bg-gradient-to-br from-purple-200 to-purple-300 relative">
-      <div className="container px-4 md:px-6 mx-auto">
+    <section ref={heroRef} className="w-full pt-24 pb-48 md:pb-32 lg:pb-48 overflow-hidden bg-gradient-to-br from-purple-200 to-purple-300 relative">
+      <div className="container px-4 md:px-6 mx-auto relative z-10">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black mt-14 md:mt-0">
               Chat with your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">customer feedback</span>
             </h1>
             <p className="text-gray-700 md:text-xl max-w-[720px] mx-auto lg:mx-0">
@@ -391,15 +391,15 @@ export function Hero() {
                             <div className="text-xs font-medium text-gray-800 mb-2">Sources</div>
                             <div className="space-y-2">
                               <div className="flex items-start">
-                                <div className="bg-purple-100 rounded-md p-1 mr-2">
+                                <div className="bg-purple-100 rounded-md p-1 mr-2 flex-shrink-0">
                                   <svg className="w-3 h-3 text-purple-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 15.5H7.5C6.10444 15.5 5.40665 15.5 4.83886 15.6722C3.56045 16.06 2.56004 17.0605 2.17224 18.3389C2 18.9067 2 19.6044 2 21M19 21V15M16 18H22M14.5 7.5C14.5 9.98528 12.4853 12 10 12C7.51472 12 5.5 9.98528 5.5 7.5C5.5 5.01472 7.51472 3 10 3C12.4853 3 14.5 5.01472 14.5 7.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
                                 </div>
-                                <div>
-                                  <div className="flex items-center">
-                                    <div className="text-xs font-medium text-gray-800">Marco P. (Customer)</div>
-                                    <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded ml-2">Gong Call</div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center flex-wrap">
+                                    <div className="text-xs font-medium text-gray-800 mr-2">Marco P. (Customer)</div>
+                                    <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded">Gong Call</div>
                                   </div>
                                   <p className="text-xs text-gray-700 mt-0.5">
                                     "I spent nearly an hour trying to configure the workflow. The setup process wasn't intuitive at all."
@@ -417,15 +417,15 @@ export function Hero() {
                               </div>
                               
                               <div className="flex items-start">
-                                <div className="bg-blue-100 rounded-md p-1 mr-2">
+                                <div className="bg-blue-100 rounded-md p-1 mr-2 flex-shrink-0">
                                   <svg className="w-3 h-3 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 9.99979H22M9 3.99979V5.99979M15 3.99979V5.99979M7.8 3.99979H16.2C17.8802 3.99979 18.7202 3.99979 19.362 4.32679C19.9265 4.61479 20.3848 5.07299 20.6728 5.63759C21 6.27959 21 7.11959 21 8.79979V16.1998C21 17.8798 21 18.7198 20.6728 19.3618C20.3848 19.9264 19.9265 20.3848 19.362 20.6726C18.7202 20.9998 17.8802 20.9998 16.2 20.9998H7.8C6.11984 20.9998 5.27976 20.9998 4.63803 20.6726C4.07354 20.3848 3.6151 19.9264 3.32725 19.3618C3 18.7198 3 17.8798 3 16.1998V8.79979C3 7.11959 3 6.27959 3.32725 5.63759C3.6151 5.07299 4.07354 4.61479 4.63803 4.32679C5.27976 3.99979 6.11984 3.99979 7.8 3.99979Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
                                 </div>
-                                <div>
-                                  <div className="flex items-center">
-                                    <div className="text-xs font-medium text-gray-800">Sarah J. (Support)</div>
-                                    <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded ml-2">Zendesk Ticket</div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center flex-wrap">
+                                    <div className="text-xs font-medium text-gray-800 mr-2">Sarah J. (Support)</div>
+                                    <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded">Zendesk Ticket</div>
                                   </div>
                                   <p className="text-xs text-gray-700 mt-0.5">
                                     "Could you please provide more documentation on the initial setup? I'm struggling to understand how to configure my workspace."
