@@ -192,7 +192,7 @@ export function Hero() {
                         {/* Integration items */}
                         <div className="space-y-2">
                           {/* Zendesk */}
-                          <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
+                          <div className={`bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <img 
                                 src="/images/integrations/zendesk-logo.png" 
@@ -206,33 +206,35 @@ export function Hero() {
                               />
                             ) : (
                               <>
-                                <div className="flex justify-between items-center mb-2">
-                                  <div className="flex items-center gap-2">
+                                <div className="flex justify-between items-center mb-1">
+                                  <div className="flex items-center gap-1.5">
                                     <img 
                                       src="/images/integrations/zendesk-logo.png" 
                                       alt="Zendesk" 
-                                      className="w-6 h-6 object-contain"
+                                      className="w-5 h-5 object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
                                         target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
                                         target.classList.add("bg-black", "rounded-sm");
                                       }}
                                     />
-                                    <div className="font-medium text-base">Zendesk</div>
+                                    <div className="font-medium text-sm">Zendesk</div>
                                   </div>
                                   <Switch defaultChecked />
                                 </div>
                                 <div className="flex items-center mt-1">
-                                  <div className="h-2 w-2 bg-green-500 rounded-full mr-1.5"></div>
-                                  <div className="text-xs text-green-500 font-medium">sincronized · 189 calls</div>
+                                  <div className="h-1.5 w-1.5 bg-green-500 rounded-full mr-1 sync-pulse"></div>
+                                  <div className="text-xs">
+                                    <span className="text-green-500 font-medium">synchronized</span>
+                                    <span className="text-gray-500"> · 189 calls</span>
+                                  </div>
                                 </div>
-                                <div className="text-xs text-gray-500">Last sync: 02/03 · 12:37</div>
                               </>
                             )}
                           </div>
                           
                           {/* Gong */}
-                          <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
+                          <div className={`bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <img 
                                 src="/images/integrations/gong-logo.png" 
@@ -246,33 +248,35 @@ export function Hero() {
                               />
                             ) : (
                               <>
-                                <div className="flex justify-between items-center mb-2">
-                                  <div className="flex items-center gap-2">
+                                <div className="flex justify-between items-center mb-1">
+                                  <div className="flex items-center gap-1.5">
                                     <img 
                                       src="/images/integrations/gong-logo.png" 
                                       alt="Gong" 
-                                      className="w-6 h-6 object-contain"
+                                      className="w-5 h-5 object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
                                         target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgN1YxMkwxNSAxNU0yMSAxMkMyMSAxNi45NzA2IDE2Ljk3MDYgMjEgMTIgMjFDNy4wMjk0NCAyMSAzIDE2Ljk3MDYgMyAxMkMzIDcuMDI5NDQgNy4wMjk0NCAzIDEyIDNDMTYuOTcwNiAzIDIxIDcuMDI5NDQgMjEgMTJaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==";
                                         target.classList.add("bg-purple-600", "rounded-sm");
                                       }}
                                     />
-                                    <div className="font-medium text-xl leading-6">Gong</div>
+                                    <div className="font-medium text-sm">Gong</div>
                                   </div>
                                   <Switch defaultChecked />
                                 </div>
                                 <div className="flex items-center mt-1">
-                                  <div className="h-2 w-2 bg-green-500 rounded-full mr-1.5"></div>
-                                  <div className="text-xs text-green-500 font-medium">sincronized · 360 calls</div>
+                                  <div className="h-1.5 w-1.5 bg-green-500 rounded-full mr-1 sync-pulse"></div>
+                                  <div className="text-xs">
+                                    <span className="text-green-500 font-medium">synchronized</span>
+                                    <span className="text-gray-500"> · 360 calls</span>
+                                  </div>
                                 </div>
-                                <div className="text-xs text-gray-500">Last sync: 01/04 · 11:23</div>
                               </>
                             )}
                           </div>
                           
                           {/* Intercom */}
-                          <div className={`bg-white rounded-lg border border-gray-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-3'}`}>
+                          <div className={`bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <img 
                                 src="/images/integrations/intercom-logo.png" 
@@ -286,35 +290,34 @@ export function Hero() {
                               />
                             ) : (
                               <>
-                                <div className="flex justify-between items-center mb-2">
-                                  <div className="flex items-center gap-2">
+                                <div className="flex justify-between items-center mb-1">
+                                  <div className="flex items-center gap-1.5">
                                     <img 
                                       src="/images/integrations/intercom-logo.png" 
                                       alt="Intercom" 
-                                      className="w-6 h-6 object-contain"
+                                      className="w-5 h-5 object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
                                         target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
                                         target.classList.add("bg-blue-800", "rounded-sm");
                                       }}
                                     />
-                                    <div className="font-medium text-base">Intercom</div>
+                                    <div className="font-medium text-sm">Intercom</div>
                                   </div>
                                   <Switch />
                                 </div>
                                 <div className="flex items-center mt-1">
-                                  <div className="h-2 w-2 bg-gray-400 rounded-full mr-1.5"></div>
+                                  <div className="h-1.5 w-1.5 bg-gray-400 rounded-full mr-1"></div>
                                   <div className="text-xs text-gray-500">disconnected</div>
                                 </div>
-                                <div className="text-xs text-gray-500">Last sync: never</div>
                               </>
                             )}
                           </div>
                           
                           {/* Add Integration */}
-                          <div className={`border border-dashed rounded-md cursor-pointer hover:bg-gray-50 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 mt-2 flex justify-center items-center'}`}>
+                          <div className={`border border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 flex justify-center items-center'}`}>
                             <div className={`${sidebarCollapsed ? '' : 'text-xs'} text-gray-500 flex items-center`}>
-                              <svg className={`${sidebarCollapsed ? 'w-3 h-3' : 'w-3 h-3 mr-1'}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <svg className={`${sidebarCollapsed ? 'w-3 h-3' : 'w-2.5 h-2.5 mr-1'}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 4V20M4 12H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                               </svg>
                               {!sidebarCollapsed && <span>Add Integration</span>}

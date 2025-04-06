@@ -208,6 +208,27 @@
   color: transparent;
 }
 
+@keyframes pulse-sync {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sync-pulse {
+  animation: pulse-sync 1.5s ease-in-out infinite;
+}
+
 .luma-button {
   @apply rounded-[20px] font-medium transition-all duration-300;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
