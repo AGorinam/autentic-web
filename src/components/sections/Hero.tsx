@@ -5,18 +5,27 @@ import { useState, useRef, useEffect } from "react";
 import { PanelLeft, PanelLeftClose } from "lucide-react";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Switch } from "@/components/ui/switch";
-import { Draggable } from "@/components/ui/draggable";
+import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [activePeriod, setActivePeriod] = useState("28D");
   const [chatVisible, setChatVisible] = useState(true);
+  const [chatSize, setChatSize] = useState({ width: 560, height: 550 });
   const heroRef = useRef<HTMLDivElement>(null);
   const [bounds, setBounds] = useState<{ top: number; left: number; right: number; bottom: number } | null>(null);
   
   // Calculate initial position based on viewport
   const [initialPosition, setInitialPosition] = useState({ x: 0, y: 50 });
+  
+  // Initial and minimum size for the chat window
+  const initialChatSize = { width: 560, height: 550 };
+  const minChatSize = { width: 400, height: 300 };
+  const maxChatSize = { width: 1000, height: 800 };
+  
+  // Chat reference to access Draggable methods
+  const chatRef = useRef<DraggableRef>(null);
   
   // Update bounds when window is resized
   useEffect(() => {
@@ -74,6 +83,19 @@ export function Hero() {
     "What users think about the new sidebar?",
   ];
   
+  // Handler for chat resize
+  const handleChatResize = (newSize: { width: number; height: number }) => {
+    setChatSize(newSize);
+  };
+
+  // Reset chat size to initial dimensions
+  const resetChatSize = () => {
+    setChatSize(initialChatSize);
+    if (chatRef.current && chatRef.current.resetSize) {
+      chatRef.current.resetSize();
+    }
+  };
+  
   return (
     <section ref={heroRef} className="w-full pt-24 pb-12 md:pb-24 lg:pb-32 overflow-hidden bg-gradient-to-br from-purple-200 to-purple-300 relative">
       <div className="container px-4 md:px-6 mx-auto">
@@ -107,12 +129,18 @@ export function Hero() {
             {/* Draggable chat mockup */}
             {chatVisible && (
               <Draggable
+                ref={chatRef}
                 bounds={bounds}
                 dragHandleSelector=".drag-handle"
                 initialPosition={initialPosition}
-                className="transition-opacity duration-500 opacity-100 w-full max-w-[560px] z-40"
+                initialSize={initialChatSize}
+                minSize={minChatSize}
+                maxSize={maxChatSize}
+                resizable={true}
+                className="transition-opacity duration-500 opacity-100"
+                onResize={handleChatResize}
               >
-                <div className="w-full rounded-xl overflow-hidden border shadow-xl bg-white">
+                <div className="w-full h-full rounded-xl overflow-hidden border shadow-xl bg-white flex flex-col">
                   {/* Top navigation bar - macOS style - make it work with draggable */}
                   <div className="bg-white p-3 border-b flex justify-between items-center drag-handle cursor-grab select-none hover:bg-gray-50 transition-colors">
                     <div className="flex space-x-2">
@@ -120,17 +148,27 @@ export function Hero() {
                       <div className="h-2.5 w-2.5 bg-yellow-400 rounded-full"></div>
                       <div className="h-2.5 w-2.5 bg-green-400 rounded-full"></div>
                     </div>
-                    <div className="text-xs text-gray-500 select-none">autentic.ai</div>
-                    <div className="w-16 flex justify-end">
+                    <div className="text-xs text-gray-500 select-none">autentic.ai <span className="text-[10px] opacity-50">{Math.round(chatSize.width)}×{Math.round(chatSize.height)}</span></div>
+                    <div className="w-16 flex justify-end items-center">
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          resetChatSize();
+                        }}
+                        className="mr-2 text-[10px] text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full px-1.5 py-0.5 transition-colors"
+                        title="Reset size"
+                      >
+                        Reset
+                      </button>
                       <div className="h-1.5 w-5 bg-gray-300 rounded mr-1 mt-1" aria-hidden="true" title="Drag to move"></div>
                     </div>
                   </div>
                   
-                  <div className="flex h-[450px]">
+                  <div className="flex flex-1 overflow-hidden">
                     {/* Sidebar with integrations */}
-                    <div className={`border-r bg-white flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
+                    <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
                       {/* Sidebar header with collapse toggle */}
-                      <div className="p-2 border-b flex items-center justify-between">
+                      <div className="p-2 flex items-center justify-between">
                         {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
                         <button 
                           className={cn(
@@ -328,8 +366,8 @@ export function Hero() {
                     </div>
                     
                     {/* Main chat area */}
-                    <div className="flex-1 flex flex-col">                  
-                      <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-white">
+                    <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+                      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white w-full">
                         {/* User query */}
                         <div className="flex justify-end">
                           <div className="bg-gray-100 rounded-lg p-3 max-w-[80%]">
@@ -400,7 +438,7 @@ export function Hero() {
                       </div>
                       
                       {/* Input area */}
-                      <div className="p-3 border-t bg-white">
+                      <div className="p-3 border-t bg-white w-full shrink-0">
                         <PlaceholdersAndVanishInput
                           placeholders={placeholders}
                           onChange={handleChange}
