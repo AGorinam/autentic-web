@@ -8,7 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { cn } from "@/lib/utils";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { GlowEffectButton } from "@/components/ui/glow-effect-button";
+import { GetStartedButton } from "@/components/ui/get-started-button";
 
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
@@ -111,17 +111,10 @@ export function Hero() {
               autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start w-full">
-              <GlowEffectButton 
-                href="#demo" 
-                colors={['#3867d6', '#4b7bec', '#45aaf2', '#2d98da']}
-                mode="colorShift"
-                blur="medium"
-                duration={3}
-                scale={0.8}
+              <GetStartedButton 
+                href="#demo"
                 className="w-full sm:w-auto"
-              >
-                Start for free
-              </GlowEffectButton>
+              />
               <Link 
                 href="#video"
                 className="w-full sm:w-auto h-[56px] flex items-center justify-center luma-button bg-white text-black dark:bg-zinc-800 dark:text-white px-8 py-0 text-base rounded-[0.625rem] border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-md hover:scale-105 transition-all duration-300"
