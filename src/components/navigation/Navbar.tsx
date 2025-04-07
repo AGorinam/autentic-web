@@ -13,7 +13,7 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="container px-4 md:px-6 max-w-[85%] md:max-w-[82%] mx-auto py-4">
-        <nav className="flex items-center justify-between rounded-[1rem] px-3 sm:px-5 py-2 backdrop-blur-md bg-white/30 border border-white/40 shadow-sm">
+        <nav className="flex items-center justify-between rounded-[1rem] px-3 sm:px-5 py-2 backdrop-blur-md bg-white/30 border border-slate-300/70 dark:border-slate-700/70 shadow-sm">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="text-lg font-bold text-slate-800 dark:text-white">autentic.ai</span>
@@ -84,7 +84,7 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-2 p-4 rounded-xl bg-white/80 backdrop-blur-md border border-white/40 shadow-sm">
+          <div className="md:hidden mt-2 p-4 rounded-xl bg-white/80 backdrop-blur-md border border-slate-300/70 dark:border-slate-700/70 shadow-sm">
             <div className="flex flex-col gap-3">
               <Link
                 href="/product"
