@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="w-full py-20 relative -mt-4">
-      <div className="container px-4 md:px-6 max-w-[85%] md:max-w-[82%] mx-auto">
+      <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
         <div className="backdrop-blur-md bg-white/30 border border-slate-300/70 dark:border-slate-700/70 shadow-sm text-slate-800 dark:text-white rounded-3xl p-8 md:p-12 lg:p-16">
           {/* Logo and social icons */}
           <div className="mb-10">
@@ -84,7 +84,7 @@ export function Footer() {
           <div className="mt-10 pt-6 border-t border-slate-200/30 dark:border-slate-700/30">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
               <p className="text-sm text-slate-600 dark:text-slate-400">© autentic.ai, {new Date().getFullYear()} — All rights reserved.</p>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 sm:mt-0">Made in Barcelona with ❤️</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 sm:mt-0">Made with ❤️ in Barcelona</p>
             </div>
           </div>
         </div>
