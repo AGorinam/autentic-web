@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { PanelLeft, PanelLeftClose } from "lucide-react";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
@@ -234,10 +235,12 @@ export function Hero() {
                           {/* Zendesk */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
-                              <img
+                              <Image
                                 src="/images/integrations/zendesk-logo.png"
                                 alt="Zendesk"
-                                className="w-5 h-5 object-contain"
+                                width={20}
+                                height={20}
+                                className="object-contain"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
@@ -248,10 +251,12 @@ export function Hero() {
                               <>
                                 <div className="flex justify-between items-center mb-1">
                                   <div className="flex items-center gap-1.5">
-                                    <img
+                                    <Image
                                       src="/images/integrations/zendesk-logo.png"
                                       alt="Zendesk"
-                                      className="w-5 h-5 object-contain"
+                                      width={20}
+                                      height={20}
+                                      className="object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
                                         target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
@@ -276,28 +281,32 @@ export function Hero() {
                           {/* Gong */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
-                              <img
+                              <Image
                                 src="/images/integrations/gong-logo.png"
                                 alt="Gong"
-                                className="w-5 h-5 object-contain"
+                                width={20}
+                                height={20}
+                                className="object-contain"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
-                                  target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgN1YxMkwxNSAxNU0yMSAxMkMyMSAxNi45NzA2IDE2Ljk3MDYgMjEgMTIgMjFDNy4wMjk0NCAyMSAzIDE2Ljk3MDYgMyAxMkMzIDcuMDI5NDQgNy4wMjk0NCAzIDEyIDNDMTYuOTcwNiAzIDIxIDcuMDI5NDQgMjEgMTJaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==";
-                                  target.classList.add("bg-purple-600", "rounded-sm");
+                                  target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
+                                  target.classList.add("bg-black", "rounded-sm");
                                 }}
                               />
                             ) : (
                               <>
                                 <div className="flex justify-between items-center mb-1">
                                   <div className="flex items-center gap-1.5">
-                                    <img
+                                    <Image
                                       src="/images/integrations/gong-logo.png"
                                       alt="Gong"
-                                      className="w-5 h-5 object-contain"
+                                      width={20}
+                                      height={20}
+                                      className="object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
-                                        target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgN1YxMkwxNSAxNU0yMSAxMkMyMSAxNi45NzA2IDE2Ljk3MDYgMjEgMTIgMjFDNy4wMjk0NCAyMSAzIDE2Ljk3MDYgMyAxMkMzIDcuMDI5NDQgNy4wMjk0NCAzIDEyIDNDMTYuOTcwNiAzIDIxIDcuMDI5NDQgMjEgMTJaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==";
-                                        target.classList.add("bg-purple-600", "rounded-sm");
+                                        target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
+                                        target.classList.add("bg-black", "rounded-sm");
                                       }}
                                     />
                                     <div className="font-medium text-sm">Gong</div>
@@ -318,28 +327,32 @@ export function Hero() {
                           {/* Intercom */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
-                              <img
+                              <Image
                                 src="/images/integrations/intercom-logo.png"
                                 alt="Intercom"
-                                className="w-5 h-5 object-contain"
+                                width={20}
+                                height={20}
+                                className="object-contain"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
-                                  target.classList.add("bg-blue-800", "rounded-sm");
+                                  target.classList.add("bg-black", "rounded-sm");
                                 }}
                               />
                             ) : (
                               <>
                                 <div className="flex justify-between items-center mb-1">
                                   <div className="flex items-center gap-1.5">
-                                    <img
+                                    <Image
                                       src="/images/integrations/intercom-logo.png"
                                       alt="Intercom"
-                                      className="w-5 h-5 object-contain"
+                                      width={20}
+                                      height={20}
+                                      className="object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
                                         target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
-                                        target.classList.add("bg-blue-800", "rounded-sm");
+                                        target.classList.add("bg-black", "rounded-sm");
                                       }}
                                     />
                                     <div className="font-medium text-sm">Intercom</div>
