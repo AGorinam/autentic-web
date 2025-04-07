@@ -76,7 +76,7 @@ export function FeatureTabs() {
   ];
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white dark:bg-slate-950">
+    <section className="w-full py-16 md:py-24 pb-24 md:pb-48 bg-white dark:bg-slate-950">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">

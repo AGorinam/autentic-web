@@ -98,7 +98,7 @@ export function Hero() {
   };
   
   return (
-    <AuroraBackground className="w-full pt-24 pb-48 md:pb-32 lg:pb-48 overflow-hidden">
+    <AuroraBackground className="w-full pt-24 pb-36 md:pb-24 lg:pb-40 overflow-hidden">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}

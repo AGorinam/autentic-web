@@ -53,8 +53,8 @@ export const Tabs = ({
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             className={cn(
-              "relative px-5 py-2.5 rounded-[0.625rem] border border-transparent transition-all duration-200",
-              active.value !== tab.value && "hover:bg-gray-100 hover:border-gray-200 dark:hover:bg-zinc-900 dark:hover:border-zinc-800",
+              "relative px-5 py-2.5 rounded-[0.625rem] transition-all duration-200 cursor-pointer",
+              active.value !== tab.value && "hover:bg-gray-100 dark:hover:bg-zinc-900",
               tabClassName
             )}
             style={{
@@ -66,7 +66,7 @@ export const Tabs = ({
                 layoutId="clickedbutton"
                 transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                 className={cn(
-                  "absolute inset-0 bg-gray-100 dark:bg-zinc-800/30 rounded-[0.625rem] border border-gray-200 dark:border-zinc-800",
+                  "absolute inset-0 bg-gray-100 dark:bg-zinc-800/30 rounded-[0.625rem]",
                   activeTabClassName
                 )}
               />
