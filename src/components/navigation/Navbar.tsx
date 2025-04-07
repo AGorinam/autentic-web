@@ -16,7 +16,7 @@ export function Navbar() {
         <div className="flex items-center justify-between px-6 py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-lg font-medium text-slate-800 dark:text-white">autentic.ai</span>
+            <span className="text-lg font-bold text-slate-800 dark:text-white">autentic.ai</span>
           </Link>
           
           {/* Desktop Navigation */}
