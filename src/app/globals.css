@@ -81,8 +81,8 @@
   
   /* Linear-style header variables */
   --header-blur: 12px;
-  --header-bg: rgba(10, 13, 20, 0.93);
-  --header-border: rgba(255, 255, 255, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --header-border: rgba(0, 0, 0, 0.1);
   --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   /* Aurora background variables */
@@ -128,6 +128,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  
+  /* Dark mode header variables */
+  --header-bg: rgba(30, 35, 45, 0.95);
+  --header-border: rgba(255, 255, 255, 0.1);
 }
 
 @layer base {
@@ -240,7 +244,7 @@
 }
 
 .luma-button {
-  @apply rounded-[20px] font-medium transition-all duration-300;
+  @apply rounded-[0.625rem] font-medium transition-all duration-300;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 

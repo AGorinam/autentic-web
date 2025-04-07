@@ -14,13 +14,13 @@ export function CallToAction() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="#demo" 
-              className="luma-button luma-button-primary px-8 py-4 text-base"
+              className="luma-button luma-button-primary px-8 py-4 text-base rounded-[0.625rem]"
             >
               Start free trial
             </Link>
             <Link 
               href="#contact"
-              className="luma-button luma-button-secondary px-8 py-4 text-base"
+              className="luma-button luma-button-secondary px-8 py-4 text-base rounded-[0.625rem]"
             >
               Schedule a demo
             </Link>

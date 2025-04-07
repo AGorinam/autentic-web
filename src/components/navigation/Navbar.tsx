@@ -12,11 +12,11 @@ export function Navbar() {
   
   return (
     <header className="fixed top-6 left-0 right-0 z-50 mx-auto max-w-7xl px-4">
-      <div className="rounded-xl shadow-lg transition-[background] duration-[160ms] ease-[var(--ease-out-quad)] backdrop-blur-[var(--header-blur)] bg-[var(--header-bg)] border-b border-[var(--header-border)]">
+      <div className="rounded-xl shadow-lg transition-[background] duration-[160ms] ease-[var(--ease-out-quad)] backdrop-blur-[var(--header-blur)] bg-[var(--header-bg)] border border-[var(--header-border)]">
         <div className="flex items-center justify-between px-6 py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-lg font-medium text-white">autentic.ai</span>
+            <span className="text-lg font-medium text-slate-800 dark:text-white">autentic.ai</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -26,8 +26,8 @@ export function Navbar() {
               className={cn(
                 "rounded-lg px-6 py-2.5 text-sm font-medium transition-colors",
                 pathname === "/product" 
-                  ? "bg-[#1a1a1a]/80 text-white"
-                  : "text-gray-400 hover:bg-[#282828] hover:text-white"
+                  ? "bg-slate-100 text-slate-800 dark:bg-slate-700/50 dark:text-white"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
               )}
             >
               Product
@@ -37,8 +37,8 @@ export function Navbar() {
               className={cn(
                 "rounded-lg px-6 py-2.5 text-sm font-medium transition-colors",
                 pathname === "/integrations" 
-                  ? "bg-[#1a1a1a]/80 text-white"
-                  : "text-gray-400 hover:bg-[#282828] hover:text-white"
+                  ? "bg-slate-100 text-slate-800 dark:bg-slate-700/50 dark:text-white"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
               )}
             >
               Integrations
@@ -48,8 +48,8 @@ export function Navbar() {
               className={cn(
                 "rounded-lg px-6 py-2.5 text-sm font-medium transition-colors",
                 pathname === "/about" 
-                  ? "bg-[#1a1a1a]/80 text-white"
-                  : "text-gray-400 hover:bg-[#282828] hover:text-white"
+                  ? "bg-slate-100 text-slate-800 dark:bg-slate-700/50 dark:text-white"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
               )}
             >
               About
@@ -60,22 +60,22 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Link 
               href="/login" 
-              className="rounded-lg bg-transparent px-4 py-2 text-sm font-medium text-gray-400 hover:bg-[#282828] hover:text-white transition-colors"
+              className="rounded-lg bg-transparent px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white transition-colors"
             >
               Log in
             </Link>
             <Link 
               href="/signup" 
-              className="rounded-lg bg-white/90 px-5 py-2 text-sm font-medium text-black hover:bg-white inline-flex items-center transition-colors"
+              className="rounded-[0.625rem] bg-slate-800 px-5 py-2 text-sm font-medium text-white hover:bg-slate-700 dark:bg-white dark:text-slate-800 dark:hover:bg-white/90 inline-flex items-center transition-colors"
             >
-              Sign up
+              Start for free
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 rounded-md text-gray-300 hover:text-white"
+            className="md:hidden p-2 rounded-md text-slate-600 hover:text-slate-800 dark:text-slate-300 dark:hover:text-white"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <Menu className="h-6 w-6" />
@@ -84,15 +84,15 @@ export function Navbar() {
         
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-2 pb-3 px-4 mb-4 bg-[#151822]/90 backdrop-blur-sm border-t border-gray-800/50 rounded-b-xl">
+          <div className="md:hidden pt-2 pb-3 px-4 mb-4 bg-white/95 backdrop-blur-sm border-t border-slate-200 dark:bg-slate-800/95 dark:border-slate-700 rounded-b-xl">
             <div className="flex flex-col gap-3">
               <Link 
                 href="/product" 
                 className={cn(
                   "rounded-lg px-5 py-2.5 text-sm font-medium text-center transition-colors",
                   pathname === "/product" 
-                    ? "bg-[#1a1a1a]/80 text-white"
-                    : "text-gray-400 hover:bg-[#282828] hover:text-white"
+                    ? "bg-slate-100 text-slate-800 dark:bg-slate-700/50 dark:text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
                 )}
               >
                 Product
@@ -102,8 +102,8 @@ export function Navbar() {
                 className={cn(
                   "rounded-lg px-5 py-2.5 text-sm font-medium text-center transition-colors",
                   pathname === "/integrations" 
-                    ? "bg-[#1a1a1a]/80 text-white"
-                    : "text-gray-400 hover:bg-[#282828] hover:text-white"
+                    ? "bg-slate-100 text-slate-800 dark:bg-slate-700/50 dark:text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
                 )}
               >
                 Integrations
@@ -113,24 +113,24 @@ export function Navbar() {
                 className={cn(
                   "rounded-lg px-5 py-2.5 text-sm font-medium text-center transition-colors",
                   pathname === "/about" 
-                    ? "bg-[#1a1a1a]/80 text-white"
-                    : "text-gray-400 hover:bg-[#282828] hover:text-white"
+                    ? "bg-slate-100 text-slate-800 dark:bg-slate-700/50 dark:text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white"
                 )}
               >
                 About
               </Link>
-              <hr className="my-2 border-gray-800/50" />
+              <hr className="my-2 border-slate-200 dark:border-slate-700" />
               <Link 
                 href="/login" 
-                className="rounded-lg bg-transparent px-5 py-2.5 text-sm font-medium text-gray-400 hover:bg-[#282828] hover:text-white text-center transition-colors"
+                className="rounded-lg bg-transparent px-5 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-300 dark:hover:bg-slate-700/50 dark:hover:text-white text-center transition-colors"
               >
                 Log in
               </Link>
               <Link 
                 href="/signup" 
-                className="rounded-lg bg-white/90 text-black text-sm px-5 py-2.5 font-medium flex items-center justify-center transition-colors hover:bg-white"
+                className="rounded-[0.625rem] bg-slate-800 text-white text-sm px-5 py-2.5 font-medium flex items-center justify-center transition-colors hover:bg-slate-700 dark:bg-white dark:text-slate-800 dark:hover:bg-white/90"
               >
-                Sign up
+                Start for free
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
