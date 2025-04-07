@@ -7,6 +7,7 @@ import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-van
 import { Switch } from "@/components/ui/switch";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { cn } from "@/lib/utils";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
@@ -97,20 +98,15 @@ export function Hero() {
   };
   
   return (
-    <section ref={heroRef} className="w-full pt-24 pb-48 md:pb-32 lg:pb-48 overflow-hidden gradient-background relative">
-      {/* Decorative blobs */}
-      <div className="absolute top-20 right-[20%] w-[500px] h-[500px] rounded-full bg-purple-400/20 blur-[80px] -z-10"></div>
-      <div className="absolute bottom-20 left-[10%] w-[600px] h-[600px] rounded-full bg-blue-400/20 blur-[100px] -z-10"></div>
-      <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full bg-pink-400/20 blur-[70px] -z-10"></div>
-      
-      <div className="container px-4 md:px-6 mx-auto relative z-10">
+    <AuroraBackground className="w-full pt-24 pb-48 md:pb-32 lg:pb-48 overflow-hidden">
+      <div className="container px-4 md:px-6 mx-auto">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black mt-14 md:mt-0">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
               Chat with your <span className="text-gradient">customer feedback</span>
             </h1>
-            <p className="text-gray-700 md:text-xl max-w-[720px] mx-auto lg:mx-0">
+            <p className="text-gray-700 dark:text-gray-200 md:text-xl max-w-[720px] mx-auto lg:mx-0">
               autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
@@ -122,7 +118,7 @@ export function Hero() {
               </Link>
               <Link 
                 href="#video"
-                className="luma-button bg-white text-black px-8 py-4 text-base rounded-[0.625rem] border border-gray-200 hover:border-gray-300 hover:shadow-md hover:scale-105 transition-all duration-300"
+                className="luma-button bg-white text-black dark:bg-zinc-800 dark:text-white px-8 py-4 text-base rounded-[0.625rem] border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-md hover:scale-105 transition-all duration-300"
               >
                 Watch video
               </Link>
@@ -459,6 +455,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </AuroraBackground>
   );
 }

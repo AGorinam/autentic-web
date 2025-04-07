@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function CallToAction() {
   return (
-    <section className="w-full py-24 md:py-32 gradient-background">
+    <section className="w-full py-24 md:py-32">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">

@@ -1,0 +1,25 @@
+@keyframes aurora {
+  0% { background-position: 0% 50%, 50% 50%; }
+  50% { background-position: 100% 50%, 75% 50%; }
+  100% { background-position: 0% 50%, 50% 50%; }
+}
+
+@keyframes aurora-after {
+  0% { background-position: 50% 50%, 0% 50%; }
+  50% { background-position: 75% 50%, 100% 50%; }
+  100% { background-position: 50% 50%, 0% 50%; }
+}
+
+.aurora-element {
+  animation-name: aurora !important;
+  animation-duration: 35s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+}
+
+.aurora-element::after {
+  animation-name: aurora-after !important;
+  animation-duration: 45s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+}
