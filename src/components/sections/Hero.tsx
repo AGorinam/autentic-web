@@ -142,7 +142,7 @@ export function Hero() {
                 minSize={minChatSize}
                 maxSize={maxChatSize}
                 resizable={true}
-                className="transition-opacity duration-500 opacity-100 hover:scale-[1.02] transition-transform duration-500"
+                className="transition-opacity duration-500 opacity-100"
                 onResize={handleChatResize}
               >
                 <div className="w-full h-full rounded-[0.625rem] overflow-hidden border shadow-lg hover:shadow-xl transition-all duration-300 bg-white flex flex-col">
