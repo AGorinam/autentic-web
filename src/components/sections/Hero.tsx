@@ -97,13 +97,18 @@ export function Hero() {
   };
   
   return (
-    <section ref={heroRef} className="w-full pt-24 pb-48 md:pb-32 lg:pb-48 overflow-hidden bg-gradient-to-br from-purple-200 to-purple-300 relative">
+    <section ref={heroRef} className="w-full pt-24 pb-48 md:pb-32 lg:pb-48 overflow-hidden gradient-background relative">
+      {/* Decorative blobs */}
+      <div className="absolute top-20 right-[20%] w-[500px] h-[500px] rounded-full bg-purple-400/20 blur-[80px] -z-10"></div>
+      <div className="absolute bottom-20 left-[10%] w-[600px] h-[600px] rounded-full bg-blue-400/20 blur-[100px] -z-10"></div>
+      <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full bg-pink-400/20 blur-[70px] -z-10"></div>
+      
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black mt-14 md:mt-0">
-              Chat with your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">customer feedback</span>
+              Chat with your <span className="text-gradient">customer feedback</span>
             </h1>
             <p className="text-gray-700 md:text-xl max-w-[720px] mx-auto lg:mx-0">
               autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.
@@ -111,13 +116,13 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
               <Link 
                 href="#demo" 
-                className="bg-black text-white px-8 py-4 text-base font-medium rounded-md"
+                className="luma-button luma-button-primary px-8 py-4 text-base rounded-[0.625rem] hover:scale-105 hover:shadow-md transition-all duration-300"
               >
                 Start for free
               </Link>
               <Link 
                 href="#video"
-                className="bg-white text-black px-8 py-4 text-base font-medium rounded-md border border-gray-300"
+                className="luma-button bg-white text-black px-8 py-4 text-base rounded-[0.625rem] border border-gray-200 hover:border-gray-300 hover:shadow-md hover:scale-105 transition-all duration-300"
               >
                 Watch video
               </Link>
@@ -137,10 +142,10 @@ export function Hero() {
                 minSize={minChatSize}
                 maxSize={maxChatSize}
                 resizable={true}
-                className="transition-opacity duration-500 opacity-100"
+                className="transition-opacity duration-500 opacity-100 hover:scale-[1.02] transition-transform duration-500"
                 onResize={handleChatResize}
               >
-                <div className="w-full h-full rounded-xl overflow-hidden border shadow-xl bg-white flex flex-col">
+                <div className="w-full h-full rounded-[0.625rem] overflow-hidden border shadow-lg hover:shadow-xl transition-all duration-300 bg-white flex flex-col">
                   {/* Top navigation bar - macOS style - make it work with draggable */}
                   <div className="bg-white p-3 border-b flex justify-between items-center drag-handle cursor-grab select-none hover:bg-gray-50 transition-colors">
                     <div className="flex space-x-2">
@@ -194,10 +199,10 @@ export function Hero() {
                             <button 
                               onClick={() => setActivePeriod("7D")}
                               className={cn(
-                                "text-xs border px-2 py-1 rounded-md transition-colors cursor-pointer", 
+                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100", 
                                 activePeriod === "7D" 
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50" 
-                                  : "bg-white hover:bg-gray-50"
+                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100" 
+                                  : "bg-white hover:border-gray-300"
                               )}
                             >
                               7D
@@ -205,10 +210,10 @@ export function Hero() {
                             <button 
                               onClick={() => setActivePeriod("28D")}
                               className={cn(
-                                "text-xs border px-2 py-1 rounded-md transition-colors cursor-pointer", 
+                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100", 
                                 activePeriod === "28D" 
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50" 
-                                  : "bg-white hover:bg-gray-50"
+                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100" 
+                                  : "bg-white hover:border-gray-300"
                               )}
                             >
                               28D
@@ -216,10 +221,10 @@ export function Hero() {
                             <button 
                               onClick={() => setActivePeriod("90D")}
                               className={cn(
-                                "text-xs border px-2 py-1 rounded-md transition-colors cursor-pointer", 
+                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100", 
                                 activePeriod === "90D" 
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50" 
-                                  : "bg-white hover:bg-gray-50"
+                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100" 
+                                  : "bg-white hover:border-gray-300"
                               )}
                             >
                               90D
@@ -230,7 +235,7 @@ export function Hero() {
                         {/* Integration items */}
                         <div className="space-y-2">
                           {/* Zendesk */}
-                          <div className={`bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
+                          <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <img 
                                 src="/images/integrations/zendesk-logo.png" 
@@ -272,7 +277,7 @@ export function Hero() {
                           </div>
                           
                           {/* Gong */}
-                          <div className={`bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
+                          <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <img 
                                 src="/images/integrations/gong-logo.png" 
@@ -314,7 +319,7 @@ export function Hero() {
                           </div>
                           
                           {/* Intercom */}
-                          <div className={`bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
+                          <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <img 
                                 src="/images/integrations/intercom-logo.png" 
@@ -353,7 +358,7 @@ export function Hero() {
                           </div>
                           
                           {/* Add Integration */}
-                          <div className={`border border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-colors ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 flex justify-center items-center'}`}>
+                          <div className={`border border-dashed rounded-[0.5rem] cursor-pointer hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 flex justify-center items-center'}`}>
                             <div className={`${sidebarCollapsed ? '' : 'text-xs'} text-gray-500 flex items-center`}>
                               <svg className={`${sidebarCollapsed ? 'w-3 h-3' : 'w-2.5 h-2.5 mr-1'}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 4V20M4 12H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -370,14 +375,14 @@ export function Hero() {
                       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white w-full">
                         {/* User query */}
                         <div className="flex justify-end">
-                          <div className="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                          <div className="bg-gray-100 rounded-[0.625rem] p-3 max-w-[80%] hover:bg-gray-200 transition-colors duration-200">
                             <p className="text-sm text-gray-800">What do users say about onboarding?</p>
                           </div>
                         </div>
                         
                         {/* AI response with insight */}
                         <div className="space-y-3 max-w-[90%]">
-                          <div className="bg-blue-50 rounded-lg p-3.5">
+                          <div className="bg-blue-50 rounded-[0.625rem] p-3.5 hover:bg-blue-100 transition-colors duration-200">
                             <p className="text-sm text-gray-800">
                               Users frequently mention that the onboarding process is too complex. 
                               Many find it difficult to set up their initial workflows without 
@@ -387,11 +392,11 @@ export function Hero() {
                           </div>
                           
                           {/* Sources section */}
-                          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                          <div className="bg-gray-50 rounded-[0.625rem] p-3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-all duration-200">
                             <div className="text-xs font-medium text-gray-800 mb-2">Sources</div>
                             <div className="space-y-2">
                               <div className="flex items-start">
-                                <div className="bg-purple-100 rounded-md p-1 mr-2 flex-shrink-0">
+                                <div className="bg-purple-100 rounded-[0.425rem] p-1 mr-2 flex-shrink-0">
                                   <svg className="w-3 h-3 text-purple-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 15.5H7.5C6.10444 15.5 5.40665 15.5 4.83886 15.6722C3.56045 16.06 2.56004 17.0605 2.17224 18.3389C2 18.9067 2 19.6044 2 21M19 21V15M16 18H22M14.5 7.5C14.5 9.98528 12.4853 12 10 12C7.51472 12 5.5 9.98528 5.5 7.5C5.5 5.01472 7.51472 3 10 3C12.4853 3 14.5 5.01472 14.5 7.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
@@ -399,7 +404,7 @@ export function Hero() {
                                 <div className="min-w-0 flex-1">
                                   <div className="flex items-center flex-wrap">
                                     <div className="text-xs font-medium text-gray-800 mr-2">Marco P. (Customer)</div>
-                                    <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded">Gong Call</div>
+                                    <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded-[0.325rem]">Gong Call</div>
                                   </div>
                                   <p className="text-xs text-gray-700 mt-0.5">
                                     "I spent nearly an hour trying to configure the workflow. The setup process wasn't intuitive at all."
@@ -417,7 +422,7 @@ export function Hero() {
                               </div>
                               
                               <div className="flex items-start">
-                                <div className="bg-blue-100 rounded-md p-1 mr-2 flex-shrink-0">
+                                <div className="bg-blue-100 rounded-[0.425rem] p-1 mr-2 flex-shrink-0">
                                   <svg className="w-3 h-3 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 9.99979H22M9 3.99979V5.99979M15 3.99979V5.99979M7.8 3.99979H16.2C17.8802 3.99979 18.7202 3.99979 19.362 4.32679C19.9265 4.61479 20.3848 5.07299 20.6728 5.63759C21 6.27959 21 7.11959 21 8.79979V16.1998C21 17.8798 21 18.7198 20.6728 19.3618C20.3848 19.9264 19.9265 20.3848 19.362 20.6726C18.7202 20.9998 17.8802 20.9998 16.2 20.9998H7.8C6.11984 20.9998 5.27976 20.9998 4.63803 20.6726C4.07354 20.3848 3.6151 19.9264 3.32725 19.3618C3 18.7198 3 17.8798 3 16.1998V8.79979C3 7.11959 3 6.27959 3.32725 5.63759C3.6151 5.07299 4.07354 4.61479 4.63803 4.32679C5.27976 3.99979 6.11984 3.99979 7.8 3.99979Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
@@ -425,7 +430,7 @@ export function Hero() {
                                 <div className="min-w-0 flex-1">
                                   <div className="flex items-center flex-wrap">
                                     <div className="text-xs font-medium text-gray-800 mr-2">Sarah J. (Support)</div>
-                                    <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded">Zendesk Ticket</div>
+                                    <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded-[0.325rem]">Zendesk Ticket</div>
                                   </div>
                                   <p className="text-xs text-gray-700 mt-0.5">
                                     "Could you please provide more documentation on the initial setup? I'm struggling to understand how to configure my workspace."
@@ -443,7 +448,7 @@ export function Hero() {
                           placeholders={placeholders}
                           onChange={handleChange}
                           onSubmit={handleSubmit}
-                          className="w-full"
+                          className="w-full rounded-[0.625rem] shadow-sm hover:shadow transition-all duration-200"
                         />
                       </div>
                     </div>

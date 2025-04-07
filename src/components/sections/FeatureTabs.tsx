@@ -8,7 +8,7 @@ export function FeatureTabs() {
       title: "Integrations",
       value: "integrations",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-indigo-600 to-violet-600">
+        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col h-full">
             <h3 className="text-2xl md:text-4xl mb-4">Connect Your Feedback Sources</h3>
             <p className="text-base md:text-lg font-normal mb-6">
@@ -17,9 +17,9 @@ export function FeatureTabs() {
             </p>
             {/* Placeholder for integration image */}
             <div className="mt-auto h-[60%] w-full relative">
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-xl"></div>
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-[0.625rem]"></div>
               {/* Display a colored placeholder div if image isn't available */}
-              <div className="w-full h-full rounded-xl bg-indigo-500/20 flex items-center justify-center">
+              <div className="w-full h-full rounded-[0.625rem] bg-indigo-500/20 flex items-center justify-center">
                 <p className="text-lg font-normal">Integration Dashboard Preview</p>
               </div>
             </div>
@@ -31,7 +31,7 @@ export function FeatureTabs() {
       title: "Chat",
       value: "chat",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-600 to-indigo-600">
+        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-600 to-indigo-600 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col h-full">
             <h3 className="text-2xl md:text-4xl mb-4">Ask Questions, Get Insights</h3>
             <p className="text-base md:text-lg font-normal mb-6">
@@ -40,9 +40,9 @@ export function FeatureTabs() {
             </p>
             {/* Placeholder for chat image */}
             <div className="mt-auto h-[60%] w-full relative">
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-xl"></div>
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-[0.625rem]"></div>
               {/* Display a colored placeholder div if image isn't available */}
-              <div className="w-full h-full rounded-xl bg-blue-500/20 flex items-center justify-center">
+              <div className="w-full h-full rounded-[0.625rem] bg-blue-500/20 flex items-center justify-center">
                 <p className="text-lg font-normal">Chat Interface Preview</p>
               </div>
             </div>
@@ -54,7 +54,7 @@ export function FeatureTabs() {
       title: "Insights",
       value: "insights",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-600 to-pink-600">
+        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col h-full">
             <h3 className="text-2xl md:text-4xl mb-4">Discover What Users Really Want</h3>
             <p className="text-base md:text-lg font-normal mb-6">
@@ -63,9 +63,9 @@ export function FeatureTabs() {
             </p>
             {/* Placeholder for insights image */}
             <div className="mt-auto h-[60%] w-full relative">
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-xl"></div>
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-[0.625rem]"></div>
               {/* Display a colored placeholder div if image isn't available */}
-              <div className="w-full h-full rounded-xl bg-purple-500/20 flex items-center justify-center">
+              <div className="w-full h-full rounded-[0.625rem] bg-purple-500/20 flex items-center justify-center">
                 <p className="text-lg font-normal">Analytics Dashboard Preview</p>
               </div>
             </div>
@@ -82,15 +82,15 @@ export function FeatureTabs() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             All your feedback in <span className="text-gradient">one place</span>
           </h2>
-          <p className="text-slate-700 md:text-lg max-w-[720px] mx-auto">
+          <p className="text-slate-700 dark:text-slate-300 md:text-lg max-w-[720px] mx-auto">
             Transform scattered feedback into a searchable knowledge base that your whole team can explore.
           </p>
         </div>
         <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
           <Tabs 
             tabs={tabs} 
-            activeTabClassName="bg-indigo-100 dark:bg-indigo-950/30"
-            tabClassName="text-sm md:text-base font-medium"
+            activeTabClassName="bg-indigo-100/70 dark:bg-indigo-950/40 shadow-sm"
+            tabClassName="text-sm md:text-base font-medium transition-all duration-200"
           />
         </div>
       </div>
