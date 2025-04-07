@@ -100,7 +100,7 @@ export function Hero() {
 
   return (
     <AuroraBackground className="w-full pt-24 pb-36 md:pb-24 lg:pb-40 overflow-hidden">
-      <div className="container px-4 md:px-6 mx-auto">
+      <div className="container px-4 md:px-6 max-w-[85%] md:max-w-[82%] mx-auto">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
