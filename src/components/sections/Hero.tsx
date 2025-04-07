@@ -115,7 +115,7 @@ export function Hero() {
                 href="#demo"
                 className="w-full sm:w-auto"
               >
-                Get Unlimited Access
+                Start Building
               </RainbowButtonLink>
               <Link
                 href="#video"

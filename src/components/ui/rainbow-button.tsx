@@ -13,7 +13,7 @@ export function RainbowButton({
   return (
     <button
       className={cn(
-        "group relative inline-flex h-14 cursor-pointer items-center justify-between rounded-[0.625rem] border-0 bg-[length:200%] px-8 py-2 font-medium text-white transition-colors [background-clip:padding-box,border-box,border-box] [background-origin:border-box] [border:calc(0.08*1rem)_solid_transparent] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+        "group relative inline-flex h-14 cursor-pointer items-center rounded-[0.625rem] border-0 bg-[length:200%] px-8 py-2 font-medium text-white transition-colors [background-clip:padding-box,border-box,border-box] [background-origin:border-box] [border:calc(0.08*1rem)_solid_transparent] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
 
         // Animation styles
         "[animation:rainbow_4s_linear_infinite]",
@@ -31,8 +31,10 @@ export function RainbowButton({
       )}
       {...props}
     >
-      <span className="z-10">{children}</span>
-      <ChevronRight className="ml-2 h-5 w-5 z-10 transform transition-transform duration-300 group-hover:translate-x-1" />
+      <div className="relative z-10 flex items-center justify-center w-full">
+        <span>{children}</span>
+        <ChevronRight className="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" />
+      </div>
     </button>
   );
 } 
