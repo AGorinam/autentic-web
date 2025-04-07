@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, ReactNode, MouseEvent, useEffect, forwardRef, useImperativeHandle, ForwardedRef } from "react";
+import React, { useState, useRef, ReactNode, MouseEvent, useEffect, forwardRef, useImperativeHandle } from "react";
 
 interface DraggableProps {
   children: ReactNode;
@@ -65,26 +65,26 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
 
     // Store the initial mouse position
     dragStartPos.current = { x: e.clientX, y: e.clientY };
-    
+
     // Store the initial element position
     elementStartPos.current = { ...position };
-    
+
     setIsDragging(true);
   };
 
   // Handle resize start
   const handleResizeStart = (e: MouseEvent<HTMLDivElement>, direction: string) => {
     if (!resizable) return;
-    
+
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Store the initial mouse position
     dragStartPos.current = { x: e.clientX, y: e.clientY };
-    
+
     // Store the initial element size
     resizeStartSize.current = { ...size };
-    
+
     setIsResizing(true);
     setResizeDirection(direction);
   };
@@ -98,16 +98,13 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
       // Calculate how far the mouse has moved from the initial position
       const deltaX = e.clientX - dragStartPos.current.x;
       const deltaY = e.clientY - dragStartPos.current.y;
-      
+
       // Calculate the new position by adding the delta to the initial element position
       let newX = elementStartPos.current.x + deltaX;
       let newY = elementStartPos.current.y + deltaY;
 
       // Apply bounds if provided
       if (bounds && draggableRef.current) {
-        const width = draggableRef.current.offsetWidth;
-        const height = draggableRef.current.offsetHeight;
-
         // Allow partial visibility when dragged to edges
         // At least 100px of the element should remain visible
         const minVisibleHeight = 50;
@@ -145,19 +142,19 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
       // Calculate how far the mouse has moved from the initial position
       const deltaX = e.clientX - dragStartPos.current.x;
       const deltaY = e.clientY - dragStartPos.current.y;
-      
+
       // Calculate new size based on resize direction
       let newWidth = resizeStartSize.current.width;
       let newHeight = resizeStartSize.current.height;
-      
+
       if (resizeDirection.includes('e')) {
         newWidth = Math.max(minSize.width, Math.min(maxSize.width, resizeStartSize.current.width + deltaX));
       }
-      
+
       if (resizeDirection.includes('s')) {
         newHeight = Math.max(minSize.height, Math.min(maxSize.height, resizeStartSize.current.height + deltaY));
       }
-      
+
       setSize({
         width: newWidth,
         height: newHeight
@@ -187,7 +184,7 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
       onResize(size);
     }
   }, [size, onResize]);
-  
+
   return (
     <div
       ref={draggableRef}
@@ -208,30 +205,30 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
       <div className="w-full h-full">
         {children}
       </div>
-      
+
       {/* Resize handles */}
       {resizable && (
         <>
           {/* East resize handle */}
-          <div 
+          <div
             className="absolute top-0 right-0 w-3 h-full cursor-e-resize hover:bg-blue-400/20"
             onMouseDown={(e) => handleResizeStart(e, 'e')}
           />
-          
+
           {/* South resize handle */}
-          <div 
+          <div
             className="absolute bottom-0 left-0 w-full h-3 cursor-s-resize hover:bg-blue-400/20"
             onMouseDown={(e) => handleResizeStart(e, 's')}
           />
-          
+
           {/* Southeast resize handle */}
-          <div 
+          <div
             className="absolute bottom-0 right-0 w-8 h-8 cursor-se-resize hover:bg-blue-400/20 flex items-end justify-end p-2"
             onMouseDown={(e) => handleResizeStart(e, 'se')}
           >
-            <svg 
-              width="10" 
-              height="10" 
+            <svg
+              width="10"
+              height="10"
               className="opacity-60 group-hover:opacity-100 transition-opacity"
               viewBox="0 0 10 10"
               fill="currentColor"
@@ -239,7 +236,7 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
               <path d="M8 8H10V10H8V8ZM4 8H6V10H4V8ZM0 8H2V10H0V8ZM8 4H10V6H8V4ZM8 0H10V2H8V0Z" />
             </svg>
           </div>
-          
+
           {/* Indicator during resize */}
           {isResizing && (
             <div className="absolute -top-7 right-0 bg-black/80 text-white text-xs rounded px-2 py-1 pointer-events-none">
@@ -250,4 +247,6 @@ export const Draggable = forwardRef<DraggableRef, DraggableProps>(({
       )}
     </div>
   );
-}); 
+});
+
+Draggable.displayName = "Draggable";

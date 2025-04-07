@@ -13,29 +13,29 @@ import { GetStartedButton } from "@/components/ui/get-started-button";
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [activePeriod, setActivePeriod] = useState("28D");
-  const [chatVisible, setChatVisible] = useState(true);
+  const [chatVisible] = useState(true);
   const [chatSize, setChatSize] = useState({ width: 560, height: 550 });
   const heroRef = useRef<HTMLDivElement>(null);
   const [bounds, setBounds] = useState<{ top: number; left: number; right: number; bottom: number } | null>(null);
-  
+
   // Calculate initial position based on viewport
   const [initialPosition, setInitialPosition] = useState({ x: 0, y: 50 });
-  
+
   // Initial and minimum size for the chat window
   const initialChatSize = { width: 560, height: 550 };
   const minChatSize = { width: 400, height: 300 };
   const maxChatSize = { width: 1000, height: 800 };
-  
+
   // Chat reference to access Draggable methods
   const chatRef = useRef<DraggableRef>(null);
-  
+
   // Update bounds when window is resized
   useEffect(() => {
     const updateBounds = () => {
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
         const isMobile = window.innerWidth < 768;
-        
+
         // Allow dragging beyond the top edge (negative values)
         setBounds({
           top: -150, // Allow dragging above the visible area
@@ -45,12 +45,12 @@ export function Hero() {
         });
       }
     };
-    
+
     updateBounds();
     window.addEventListener('resize', updateBounds);
     return () => window.removeEventListener('resize', updateBounds);
   }, []);
-  
+
   useEffect(() => {
     const calculateInitialPosition = () => {
       // For mobile, center the chat horizontally
@@ -62,21 +62,21 @@ export function Hero() {
         setInitialPosition({ x: 20, y: 50 });
       }
     };
-    
+
     calculateInitialPosition();
     window.addEventListener('resize', calculateInitialPosition);
     return () => window.removeEventListener('resize', calculateInitialPosition);
   }, []);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("submitted");
   };
-  
+
   // Placeholders for the input field with explicit instructions to try it
   const placeholders = [
     "What users think about the new mobile app?",
@@ -84,7 +84,7 @@ export function Hero() {
     "What do enterprise customers think?",
     "What users think about the new sidebar?",
   ];
-  
+
   // Handler for chat resize
   const handleChatResize = (newSize: { width: number; height: number }) => {
     setChatSize(newSize);
@@ -97,7 +97,7 @@ export function Hero() {
       chatRef.current.resetSize();
     }
   };
-  
+
   return (
     <AuroraBackground className="w-full pt-24 pb-36 md:pb-24 lg:pb-40 overflow-hidden">
       <div className="container px-4 md:px-6 mx-auto">
@@ -111,11 +111,11 @@ export function Hero() {
               autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start w-full">
-              <GetStartedButton 
+              <GetStartedButton
                 href="#demo"
                 className="w-full sm:w-auto"
               />
-              <Link 
+              <Link
                 href="#video"
                 className="w-full sm:w-auto h-[56px] flex items-center justify-center luma-button bg-white text-black dark:bg-zinc-800 dark:text-white px-8 py-0 text-base rounded-[0.625rem] border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-md hover:scale-105 transition-all duration-300"
               >
@@ -123,7 +123,7 @@ export function Hero() {
               </Link>
             </div>
           </div>
-          
+
           {/* Right column with the chat mockup */}
           <div className="lg:ml-auto flex items-center justify-center relative h-[550px] w-full" style={{ zIndex: 30 }}>
             {/* Draggable chat mockup */}
@@ -150,7 +150,7 @@ export function Hero() {
                     </div>
                     <div className="text-xs text-gray-500 select-none">autentic.ai <span className="text-[10px] opacity-50">{Math.round(chatSize.width)}×{Math.round(chatSize.height)}</span></div>
                     <div className="w-16 flex justify-end items-center">
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.stopPropagation();
                           resetChatSize();
@@ -163,14 +163,14 @@ export function Hero() {
                       <div className="h-1.5 w-5 bg-gray-300 rounded mr-1 mt-1" aria-hidden="true" title="Drag to move"></div>
                     </div>
                   </div>
-                  
+
                   <div className="flex flex-1 overflow-hidden">
                     {/* Sidebar with integrations */}
                     <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
                       {/* Sidebar header with collapse toggle */}
                       <div className="p-2 flex items-center justify-between">
                         {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
-                        <button 
+                        <button
                           className={cn(
                             "p-1 rounded-md hover:bg-gray-100 text-gray-500 cursor-pointer",
                             sidebarCollapsed ? "w-full flex justify-center" : ""
@@ -185,40 +185,40 @@ export function Hero() {
                           )}
                         </button>
                       </div>
-                      
+
                       {/* Sidebar content */}
                       <div className="overflow-y-auto p-2 space-y-2 flex-1">
                         {/* Time period filters */}
                         {!sidebarCollapsed && (
                           <div className="flex gap-1 mb-2">
-                            <button 
+                            <button
                               onClick={() => setActivePeriod("7D")}
                               className={cn(
-                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100", 
-                                activePeriod === "7D" 
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100" 
+                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100",
+                                activePeriod === "7D"
+                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100"
                                   : "bg-white hover:border-gray-300"
                               )}
                             >
                               7D
                             </button>
-                            <button 
+                            <button
                               onClick={() => setActivePeriod("28D")}
                               className={cn(
-                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100", 
-                                activePeriod === "28D" 
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100" 
+                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100",
+                                activePeriod === "28D"
+                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100"
                                   : "bg-white hover:border-gray-300"
                               )}
                             >
                               28D
                             </button>
-                            <button 
+                            <button
                               onClick={() => setActivePeriod("90D")}
                               className={cn(
-                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100", 
-                                activePeriod === "90D" 
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100" 
+                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100",
+                                activePeriod === "90D"
+                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100"
                                   : "bg-white hover:border-gray-300"
                               )}
                             >
@@ -226,15 +226,15 @@ export function Hero() {
                             </button>
                           </div>
                         )}
-                        
+
                         {/* Integration items */}
                         <div className="space-y-2">
                           {/* Zendesk */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
-                              <img 
-                                src="/images/integrations/zendesk-logo.png" 
-                                alt="Zendesk" 
+                              <img
+                                src="/images/integrations/zendesk-logo.png"
+                                alt="Zendesk"
                                 className="w-5 h-5 object-contain"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
@@ -246,9 +246,9 @@ export function Hero() {
                               <>
                                 <div className="flex justify-between items-center mb-1">
                                   <div className="flex items-center gap-1.5">
-                                    <img 
-                                      src="/images/integrations/zendesk-logo.png" 
-                                      alt="Zendesk" 
+                                    <img
+                                      src="/images/integrations/zendesk-logo.png"
+                                      alt="Zendesk"
                                       className="w-5 h-5 object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
@@ -270,13 +270,13 @@ export function Hero() {
                               </>
                             )}
                           </div>
-                          
+
                           {/* Gong */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
-                              <img 
-                                src="/images/integrations/gong-logo.png" 
-                                alt="Gong" 
+                              <img
+                                src="/images/integrations/gong-logo.png"
+                                alt="Gong"
                                 className="w-5 h-5 object-contain"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
@@ -288,9 +288,9 @@ export function Hero() {
                               <>
                                 <div className="flex justify-between items-center mb-1">
                                   <div className="flex items-center gap-1.5">
-                                    <img 
-                                      src="/images/integrations/gong-logo.png" 
-                                      alt="Gong" 
+                                    <img
+                                      src="/images/integrations/gong-logo.png"
+                                      alt="Gong"
                                       className="w-5 h-5 object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
@@ -312,13 +312,13 @@ export function Hero() {
                               </>
                             )}
                           </div>
-                          
+
                           {/* Intercom */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
-                              <img 
-                                src="/images/integrations/intercom-logo.png" 
-                                alt="Intercom" 
+                              <img
+                                src="/images/integrations/intercom-logo.png"
+                                alt="Intercom"
                                 className="w-5 h-5 object-contain"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
@@ -330,9 +330,9 @@ export function Hero() {
                               <>
                                 <div className="flex justify-between items-center mb-1">
                                   <div className="flex items-center gap-1.5">
-                                    <img 
-                                      src="/images/integrations/intercom-logo.png" 
-                                      alt="Intercom" 
+                                    <img
+                                      src="/images/integrations/intercom-logo.png"
+                                      alt="Intercom"
                                       className="w-5 h-5 object-contain"
                                       onError={(e) => {
                                         const target = e.target as HTMLImageElement;
@@ -351,7 +351,7 @@ export function Hero() {
                               </>
                             )}
                           </div>
-                          
+
                           {/* Add Integration */}
                           <div className={`border border-dashed rounded-[0.5rem] cursor-pointer hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 flex justify-center items-center'}`}>
                             <div className={`${sidebarCollapsed ? '' : 'text-xs'} text-gray-500 flex items-center`}>
@@ -364,7 +364,7 @@ export function Hero() {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Main chat area */}
                     <div className="flex-1 flex flex-col overflow-hidden min-w-0">
                       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white w-full">
@@ -374,18 +374,18 @@ export function Hero() {
                             <p className="text-sm text-gray-800">What do users say about onboarding?</p>
                           </div>
                         </div>
-                        
+
                         {/* AI response with insight */}
                         <div className="space-y-3 max-w-[90%]">
                           <div className="bg-blue-50 rounded-[0.625rem] p-3.5 hover:bg-blue-100 transition-colors duration-200">
                             <p className="text-sm text-gray-800">
-                              Users frequently mention that the onboarding process is too complex. 
-                              Many find it difficult to set up their initial workflows without 
-                              additional guidance. Consider adding interactive tutorials and reducing 
+                              Users frequently mention that the onboarding process is too complex.
+                              Many find it difficult to set up their initial workflows without
+                              additional guidance. Consider adding interactive tutorials and reducing
                               the number of required steps.
                             </p>
                           </div>
-                          
+
                           {/* Sources section */}
                           <div className="bg-gray-50 rounded-[0.625rem] p-3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-all duration-200">
                             <div className="text-xs font-medium text-gray-800 mb-2">Sources</div>
@@ -402,7 +402,7 @@ export function Hero() {
                                     <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded-[0.325rem]">Gong Call</div>
                                   </div>
                                   <p className="text-xs text-gray-700 mt-0.5">
-                                    "I spent nearly an hour trying to configure the workflow. The setup process wasn't intuitive at all."
+                                    &quot;I spent nearly an hour trying to configure the workflow. The setup process wasn&apos;t intuitive at all.&quot;
                                   </p>
                                   <button className="flex items-center text-[10px] text-blue-600 hover:text-blue-800 mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
@@ -415,7 +415,7 @@ export function Hero() {
                                   </button>
                                 </div>
                               </div>
-                              
+
                               <div className="flex items-start">
                                 <div className="bg-blue-100 rounded-[0.425rem] p-1 mr-2 flex-shrink-0">
                                   <svg className="w-3 h-3 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -428,7 +428,7 @@ export function Hero() {
                                     <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded-[0.325rem]">Zendesk Ticket</div>
                                   </div>
                                   <p className="text-xs text-gray-700 mt-0.5">
-                                    "Could you please provide more documentation on the initial setup? I'm struggling to understand how to configure my workspace."
+                                    &quot;Could you please provide more documentation on the initial setup? I&apos;m struggling to understand how to configure my workspace.&quot;
                                   </p>
                                 </div>
                               </div>
@@ -436,7 +436,7 @@ export function Hero() {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Input area */}
                       <div className="p-3 border-t bg-white w-full shrink-0">
                         <PlaceholdersAndVanishInput
