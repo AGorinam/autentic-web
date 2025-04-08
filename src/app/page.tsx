@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { FeatureTabs } from "@/components/sections/FeatureTabs";
 import { CallToAction } from "@/components/sections/CallToAction";
 import { Footer } from "@/components/sections/Footer";
+import { ComparisonCard } from "@/components/ComparisonCard";
 
 export default function Home() {
   return (
@@ -13,6 +14,13 @@ export default function Home() {
         </svg>
       </div>
       <FeatureTabs />
+      <section className="w-full py-16 md:py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
+        <div className="absolute inset-0 bg-indigo-50/30 dark:bg-indigo-950/10 z-0"></div>
+        <div className="absolute inset-0 aurora-bg z-0"></div>
+        <div className="relative z-10">
+          <ComparisonCard />
+        </div>
+      </section>
       <CallToAction />
       <Footer />
     </main>
