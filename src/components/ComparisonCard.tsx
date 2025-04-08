@@ -40,7 +40,7 @@ export function ComparisonCard({ className }: ComparisonCardProps) {
   return (
     <div className={cn("w-full max-w-5xl mx-auto px-4 relative", className)}>
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12">
-        Chatbots Weren't Built for Product Discovery.
+        Chatbots Weren&apos;t Built for Product Discovery.
         <br />
         <span className="text-gradient">Autentic</span> <span className="text-pink-500">Is.</span>
       </h2>
