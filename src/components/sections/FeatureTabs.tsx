@@ -86,11 +86,12 @@ export function FeatureTabs() {
             Transform scattered feedback into a searchable knowledge base that your whole team can explore.
           </p>
         </div>
-        <div className="h-[30rem] md:h-[40rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
+        <div className="h-[36rem] md:h-[42rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
           <Tabs 
             tabs={tabs} 
             activeTabClassName="bg-indigo-100/70 dark:bg-indigo-950/40 shadow-sm"
             tabClassName="text-sm md:text-base font-medium transition-all duration-200"
+            contentClassName="mt-24 md:mt-28"
           />
         </div>
       </div>
