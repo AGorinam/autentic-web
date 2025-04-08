@@ -105,18 +105,18 @@ export function Hero() {
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
-              Chat with your <span className="text-gradient">customer feedback</span>
+            <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
+              Solve the <span className="text-gradient">right problems</span>
             </h1>
             <p className="text-gray-700 dark:text-gray-200 md:text-xl max-w-[720px] mx-auto lg:mx-0">
-              autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.
+              Import feedback from any channel — support tickets, sales calls, interviews — and chat with it. Find real product opportunities, with source clips and auto-generated insights.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start w-full">
               <RainbowButtonLink
                 href="#demo"
                 className="w-full sm:w-auto"
               >
-                Start Building
+                Start builidng
               </RainbowButtonLink>
               <Link
                 href="#video"
