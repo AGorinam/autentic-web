@@ -38,16 +38,16 @@ interface ComparisonCardProps {
 
 export function ComparisonCard({ className }: ComparisonCardProps) {
   return (
-    <div className={cn("w-full max-w-5xl mx-auto px-4 relative", className)}>
+    <div className={cn("container max-w-[96%] md:max-w-[85%] mx-auto px-4 md:px-6 relative", className)}>
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12">
         Chatbots Weren&apos;t Built for Product Discovery.
         <br />
         <span className="text-gradient">Autentic</span> <span className="text-pink-500">Is.</span>
       </h2>
 
-      <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
+      <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-6 lg:gap-8 w-full">
         {/* ChatGPT Column */}
-        <div className="pb-10 md:p-6 border-b md:border-b-0 md:bg-white/80 md:dark:bg-zinc-950/80 md:backdrop-blur-sm md:rounded-xl md:shadow-sm">
+        <div className="pb-10 md:pb-0 border border-gray-200 dark:border-zinc-700 rounded-xl p-5 md:p-5 lg:p-6 md:border-b-0 md:bg-white/80 md:dark:bg-zinc-950/80 md:backdrop-blur-sm md:rounded-xl md:shadow-sm w-full">
           <div className="flex items-center mb-8">
             <div className="w-8 h-8 mr-3 flex items-center justify-center">
               <Image 
@@ -87,7 +87,7 @@ export function ComparisonCard({ className }: ComparisonCardProps) {
         </div>
 
         {/* Fray Column */}
-        <div className="relative p-6 rounded-xl bg-gradient-to-br from-purple-100/80 to-indigo-100/80 dark:from-purple-900/30 dark:to-indigo-900/30 backdrop-blur-sm md:shadow-sm overflow-hidden">
+        <div className="relative p-5 lg:p-6 rounded-xl bg-gradient-to-br from-purple-100/80 to-indigo-100/80 dark:from-purple-900/30 dark:to-indigo-900/30 backdrop-blur-sm md:shadow-sm overflow-hidden w-full">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-100/80 to-indigo-100/80 dark:from-purple-900/30 dark:to-indigo-900/30 rounded-xl"></div>
           
           <div className="relative z-10">

@@ -17,9 +17,7 @@ export default function Home() {
       <section className="w-full py-16 md:py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-indigo-50/30 dark:bg-indigo-950/10 z-0"></div>
         <div className="absolute inset-0 aurora-bg z-0"></div>
-        <div className="relative z-10">
-          <ComparisonCard />
-        </div>
+        <ComparisonCard className="relative z-10" />
       </section>
       <CallToAction />
       <Footer />
