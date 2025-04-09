@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
-import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
+import { ChatFlow } from "@/components/ui/chat-flow";
 
 export function Hero() {
   const [chatVisible] = useState(true);
@@ -17,8 +17,8 @@ export function Hero() {
   const [initialPosition, setInitialPosition] = useState({ x: 0, y: 50 });
 
   // Initial and minimum size for the chat window
-  const initialChatSize = { width: 560, height: 550 };
-  const minChatSize = { width: 400, height: 300 };
+  const initialChatSize = { width: 560, height: 720 };
+  const minChatSize = { width: 400, height: 650 };
   const maxChatSize = { width: 1000, height: 800 };
 
   // Chat reference to access Draggable methods
@@ -63,23 +63,6 @@ export function Hero() {
     return () => window.removeEventListener('resize', calculateInitialPosition);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submitted");
-  };
-
-  // Placeholders for the input field with explicit instructions to try it
-  const placeholders = [
-    "What users think about the new mobile app?",
-    "What mobile features do users want most?",
-    "What do enterprise customers think?",
-    "What users think about the new sidebar?",
-  ];
-
   // Handler for chat resize
   const handleChatResize = (newSize: { width: number; height: number }) => {
     setChatSize(newSize);
@@ -94,16 +77,16 @@ export function Hero() {
   };
 
   return (
-    <AuroraBackground className="w-full pt-24 pb-36 md:pb-24 lg:pb-40 overflow-hidden">
-      <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
+    <AuroraBackground className="w-full pt-24 pb-60 md:pb-52 lg:pb-64 overflow-hidden">
+      <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
-          <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
-            <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
-              Solve the <span className="text-gradient">right problems</span>
+          <div className="flex flex-col justify-center space-y-8 text-center lg:text-left">
+            <h1 className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
+              Solve the <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient">right problems</span>
             </h1>
-            <p className="text-gray-700 dark:text-gray-200 md:text-xl max-w-[720px] mx-auto lg:mx-0">
-              Import feedback from any channel — support tickets, sales calls, interviews — and chat with it. Find real product opportunities, with source clips and auto-generated insights.
+            <p className="text-lg sm:text-xl md:text-2xl max-w-[720px] mx-auto lg:mx-0 font-medium text-gray-700 dark:text-gray-200">
+              autentic imports product feedback from support tickets, sales calls, interviews, and more — turning it into insights you can chat with.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start w-full">
               <RainbowButtonLink
@@ -122,7 +105,7 @@ export function Hero() {
           </div>
 
           {/* Right column with the chat mockup */}
-          <div className="lg:ml-auto flex items-center justify-center relative h-[550px] w-full" style={{ zIndex: 30 }}>
+          <div className="lg:ml-auto flex items-center justify-center relative h-[720px] w-full" style={{ zIndex: 30 }}>
             {/* Draggable chat mockup */}
             {chatVisible && (
               <Draggable
@@ -161,90 +144,8 @@ export function Hero() {
                     </div>
                   </div>
 
-                  <div className="flex flex-1 overflow-hidden">
-                    {/* Main chat area */}
-                    <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-                      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white w-full">
-                        {/* User query */}
-                        <div className="flex justify-end">
-                          <div className="bg-gray-100 rounded-[0.625rem] p-3 max-w-[80%] hover:bg-gray-200 transition-colors duration-200">
-                            <p className="text-sm text-gray-800">What do users say about onboarding?</p>
-                          </div>
-                        </div>
-
-                        {/* AI response with insight */}
-                        <div className="space-y-3 max-w-[90%]">
-                          <div className="bg-blue-50 rounded-[0.625rem] p-3.5 hover:bg-blue-100 transition-colors duration-200">
-                            <p className="text-sm text-gray-800">
-                              Users frequently mention that the onboarding process is too complex.
-                              Many find it difficult to set up their initial workflows without
-                              additional guidance. Consider adding interactive tutorials and reducing
-                              the number of required steps.
-                            </p>
-                          </div>
-
-                          {/* Sources section */}
-                          <div className="bg-gray-50 rounded-[0.625rem] p-3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100 transition-all duration-200">
-                            <div className="text-xs font-medium text-gray-800 mb-2">Sources</div>
-                            <div className="space-y-2">
-                              <div className="flex items-start">
-                                <div className="bg-purple-100 rounded-[0.425rem] p-1 mr-2 flex-shrink-0">
-                                  <svg className="w-3 h-3 text-purple-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 15.5H7.5C6.10444 15.5 5.40665 15.5 4.83886 15.6722C3.56045 16.06 2.56004 17.0605 2.17224 18.3389C2 18.9067 2 19.6044 2 21M19 21V15M16 18H22M14.5 7.5C14.5 9.98528 12.4853 12 10 12C7.51472 12 5.5 9.98528 5.5 7.5C5.5 5.01472 7.51472 3 10 3C12.4853 3 14.5 5.01472 14.5 7.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                  </svg>
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-center flex-wrap">
-                                    <div className="text-xs font-medium text-gray-800 mr-2">Marco P. (Customer)</div>
-                                    <div className="bg-purple-100 text-purple-600 text-[10px] px-1.5 rounded-[0.325rem]">Gong Call</div>
-                                  </div>
-                                  <p className="text-xs text-gray-700 mt-0.5">
-                                    &quot;I spent nearly an hour trying to configure the workflow. The setup process wasn&apos;t intuitive at all.&quot;
-                                  </p>
-                                  <button className="flex items-center text-[10px] text-blue-600 hover:text-blue-800 mt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-                                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                                      <line x1="12" y1="19" x2="12" y2="23" />
-                                      <line x1="8" y1="23" x2="16" y2="23" />
-                                    </svg>
-                                    Listen to clip
-                                  </button>
-                                </div>
-                              </div>
-
-                              <div className="flex items-start">
-                                <div className="bg-blue-100 rounded-[0.425rem] p-1 mr-2 flex-shrink-0">
-                                  <svg className="w-3 h-3 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 9.99979H22M9 3.99979V5.99979M15 3.99979V5.99979M7.8 3.99979H16.2C17.8802 3.99979 18.7202 3.99979 19.362 4.32679C19.9265 4.61479 20.3848 5.07299 20.6728 5.63759C21 6.27959 21 7.11959 21 8.79979V16.1998C21 17.8798 21 18.7198 20.6728 19.3618C20.3848 19.9264 19.9265 20.3848 19.362 20.6726C18.7202 20.9998 17.8802 20.9998 16.2 20.9998H7.8C6.11984 20.9998 5.27976 20.9998 4.63803 20.6726C4.07354 20.3848 3.6151 19.9264 3.32725 19.3618C3 18.7198 3 17.8798 3 16.1998V8.79979C3 7.11959 3 6.27959 3.32725 5.63759C3.6151 5.07299 4.07354 4.61479 4.63803 4.32679C5.27976 3.99979 6.11984 3.99979 7.8 3.99979Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                  </svg>
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-center flex-wrap">
-                                    <div className="text-xs font-medium text-gray-800 mr-2">Sarah J. (Support)</div>
-                                    <div className="bg-blue-100 text-blue-600 text-[10px] px-1.5 rounded-[0.325rem]">Zendesk Ticket</div>
-                                  </div>
-                                  <p className="text-xs text-gray-700 mt-0.5">
-                                    &quot;Could you please provide more documentation on the initial setup? I&apos;m struggling to understand how to configure my workspace.&quot;
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Input area */}
-                      <div className="p-3 border-t bg-white w-full shrink-0">
-                        <PlaceholdersAndVanishInput
-                          placeholders={placeholders}
-                          onChange={handleChange}
-                          onSubmit={handleSubmit}
-                          className="w-full rounded-[0.625rem] shadow-sm hover:shadow transition-all duration-200"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  {/* ChatFlow component */}
+                  <ChatFlow />
                 </div>
               </Draggable>
             )}
