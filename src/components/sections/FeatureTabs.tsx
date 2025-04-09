@@ -98,7 +98,7 @@ export function FeatureTabs() {
     <section className="w-full py-16 md:py-24 pb-24 md:pb-48 bg-white dark:bg-slate-950">
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             All your feedback in <span className="text-gradient">one place</span>
           </h2>
           <p className="text-slate-700 dark:text-slate-300 md:text-lg max-w-[720px] mx-auto">

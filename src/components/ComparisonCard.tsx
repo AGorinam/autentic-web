@@ -39,7 +39,7 @@ interface ComparisonCardProps {
 export function ComparisonCard({ className }: ComparisonCardProps) {
   return (
     <div className={cn("container max-w-[96%] md:max-w-[85%] mx-auto px-4 md:px-6 relative", className)}>
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 md:mb-12">
         Chatbots Weren&apos;t Built for Product Discovery.
         <br />
         <span className="text-gradient">Autentic</span> <span className="text-pink-500">Is.</span>

@@ -82,7 +82,7 @@ export function Hero() {
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-8 text-center lg:text-left">
-            <h1 className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
+            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
               Solve the <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient">right problems</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl max-w-[720px] mx-auto lg:mx-0 font-medium text-gray-700 dark:text-gray-200">

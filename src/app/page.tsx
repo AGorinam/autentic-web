@@ -3,6 +3,7 @@ import { FeatureTabs } from "@/components/sections/FeatureTabs";
 import { CallToAction } from "@/components/sections/CallToAction";
 import { Footer } from "@/components/sections/Footer";
 import { ComparisonCard } from "@/components/ComparisonCard";
+import { Integrations } from "@/components/sections/Integrations";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <div className="absolute inset-0 aurora-bg z-0"></div>
         <ComparisonCard className="relative z-10" />
       </section>
+      <Integrations />
       <CallToAction />
       <Footer />
     </main>
