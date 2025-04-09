@@ -186,18 +186,13 @@ export function Hero() {
                   </div>
 
                   <div className="flex flex-1 overflow-hidden">
-                    {/* Sidebar with integrations */}
-                    <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 overflow-hidden transform will-change-transform ${
+                    {/* Commented out sidebar temporarily to fix mobile refresh issues */}
+                    {/* 
+                    <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 overflow-hidden ${
                       sidebarCollapsed 
                         ? 'w-[50px]' 
                         : 'w-[230px]'
-                    }`} style={{
-                      transform: `translateX(${sidebarCollapsed ? '0px' : '0px'})`,
-                      WebkitTransform: `translateX(${sidebarCollapsed ? '0px' : '0px'})`,
-                      WebkitBackfaceVisibility: 'hidden',
-                      WebkitPerspective: 1000,
-                    }}>
-                      {/* Sidebar header with collapse toggle */}
+                    }`}>
                       <div className="p-2 flex items-center justify-between">
                         {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
                         <SidebarToggle 
@@ -206,9 +201,7 @@ export function Hero() {
                         />
                       </div>
 
-                      {/* Sidebar content */}
                       <div className="overflow-y-auto p-2 space-y-2 flex-1">
-                        {/* Time period filters */}
                         {!sidebarCollapsed && (
                           <div className="flex gap-1 mb-2">
                             <button
@@ -247,9 +240,7 @@ export function Hero() {
                           </div>
                         )}
 
-                        {/* Integration items */}
                         <div className="space-y-2">
-                          {/* Zendesk */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <Image
@@ -295,7 +286,6 @@ export function Hero() {
                             )}
                           </div>
 
-                          {/* Gong */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <Image
@@ -341,7 +331,6 @@ export function Hero() {
                             )}
                           </div>
 
-                          {/* Intercom */}
                           <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
                             {sidebarCollapsed ? (
                               <Image
@@ -384,7 +373,6 @@ export function Hero() {
                             )}
                           </div>
 
-                          {/* Add Integration */}
                           <div className={`border border-dashed rounded-[0.5rem] cursor-pointer hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 flex justify-center items-center'}`}>
                             <div className={`${sidebarCollapsed ? '' : 'text-xs'} text-gray-500 flex items-center`}>
                               <svg className={`${sidebarCollapsed ? 'w-3 h-3' : 'w-2.5 h-2.5 mr-1'}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -396,6 +384,7 @@ export function Hero() {
                         </div>
                       </div>
                     </div>
+                    */}
 
                     {/* Main chat area */}
                     <div className="flex-1 flex flex-col overflow-hidden min-w-0">
