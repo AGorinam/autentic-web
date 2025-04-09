@@ -35,35 +35,37 @@ export function Integrations() {
         </div>
 
         {/* Mobile scroll container */}
-        <div className="overflow-x-auto pb-6 -mx-4 px-4 md:overflow-visible md:-mx-0 md:px-0">
-          {/* Integration logos grid */}
-          <div className="grid grid-flow-col md:grid-flow-row auto-cols-max md:auto-cols-auto gap-3 md:gap-4 md:grid-cols-3 lg:grid-cols-6 min-w-[800px] md:min-w-0">
-            {integrationLogos.map((logo, index) => (
-              <div 
-                key={index}
-                className="w-[150px] h-[150px] md:w-auto md:h-auto md:aspect-square bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl flex items-center justify-center p-4 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-sm transition-all"
-              >
-                <div className="relative w-12 h-12">
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    fill
-                    className="object-contain"
-                  />
+        <div className="relative">
+          <div className="overflow-x-auto pb-6 no-scrollbar md:overflow-visible">
+            {/* Integration logos grid */}
+            <div className="grid grid-flow-col md:grid-flow-row auto-cols-max md:auto-cols-auto gap-4 md:gap-4 md:grid-cols-3 lg:grid-cols-6 pl-0 pr-4 md:pr-0 md:min-w-0">
+              {integrationLogos.map((logo, index) => (
+                <div 
+                  key={index}
+                  className="w-[150px] h-[150px] md:w-auto md:h-auto md:aspect-square bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl flex items-center justify-center p-4 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-sm transition-all"
+                >
+                  <div className="relative w-12 h-12">
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Custom CSS for scrollbar */}
         <style jsx global>{`
           @media (max-width: 768px) {
-            .overflow-x-auto {
+            .no-scrollbar {
               -ms-overflow-style: none;
               scrollbar-width: none;
             }
-            .overflow-x-auto::-webkit-scrollbar {
+            .no-scrollbar::-webkit-scrollbar {
               display: none;
             }
           }
