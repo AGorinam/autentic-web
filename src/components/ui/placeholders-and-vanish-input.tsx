@@ -59,23 +59,29 @@ export function PlaceholdersAndVanishInput({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = 800;
-    canvas.height = 800;
-    ctx.clearRect(0, 0, 800, 800);
+    // Adjust canvas size based on device
+    const isMobile = window.innerWidth < 768;
+    const canvasSize = isMobile ? 400 : 800;
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+    
+    ctx.clearRect(0, 0, canvasSize, canvasSize);
     const computedStyles = getComputedStyle(inputRef.current);
 
     const fontSize = parseFloat(computedStyles.getPropertyValue("font-size"));
-    ctx.font = `${fontSize * 2}px ${computedStyles.fontFamily}`;
+    ctx.font = `${fontSize * (isMobile ? 1.5 : 2)}px ${computedStyles.fontFamily}`;
     ctx.fillStyle = "#FFF";
-    ctx.fillText(value, 16, 40);
+    ctx.fillText(value, isMobile ? 8 : 16, isMobile ? 20 : 40);
 
-    const imageData = ctx.getImageData(0, 0, 800, 800);
+    const imageData = ctx.getImageData(0, 0, canvasSize, canvasSize);
     const pixelData = imageData.data;
     const newData: Array<{x: number, y: number, color: number[]}> = [];
 
-    for (let t = 0; t < 800; t++) {
-      const i = 4 * t * 800;
-      for (let n = 0; n < 800; n++) {
+    // Optimize pixel sampling for mobile
+    const sampleRate = isMobile ? 2 : 1;
+    for (let t = 0; t < canvasSize; t += sampleRate) {
+      const i = 4 * t * canvasSize;
+      for (let n = 0; n < canvasSize; n += sampleRate) {
         const e = i + 4 * n;
         if (
           pixelData[e] !== 0 &&
@@ -96,10 +102,14 @@ export function PlaceholdersAndVanishInput({
       }
     }
 
-    newDataRef.current = newData.map(({ x, y, color }) => ({
+    // Limit the number of particles for better performance
+    const maxParticles = isMobile ? 1000 : 2000;
+    const particles = newData.slice(0, maxParticles);
+
+    newDataRef.current = particles.map(({ x, y, color }) => ({
       x,
       y,
-      r: 1,
+      r: isMobile ? 0.75 : 1,
       color: `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`,
     }));
   }, [value]);
@@ -109,49 +119,106 @@ export function PlaceholdersAndVanishInput({
   }, [value, draw]);
 
   const animate = (start: number) => {
+    let animationFrameId: number;
+    let lastTime = performance.now();
+    const fps = 60;
+    const frameInterval = 1000 / fps;
+    
     const animateFrame = (pos: number = 0) => {
-      requestAnimationFrame(() => {
+      animationFrameId = requestAnimationFrame((currentTime) => {
+        // Throttle animation frame rate
+        const deltaTime = currentTime - lastTime;
+        if (deltaTime < frameInterval) {
+          animateFrame(pos);
+          return;
+        }
+        lastTime = currentTime - (deltaTime % frameInterval);
+
+        const isMobile = window.innerWidth < 768;
+        const canvasSize = isMobile ? 400 : 800;
         const newArr = [];
-        for (let i = 0; i < newDataRef.current.length; i++) {
-          const current = newDataRef.current[i];
-          if (current.x < pos) {
-            newArr.push(current);
-          } else {
-            if (current.r <= 0) {
-              current.r = 0;
-              continue;
+        
+        // Batch process particles for better performance
+        const batchSize = 100;
+        for (let batch = 0; batch < newDataRef.current.length; batch += batchSize) {
+          const end = Math.min(batch + batchSize, newDataRef.current.length);
+          for (let i = batch; i < end; i++) {
+            const current = newDataRef.current[i];
+            if (current.x < pos) {
+              newArr.push(current);
+            } else {
+              if (current.r <= 0) {
+                current.r = 0;
+                continue;
+              }
+              // Reduce random calculations on mobile
+              if (isMobile) {
+                current.x += Math.random() > 0.5 ? 0.75 : -0.75;
+                current.y += Math.random() > 0.5 ? 0.75 : -0.75;
+                current.r -= 0.075;
+              } else {
+                current.x += Math.random() > 0.5 ? 1 : -1;
+                current.y += Math.random() > 0.5 ? 1 : -1;
+                current.r -= 0.05 * Math.random();
+              }
+              newArr.push(current);
             }
-            current.x += Math.random() > 0.5 ? 1 : -1;
-            current.y += Math.random() > 0.5 ? 1 : -1;
-            current.r -= 0.05 * Math.random();
-            newArr.push(current);
           }
         }
+
         newDataRef.current = newArr;
         const ctx = canvasRef.current?.getContext("2d");
         if (ctx) {
-          ctx.clearRect(pos, 0, 800, 800);
+          ctx.clearRect(pos, 0, canvasSize, canvasSize);
+          
+          // Batch render particles
+          ctx.beginPath();
           newDataRef.current.forEach((t) => {
             const { x: n, y: i, r: s, color: color } = t;
             if (n > pos) {
-              ctx.beginPath();
-              ctx.rect(n, i, s, s);
               ctx.fillStyle = color;
-              ctx.strokeStyle = color;
-              ctx.stroke();
+              ctx.fillRect(n, i, s, s);
             }
           });
+          ctx.fill();
         }
+
         if (newDataRef.current.length > 0) {
-          animateFrame(pos - 8);
+          animateFrame(pos - (isMobile ? 6 : 8));
         } else {
           setValue("");
           setAnimating(false);
+          cancelAnimationFrame(animationFrameId);
         }
       });
     };
     animateFrame(start);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   };
+
+  // Add touch event handling
+  const handleTouchStart = (e: React.TouchEvent<HTMLInputElement>) => {
+    // Prevent zooming on double tap
+    e.preventDefault();
+  };
+
+  // Add cleanup for animation on unmount
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    return () => {
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.clearRect(0, 0, 800, 800);
+        }
+      }
+    };
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !animating) {
@@ -211,13 +278,14 @@ export function PlaceholdersAndVanishInput({
             if (onChange) onChange(e);
           }
         }}
+        onTouchStart={handleTouchStart}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         value={value}
         type="text"
         placeholder=""
         className={cn(
-          "w-full relative text-sm sm:text-base z-50 border-none text-gray-900 bg-transparent h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-8 pr-20",
+          "w-full relative text-sm sm:text-base z-50 border-none text-gray-900 bg-transparent h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-8 pr-20 touch-manipulation",
           animating && "text-transparent"
         )}
       />

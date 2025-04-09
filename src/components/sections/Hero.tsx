@@ -2,14 +2,28 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
-import { PanelLeft, PanelLeftClose } from "lucide-react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Switch } from "@/components/ui/switch";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { cn } from "@/lib/utils";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
+
+const SidebarToggle = memo(({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) => (
+  <button
+    onClick={onToggle}
+    className="p-1 hover:bg-gray-100 rounded-md"
+    aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+  >
+    <ChevronLeftIcon className={`h-5 w-5 transition-transform duration-300 ${
+      collapsed ? 'rotate-180' : ''
+    }`} />
+  </button>
+));
+
+SidebarToggle.displayName = 'SidebarToggle';
 
 export function Hero() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
@@ -99,6 +113,10 @@ export function Hero() {
     }
   };
 
+  const handleToggleSidebar = useCallback(() => {
+    setSidebarCollapsed(prev => !prev);
+  }, []);
+
   return (
     <AuroraBackground className="w-full pt-24 pb-36 md:pb-24 lg:pb-40 overflow-hidden">
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
@@ -169,24 +187,23 @@ export function Hero() {
 
                   <div className="flex flex-1 overflow-hidden">
                     {/* Sidebar with integrations */}
-                    <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 ${sidebarCollapsed ? 'w-[50px]' : 'w-[230px]'}`}>
+                    <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 overflow-hidden transform will-change-transform ${
+                      sidebarCollapsed 
+                        ? 'w-[50px]' 
+                        : 'w-[230px]'
+                    }`} style={{
+                      transform: `translateX(${sidebarCollapsed ? '0px' : '0px'})`,
+                      WebkitTransform: `translateX(${sidebarCollapsed ? '0px' : '0px'})`,
+                      WebkitBackfaceVisibility: 'hidden',
+                      WebkitPerspective: 1000,
+                    }}>
                       {/* Sidebar header with collapse toggle */}
                       <div className="p-2 flex items-center justify-between">
                         {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
-                        <button
-                          className={cn(
-                            "p-1 rounded-md hover:bg-gray-100 text-gray-500 cursor-pointer",
-                            sidebarCollapsed ? "w-full flex justify-center" : ""
-                          )}
-                          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                          title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                        >
-                          {sidebarCollapsed ? (
-                            <PanelLeft className="h-4 w-4 text-gray-700" />
-                          ) : (
-                            <PanelLeftClose className="h-4 w-4 text-gray-700" />
-                          )}
-                        </button>
+                        <SidebarToggle 
+                          collapsed={sidebarCollapsed}
+                          onToggle={handleToggleSidebar}
+                        />
                       </div>
 
                       {/* Sidebar content */}
