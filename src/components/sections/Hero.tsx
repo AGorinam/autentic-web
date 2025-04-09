@@ -1,33 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { useState, useRef, useEffect, useCallback, memo } from "react";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { useState, useRef, useEffect } from "react";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-import { Switch } from "@/components/ui/switch";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
-import { cn } from "@/lib/utils";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
 
-const SidebarToggle = memo(({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) => (
-  <button
-    onClick={onToggle}
-    className="p-1 hover:bg-gray-100 rounded-md"
-    aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-  >
-    <ChevronLeftIcon className={`h-5 w-5 transition-transform duration-300 ${
-      collapsed ? 'rotate-180' : ''
-    }`} />
-  </button>
-));
-
-SidebarToggle.displayName = 'SidebarToggle';
-
 export function Hero() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
-  const [activePeriod, setActivePeriod] = useState("28D");
   const [chatVisible] = useState(true);
   const [chatSize, setChatSize] = useState({ width: 560, height: 550 });
   const heroRef = useRef<HTMLDivElement>(null);
@@ -113,10 +93,6 @@ export function Hero() {
     }
   };
 
-  const handleToggleSidebar = useCallback(() => {
-    setSidebarCollapsed(prev => !prev);
-  }, []);
-
   return (
     <AuroraBackground className="w-full pt-24 pb-36 md:pb-24 lg:pb-40 overflow-hidden">
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
@@ -186,206 +162,6 @@ export function Hero() {
                   </div>
 
                   <div className="flex flex-1 overflow-hidden">
-                    {/* Commented out sidebar temporarily to fix mobile refresh issues */}
-                    {/* 
-                    <div className={`border-r bg-white flex flex-col transition-all duration-300 flex-shrink-0 overflow-hidden ${
-                      sidebarCollapsed 
-                        ? 'w-[50px]' 
-                        : 'w-[230px]'
-                    }`}>
-                      <div className="p-2 flex items-center justify-between">
-                        {!sidebarCollapsed && <div className="text-xs font-medium text-gray-500">Active Integrations</div>}
-                        <SidebarToggle 
-                          collapsed={sidebarCollapsed}
-                          onToggle={handleToggleSidebar}
-                        />
-                      </div>
-
-                      <div className="overflow-y-auto p-2 space-y-2 flex-1">
-                        {!sidebarCollapsed && (
-                          <div className="flex gap-1 mb-2">
-                            <button
-                              onClick={() => setActivePeriod("7D")}
-                              className={cn(
-                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100",
-                                activePeriod === "7D"
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100"
-                                  : "bg-white hover:border-gray-300"
-                              )}
-                            >
-                              7D
-                            </button>
-                            <button
-                              onClick={() => setActivePeriod("28D")}
-                              className={cn(
-                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100",
-                                activePeriod === "28D"
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100"
-                                  : "bg-white hover:border-gray-300"
-                              )}
-                            >
-                              28D
-                            </button>
-                            <button
-                              onClick={() => setActivePeriod("90D")}
-                              className={cn(
-                                "text-xs border px-2.5 py-1.5 rounded-[0.425rem] transition-all duration-200 cursor-pointer hover:bg-gray-100",
-                                activePeriod === "90D"
-                                  ? "text-blue-600 font-medium border-blue-200 bg-blue-50 hover:bg-blue-100"
-                                  : "bg-white hover:border-gray-300"
-                              )}
-                            >
-                              90D
-                            </button>
-                          </div>
-                        )}
-
-                        <div className="space-y-2">
-                          <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
-                            {sidebarCollapsed ? (
-                              <Image
-                                src="/images/integrations/zendesk-logo.png"
-                                alt="Zendesk"
-                                width={20}
-                                height={20}
-                                className="object-contain"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
-                                  target.classList.add("bg-black", "rounded-sm");
-                                }}
-                              />
-                            ) : (
-                              <>
-                                <div className="flex justify-between items-center mb-1">
-                                  <div className="flex items-center gap-1.5">
-                                    <Image
-                                      src="/images/integrations/zendesk-logo.png"
-                                      alt="Zendesk"
-                                      width={20}
-                                      height={20}
-                                      className="object-contain"
-                                      onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
-                                        target.classList.add("bg-black", "rounded-sm");
-                                      }}
-                                    />
-                                    <div className="font-medium text-sm">Zendesk</div>
-                                  </div>
-                                  <Switch defaultChecked />
-                                </div>
-                                <div className="flex items-center mt-1">
-                                  <div className="h-1.5 w-1.5 bg-green-500 rounded-full mr-1 sync-pulse"></div>
-                                  <div className="text-xs">
-                                    <span className="text-green-500 font-medium">synchronized</span>
-                                    <span className="text-gray-500"> · 189 calls</span>
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </div>
-
-                          <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
-                            {sidebarCollapsed ? (
-                              <Image
-                                src="/images/integrations/gong-logo.png"
-                                alt="Gong"
-                                width={20}
-                                height={20}
-                                className="object-contain"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
-                                  target.classList.add("bg-black", "rounded-sm");
-                                }}
-                              />
-                            ) : (
-                              <>
-                                <div className="flex justify-between items-center mb-1">
-                                  <div className="flex items-center gap-1.5">
-                                    <Image
-                                      src="/images/integrations/gong-logo.png"
-                                      alt="Gong"
-                                      width={20}
-                                      height={20}
-                                      className="object-contain"
-                                      onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAyMUwyMSAzTTMgM0wyMSAyMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=";
-                                        target.classList.add("bg-black", "rounded-sm");
-                                      }}
-                                    />
-                                    <div className="font-medium text-sm">Gong</div>
-                                  </div>
-                                  <Switch defaultChecked />
-                                </div>
-                                <div className="flex items-center mt-1">
-                                  <div className="h-1.5 w-1.5 bg-green-500 rounded-full mr-1 sync-pulse"></div>
-                                  <div className="text-xs">
-                                    <span className="text-green-500 font-medium">synchronized</span>
-                                    <span className="text-gray-500"> · 360 calls</span>
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </div>
-
-                          <div className={`bg-white rounded-[0.5rem] border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2.5'}`}>
-                            {sidebarCollapsed ? (
-                              <Image
-                                src="/images/integrations/intercom-logo.png"
-                                alt="Intercom"
-                                width={20}
-                                height={20}
-                                className="object-contain"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
-                                  target.classList.add("bg-black", "rounded-sm");
-                                }}
-                              />
-                            ) : (
-                              <>
-                                <div className="flex justify-between items-center mb-1">
-                                  <div className="flex items-center gap-1.5">
-                                    <Image
-                                      src="/images/integrations/intercom-logo.png"
-                                      alt="Intercom"
-                                      width={20}
-                                      height={20}
-                                      className="object-contain"
-                                      onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAxMGguMDFNMTIgMTBoLjAxTTE2IDEwaC4wMU05IDE2SDVhMiAyIDAgMDEtMi0yVjZhMiAyIDAgMDEyLTJoMTRhMiAyIDAgMDEyIDJ2OGEyIDIgMCAwMS0yIDJoLTVsLTUgNXYtNXoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZVdpZHRoPSIyIiBzdHJva2VMaW5lY2FwPSJyb3VuZCIgc3Ryb2tlTGluZWpvaW49InJvdW5kIi8+PC9zdmc+";
-                                        target.classList.add("bg-black", "rounded-sm");
-                                      }}
-                                    />
-                                    <div className="font-medium text-sm">Intercom</div>
-                                  </div>
-                                  <Switch />
-                                </div>
-                                <div className="flex items-center mt-1">
-                                  <div className="h-1.5 w-1.5 bg-gray-400 rounded-full mr-1"></div>
-                                  <div className="text-xs text-gray-500">disconnected</div>
-                                </div>
-                              </>
-                            )}
-                          </div>
-
-                          <div className={`border border-dashed rounded-[0.5rem] cursor-pointer hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ${sidebarCollapsed ? 'p-1.5 flex justify-center' : 'p-2 flex justify-center items-center'}`}>
-                            <div className={`${sidebarCollapsed ? '' : 'text-xs'} text-gray-500 flex items-center`}>
-                              <svg className={`${sidebarCollapsed ? 'w-3 h-3' : 'w-2.5 h-2.5 mr-1'}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 4V20M4 12H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                              </svg>
-                              {!sidebarCollapsed && <span>Add Integration</span>}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    */}
-
                     {/* Main chat area */}
                     <div className="flex-1 flex flex-col overflow-hidden min-w-0">
                       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white w-full">
