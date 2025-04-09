@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs } from "@/components/ui/tabs";
+import Image from "next/image";
 
 export function FeatureTabs() {
   const tabs = [
@@ -8,19 +9,25 @@ export function FeatureTabs() {
       title: "Integrations",
       value: "integrations",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-6 md:p-10 md:pt-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col h-full">
-            <h3 className="text-2xl md:text-4xl mb-4">Connect Your Feedback Sources</h3>
-            <p className="text-base md:text-lg font-normal mb-6">
+            <h3 className="text-xl md:text-4xl mb-2">Connect Your Feedback Sources</h3>
+            <p className="text-sm md:text-lg font-normal mb-4 md:mb-8">
               Import customer feedback from multiple channels into one unified workspace. 
               Easily connect with Intercom, Zendesk, customer interviews, and more.
             </p>
-            {/* Placeholder for integration image */}
-            <div className="mt-auto h-[60%] w-full relative">
+            {/* Feature image container */}
+            <div className="mt-2 md:mt-4 h-[72%] md:h-[80%] w-full relative">
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-[0.625rem]"></div>
-              {/* Display a colored placeholder div if image isn't available */}
-              <div className="w-full h-full rounded-[0.625rem] bg-indigo-500/20 flex items-center justify-center">
-                <p className="text-lg font-normal">Integration Dashboard Preview</p>
+              <div className="relative w-full h-full rounded-[0.625rem] overflow-hidden">
+                <Image
+                  src="/images/features/integrations-dashboard.png"
+                  alt="Integration Dashboard showing multiple feedback sources connected"
+                  fill
+                  className="object-cover object-top scale-[1.02]"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -31,19 +38,25 @@ export function FeatureTabs() {
       title: "Chat",
       value: "chat",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-600 to-indigo-600 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-6 md:p-10 md:pt-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-600 to-indigo-600 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col h-full">
-            <h3 className="text-2xl md:text-4xl mb-4">Ask Questions, Get Insights</h3>
-            <p className="text-base md:text-lg font-normal mb-6">
+            <h3 className="text-xl md:text-4xl mb-2">Ask Questions, Get Insights</h3>
+            <p className="text-sm md:text-lg font-normal mb-4 md:mb-8">
               Chat with your customer feedback in natural language. Ask specific questions and get 
               instant insights backed by real user quotes and source contexts.
             </p>
-            {/* Placeholder for chat image */}
-            <div className="mt-auto h-[60%] w-full relative">
+            {/* Feature image container */}
+            <div className="mt-2 md:mt-4 h-[72%] md:h-[80%] w-full relative">
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-[0.625rem]"></div>
-              {/* Display a colored placeholder div if image isn't available */}
-              <div className="w-full h-full rounded-[0.625rem] bg-blue-500/20 flex items-center justify-center">
-                <p className="text-lg font-normal">Chat Interface Preview</p>
+              <div className="relative w-full h-full rounded-[0.625rem] overflow-hidden">
+                <Image
+                  src="/images/features/chat-interface.png"
+                  alt="AI chat interface showing customer feedback analysis"
+                  fill
+                  className="object-cover object-top scale-[1.02]"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -54,19 +67,25 @@ export function FeatureTabs() {
       title: "Insights",
       value: "insights",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="w-full overflow-hidden relative h-full rounded-[0.825rem] p-6 md:p-10 md:pt-6 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col h-full">
-            <h3 className="text-2xl md:text-4xl mb-4">Discover What Users Really Want</h3>
-            <p className="text-base md:text-lg font-normal mb-6">
+            <h3 className="text-xl md:text-4xl mb-2">Discover What Users Really Want</h3>
+            <p className="text-sm md:text-lg font-normal mb-4 md:mb-8">
               Uncover patterns, track sentiment over time, and identify the most requested features
               with AI-powered analytics that go beyond basic categorization.
             </p>
-            {/* Placeholder for insights image */}
-            <div className="mt-auto h-[60%] w-full relative">
+            {/* Feature image container */}
+            <div className="mt-2 md:mt-4 h-[72%] md:h-[80%] w-full relative">
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-[0.625rem]"></div>
-              {/* Display a colored placeholder div if image isn't available */}
-              <div className="w-full h-full rounded-[0.625rem] bg-purple-500/20 flex items-center justify-center">
-                <p className="text-lg font-normal">Analytics Dashboard Preview</p>
+              <div className="relative w-full h-full rounded-[0.625rem] overflow-hidden">
+                <Image
+                  src="/images/features/insights-dashboard.png"
+                  alt="Analytics dashboard showing user feedback insights and trends"
+                  fill
+                  className="object-cover object-top scale-[1.02]"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -86,7 +105,7 @@ export function FeatureTabs() {
             Transform scattered feedback into a searchable knowledge base that your whole team can explore.
           </p>
         </div>
-        <div className="h-[36rem] md:h-[42rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
+        <div className="h-[40rem] md:h-[42rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
           <Tabs 
             tabs={tabs} 
             activeTabClassName="bg-indigo-100/70 dark:bg-indigo-950/40 shadow-sm"
@@ -97,4 +116,4 @@ export function FeatureTabs() {
       </div>
     </section>
   );
-} 
+}
