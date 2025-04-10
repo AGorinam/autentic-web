@@ -1,4 +1,13 @@
-import { Features } from '../types/features';
+type Feature = {
+  id: string;
+  title: string;
+  subtitle: string;
+  keyPoints: string[];
+  media: {
+    desktop: string;
+    mobile: string;
+  };
+};
 
 export const features = [
   {
@@ -57,4 +66,7 @@ export const features = [
       mobile: '/images/features/integrations-dashboard.png'
     }
   }
-] as const; 
+] as const;
+
+// Export the type for use in other files if needed
+export type { Feature }; 

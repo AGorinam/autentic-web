@@ -22,10 +22,10 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             <Link
-              href="/product"
+              href="/#first-feature"
               className={cn(
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                pathname === "/product"
+                pathname === "/#first-feature"
                   ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                   : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
               )}
@@ -33,26 +33,15 @@ export function Navbar() {
               Product
             </Link>
             <Link
-              href="/integrations"
+              href="/#integrations"
               className={cn(
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                pathname === "/integrations"
+                pathname === "/#integrations"
                   ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                   : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
               )}
             >
               Integrations
-            </Link>
-            <Link
-              href="/about"
-              className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                pathname === "/about"
-                  ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
-                  : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
-              )}
-            >
-              About
             </Link>
           </div>
 
@@ -87,10 +76,10 @@ export function Navbar() {
           <div className="md:hidden mt-2 p-4 rounded-[0.625rem] bg-white/80 backdrop-blur-md border border-slate-300/70 dark:border-slate-700/70 shadow-sm">
             <div className="flex flex-col gap-3">
               <Link
-                href="/product"
+                href="/#first-feature"
                 className={cn(
                   "rounded-md px-4 py-2.5 text-sm font-medium text-center transition-colors",
-                  pathname === "/product"
+                  pathname === "/#first-feature"
                     ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                     : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                 )}
@@ -98,26 +87,15 @@ export function Navbar() {
                 Product
               </Link>
               <Link
-                href="/integrations"
+                href="/#integrations"
                 className={cn(
                   "rounded-md px-4 py-2.5 text-sm font-medium text-center transition-colors",
-                  pathname === "/integrations"
+                  pathname === "/#integrations"
                     ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                     : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                 )}
               >
                 Integrations
-              </Link>
-              <Link
-                href="/about"
-                className={cn(
-                  "rounded-md px-4 py-2.5 text-sm font-medium text-center transition-colors",
-                  pathname === "/about"
-                    ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
-                    : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
-                )}
-              >
-                About
               </Link>
               <hr className="my-2 border-slate-200/50 dark:border-slate-700/50" />
               <Link
