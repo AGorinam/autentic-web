@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
-import { ChatFlow } from "@/components/ui/chat-flow";
+import { ChatUI } from "@/components/ui/chat-ui";
 
 export function Hero() {
   const [chatVisible] = useState(true);
@@ -135,7 +135,7 @@ export function Hero() {
                           e.stopPropagation();
                           resetChatSize();
                         }}
-                        className="mr-2 text-[10px] text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full px-1.5 py-0.5 transition-colors"
+                        className="mr-2 text-[10px] text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full px-1.5 py-0.5 transition-colors cursor-pointer"
                         title="Reset size"
                       >
                         Reset
@@ -144,8 +144,10 @@ export function Hero() {
                     </div>
                   </div>
 
-                  {/* ChatFlow component */}
-                  <ChatFlow />
+                  {/* ChatUI component */}
+                  <div className="flex-grow flex overflow-hidden">
+                    <ChatUI />
+                  </div>
                 </div>
               </Draggable>
             )}
