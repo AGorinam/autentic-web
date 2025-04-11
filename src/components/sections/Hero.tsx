@@ -17,9 +17,9 @@ export function Hero() {
   const [initialPosition, setInitialPosition] = useState({ x: 0, y: 50 });
 
   // Initial and minimum size for the chat window
-  const initialChatSize = { width: 560, height: 720 };
-  const minChatSize = { width: 400, height: 650 };
-  const maxChatSize = { width: 1000, height: 800 };
+  const initialChatSize = { width: 450, height: 600 };
+  const minChatSize = { width: 400, height: 550 };
+  const maxChatSize = { width: 800, height: 800 };
 
   // Chat reference to access Draggable methods
   const chatRef = useRef<DraggableRef>(null);
@@ -31,11 +31,10 @@ export function Hero() {
         const rect = heroRef.current.getBoundingClientRect();
         const isMobile = window.innerWidth < 768;
 
-        // Allow dragging beyond the top edge (negative values)
         setBounds({
-          top: -150, // Allow dragging above the visible area
-          left: isMobile ? -50 : -100,
-          right: rect.width - (isMobile ? 0 : 100),
+          top: isMobile ? -200 : -400, // Adjusted for mobile
+          left: isMobile ? 20 : 0, // Added margin for mobile
+          right: isMobile ? 20 : (rect.width - 50), // Added margin for mobile
           bottom: rect.height - 100,
         });
       }
@@ -48,13 +47,20 @@ export function Hero() {
 
   useEffect(() => {
     const calculateInitialPosition = () => {
-      // For mobile, center the chat horizontally
-      if (window.innerWidth < 768) {
-        const centerX = (window.innerWidth - 560) / 2;
-        setInitialPosition({ x: Math.max(0, centerX), y: 50 });
+      const isMobile = window.innerWidth < 768;
+      
+      if (isMobile) {
+        // For mobile, center horizontally and adjust vertical position
+        const availableWidth = window.innerWidth - 40; // Account for margins
+        const centerX = (availableWidth - initialChatSize.width) / 2;
+        setInitialPosition({ 
+          x: Math.max(20, centerX), // Ensure minimum margin
+          y: 50 // Keep chat more visible on mobile
+        });
       } else {
-        // For larger screens, position it slightly to the right
-        setInitialPosition({ x: 20, y: 50 });
+        // For larger screens, position it to the right
+        const rightPosition = window.innerWidth * 0.85 - initialChatSize.width;
+        setInitialPosition({ x: rightPosition, y: -250 });
       }
     };
 
@@ -79,9 +85,9 @@ export function Hero() {
   return (
     <AuroraBackground className="w-full pt-24 pb-60 md:pb-52 lg:pb-64 overflow-hidden">
       <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-start">
           {/* Left column with text content */}
-          <div className="flex flex-col justify-center space-y-8 text-center lg:text-left">
+          <div className="flex flex-col justify-center space-y-8 text-center lg:text-left pt-20">
             <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
               Solve the <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient">right problems</span>
             </h1>
@@ -105,7 +111,7 @@ export function Hero() {
           </div>
 
           {/* Right column with the chat mockup */}
-          <div className="lg:ml-auto flex items-center justify-center relative h-[720px] w-full" style={{ zIndex: 30 }}>
+          <div className="lg:ml-auto flex items-start justify-center lg:justify-end relative h-[800px] w-full" style={{ zIndex: 30 }}>
             {/* Draggable chat mockup */}
             {chatVisible && (
               <Draggable

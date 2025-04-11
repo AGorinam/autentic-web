@@ -6,6 +6,7 @@ import { features } from '@/lib/data/features';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { Badge } from '@/components/ui/badge';
 
 export function FeatureHighlights() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -45,6 +46,14 @@ export function FeatureHighlights() {
       {/* Title Section */}
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto relative">
         <div className="text-center max-w-4xl mx-auto pt-16 md:pt-24 pb-8 md:pb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-4"
+          >
+            <Badge>Product</Badge>
+          </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +89,7 @@ export function FeatureHighlights() {
 
               {/* Media Content */}
               <div className="relative flex items-center h-full">
-                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border-4 border-gray-300 bg-white dark:bg-gray-900 dark:border-gray-700 shadow-md">
                   {/* Background Cover Image */}
                   <Image
                     src="/images/features/cover.png"
@@ -244,7 +253,7 @@ export function FeatureHighlights() {
                   ))}
                 </ul>
               </div>
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-2 border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-700 shadow-md">
                 {/* Background Cover Image */}
                 <Image
                   src="/images/features/cover.png"

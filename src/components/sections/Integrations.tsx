@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 export function Integrations() {
   // Logo images for the integration grid
@@ -25,6 +26,9 @@ export function Integrations() {
       <div className="absolute inset-0 aurora-bg z-0"></div>
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto relative z-10">
         <div className="text-center mb-10 md:mb-12">
+          <div className="mb-4">
+            <Badge>Integrations</Badge>
+          </div>
           <h2 className="text-4xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8">
             Integrates with <br className="sm:hidden" />
             <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">your tools</span>
