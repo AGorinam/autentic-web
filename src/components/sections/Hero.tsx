@@ -83,12 +83,12 @@ export function Hero() {
   };
 
   return (
-    <AuroraBackground className="w-full pt-24 pb-60 md:pb-52 lg:pb-64 overflow-hidden">
+    <AuroraBackground className="w-full pt-20 pb-24 md:pb-20 lg:pb-24 overflow-hidden">
       <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-start">
           {/* Left column with text content */}
-          <div className="flex flex-col justify-center space-y-8 text-center lg:text-left pt-20">
-            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white mt-14 md:mt-0">
+          <div className="flex flex-col justify-center space-y-8 text-center lg:text-left pt-12 md:pt-16">
+            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white">
               Solve the <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient">right problems</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl max-w-[720px] mx-auto lg:mx-0 font-medium text-gray-700 dark:text-gray-200">

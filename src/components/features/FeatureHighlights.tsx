@@ -45,7 +45,7 @@ export function FeatureHighlights() {
     <section ref={sectionRef} className="relative w-full bg-gradient-to-b from-white via-purple-50/30 to-orange-50/30 z-10">
       {/* Title Section */}
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto relative">
-        <div className="text-center max-w-4xl mx-auto pt-16 md:pt-24 pb-8 md:pb-16">
+        <div className="text-center max-w-4xl mx-auto pt-8 md:pt-12 pb-4 md:pb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
