@@ -27,50 +27,30 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Menu sections - 2 columns on mobile, 4 on tablet, 5 on desktop */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
-            {/* Contact column */}
+          {/* Menu sections - 2 columns on mobile, 3 on larger screens */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-10">
+            {/* Connect column (merged Contact and Socials) */}
             <div>
-              <h3 className="text-lg font-medium mb-4">Contact</h3>
+              <h3 className="text-lg font-medium mb-4">Connect</h3>
               <ul className="space-y-3">
                 <li><Link href="https://github.com" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Github</Link></li>
                 <li><Link href="https://twitter.com" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Twitter</Link></li>
-                <li><Link href="https://instagram.com" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Instagram</Link></li>
+                <li><Link href="https://linkedin.com" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">LinkedIn</Link></li>
               </ul>
             </div>
 
-            {/* Platforms column */}
+            {/* Resources column (merged Help and Platforms) */}
             <div>
-              <h3 className="text-lg font-medium mb-4">Platforms</h3>
+              <h3 className="text-lg font-medium mb-4">Resources</h3>
               <ul className="space-y-3">
-                <li><Link href="#ios" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">iOS</Link></li>
-                <li><Link href="#android" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Android</Link></li>
+                <li><Link href="#contact-us" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link href="#faq" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">FAQ</Link></li>
                 <li><Link href="#web" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Web</Link></li>
               </ul>
             </div>
 
-            {/* Help column */}
+            {/* Product column - now visible on all screen sizes */}
             <div>
-              <h3 className="text-lg font-medium mb-4">Help</h3>
-              <ul className="space-y-3">
-                <li><Link href="#contact-us" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Contact Us</Link></li>
-                <li><Link href="#faq" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">FAQ</Link></li>
-                <li><Link href="#feedback" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Feedback</Link></li>
-              </ul>
-            </div>
-
-            {/* Socials column */}
-            <div>
-              <h3 className="text-lg font-medium mb-4">Socials</h3>
-              <ul className="space-y-3">
-                <li><Link href="https://twitch.tv" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Twitch</Link></li>
-                <li><Link href="https://discord.com" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Discord</Link></li>
-                <li><Link href="https://dribbble.com" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Dribbble</Link></li>
-              </ul>
-            </div>
-
-            {/* Product column - only visible on desktop */}
-            <div className="hidden lg:block">
               <h3 className="text-lg font-medium mb-4">Product</h3>
               <ul className="space-y-3">
                 <li><Link href="#features" className="text-slate-600 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:text-white transition-colors">Features</Link></li>

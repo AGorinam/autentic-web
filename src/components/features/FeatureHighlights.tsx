@@ -58,20 +58,21 @@ export function FeatureHighlights() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-4xl lg:text-5xl font-bold mb-6"
+            className="text-4xl md:text-4xl lg:text-5xl font-bold mb-6 mx-auto"
           >
-            Powerful{" "}
+            Built for{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-orange-600">
-              features for
-            </span>{" "}
-            feedback
+              Product Teams
+            </span>
+            <br className="hidden sm:block" />
+            {" "}who care about user feedback
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-600/90 font-light"
+            className="text-xl md:text-2xl text-gray-600/90 font-light mx-auto"
           >
             Everything you need to collect, analyze, and act on customer feedback
           </motion.p>
@@ -148,22 +149,28 @@ export function FeatureHighlights() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: false, margin: "-20% 0px -20% 0px" }}
                       transition={{ duration: 0.5 }}
-                      className="space-y-8 py-16"
+                      className="space-y-8 py-16 max-w-3xl"
                     >
                       <motion.h2 
-                        className="text-4xl font-bold"
+                        className="text-4xl font-bold leading-tight"
                       >
                         {feature.title.split(' ').map((word, i, arr) => {
                           // Apply gradient to the middle word(s)
                           const isMiddle = i > 0 && i < arr.length - 1;
+                          // Add line break for feature title that has more than 3 words
+                          const shouldBreak = arr.length > 3 && i === Math.floor(arr.length / 2) - 1;
                           return (
                             <span key={i}>
                               {isMiddle ? (
                                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-orange-600">
-                                  {word}{" "}
+                                  {word}
+                                  {shouldBreak ? <br /> : " "}
                                 </span>
                               ) : (
-                                word + " "
+                                <>
+                                  {word}
+                                  {shouldBreak ? <br /> : " "}
+                                </>
                               )}
                             </span>
                           );
@@ -205,54 +212,46 @@ export function FeatureHighlights() {
       </div>
 
       {/* Mobile Layout */}
-      <div className="lg:hidden container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
-        <div className="space-y-16 py-16">
-          {features.map((feature) => (
+      <div id="features-mobile" className="lg:hidden container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
+        <div id="first-feature" className="space-y-16 py-16 pt-24">
+          {features.map((feature, index) => (
             <motion.div
               key={feature.id}
+              id={index === 0 ? 'feature-item-0' : undefined}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="space-y-8"
             >
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold">
+              {/* Title - First */}
+              <div className="px-0">
+                <h2 className="text-3xl font-bold leading-tight">
                   {feature.title.split(' ').map((word, i, arr) => {
                     // Apply gradient to the middle word(s)
                     const isMiddle = i > 0 && i < arr.length - 1;
+                    // Add line break for feature title that has more than 3 words
+                    const shouldBreak = arr.length > 3 && i === Math.floor(arr.length / 2) - 1;
                     return (
                       <span key={i}>
                         {isMiddle ? (
                           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-orange-600">
-                            {word}{" "}
+                            {word}
+                            {shouldBreak ? <br /> : " "}
                           </span>
                         ) : (
-                          word + " "
+                          <>
+                            {word}
+                            {shouldBreak ? <br /> : " "}
+                          </>
                         )}
                       </span>
                     );
                   })}
                 </h2>
-                <p className="text-lg text-gray-600/90 font-light leading-relaxed">{feature.subtitle}</p>
-                <ul className="space-y-6">
-                  {feature.keyPoints.map((point, pointIndex) => (
-                    <motion.li
-                      key={pointIndex}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: pointIndex * 0.2 }}
-                      className="flex items-center space-x-4 group"
-                    >
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-purple-100 to-orange-100 group-hover:from-purple-200 group-hover:to-orange-200 transition-all duration-300 shadow-sm">
-                        <ArrowRightIcon className="w-4 h-4 text-purple-600 group-hover:text-orange-600 transition-colors duration-300" />
-                      </div>
-                      <span className="text-gray-700 text-lg group-hover:text-gray-900 transition-colors duration-300">{point}</span>
-                    </motion.li>
-                  ))}
-                </ul>
               </div>
+              
+              {/* Image - Second */}
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-2 border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-700 shadow-md">
                 {/* Background Cover Image */}
                 <Image
@@ -260,7 +259,7 @@ export function FeatureHighlights() {
                   alt="Background"
                   width={800}
                   height={600}
-                  className="absolute inset-0 w-[120%] h-[120%] object-cover -translate-x-[10%] -translate-y-[10%]"
+                  className="absolute inset-0 w-full h-full object-cover"
                   quality={85}
                   priority
                 />
@@ -275,6 +274,30 @@ export function FeatureHighlights() {
                   />
                 </div>
               </div>
+              
+              {/* Subtitle - Third */}
+              <div className="px-0">
+                <p className="text-lg text-gray-600/90 font-light leading-relaxed">{feature.subtitle}</p>
+              </div>
+              
+              {/* Key Points - Fourth */}
+              <ul className="space-y-6 px-0">
+                {feature.keyPoints.map((point, pointIndex) => (
+                  <motion.li
+                    key={pointIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: pointIndex * 0.2 }}
+                    className="flex items-center space-x-4 group"
+                  >
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-purple-100 to-orange-100 group-hover:from-purple-200 group-hover:to-orange-200 transition-all duration-300 shadow-sm">
+                      <ArrowRightIcon className="w-4 h-4 text-purple-600 group-hover:text-orange-600 transition-colors duration-300" />
+                    </div>
+                    <span className="text-gray-700 text-lg group-hover:text-gray-900 transition-colors duration-300">{point}</span>
+                  </motion.li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>

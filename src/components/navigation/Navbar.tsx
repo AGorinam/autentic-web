@@ -1,14 +1,142 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, ArrowRight } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [activeHash, setActiveHash] = useState<string>("");
+
+  // Update active hash when it changes in the URL
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+
+    // Set initial hash
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  // Function to check if a link should be highlighted as active
+  const isLinkActive = (href: string) => {
+    const hashPart = href.split('#')[1];
+    if (!hashPart) return false;
+    return activeHash === `#${hashPart}`;
+  };
+
+  const handleHashLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    // Update URL with hash
+    window.history.pushState({}, "", `/#${targetId}`);
+    setActiveHash(`#${targetId}`);
+    
+    // Special case for first-feature (Product tab)
+    if (targetId === "first-feature") {
+      // Using a timeout to ensure DOM is fully loaded
+      setTimeout(() => {
+        // For mobile specifically
+        if (window.innerWidth < 1024) {
+          // Try several strategies to find the features section
+          
+          // 1. Look for specific text content that would only be in the features section
+          const findFeaturesByText = () => {
+            const allHeadings = Array.from(document.querySelectorAll('h2, h3'));
+            for (const heading of allHeadings) {
+              if (heading.textContent && 
+                  (heading.textContent.includes('Product Teams') || 
+                   heading.textContent.includes('features') ||
+                   heading.textContent.includes('Built for'))) {
+                return heading;
+              }
+            }
+            return null;
+          };
+          
+          // 2. Look for the badge with "Product" text
+          const findProductBadge = () => {
+            const badges = Array.from(document.querySelectorAll('.badge, [class*="badge"]'));
+            for (const badge of badges) {
+              if (badge.textContent && badge.textContent.includes('Product')) {
+                return badge;
+              }
+            }
+            return null;
+          };
+          
+          // Try different methods to find the target
+          const featureHeading = findFeaturesByText();
+          const productBadge = findProductBadge();
+          
+          const targetElement = featureHeading || productBadge;
+          
+          if (targetElement) {
+            // Get closest major container
+            const container = targetElement.closest('section') || 
+                              targetElement.closest('[class*="feature"]') || 
+                              targetElement.closest('div[class*="container"]');
+            
+            if (container) {
+              // Calculate position with sufficient offset to account for header
+              const rect = container.getBoundingClientRect();
+              const scrollPosition = rect.top + window.pageYOffset - 100;
+              
+              window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+              });
+              return;
+            }
+          }
+          
+          // If all else fails, use a hardcoded position that's much further down
+          // This number is higher to ensure we get past the chat interface
+          window.scrollTo({
+            top: 1200, // Much larger value to scroll past the chat
+            behavior: 'smooth'
+          });
+        } else {
+          // Desktop handling (unchanged)
+          const element = document.getElementById(targetId);
+          if (element) {
+            const headerOffset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 300);
+      return;
+    }
+    
+    // For other sections, use the original approach
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 300);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -25,10 +153,11 @@ export function Navbar() {
               href="/#first-feature"
               className={cn(
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                pathname === "/#first-feature"
+                isLinkActive("/#first-feature")
                   ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                   : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
               )}
+              onClick={(e) => handleHashLinkClick(e, "first-feature")}
             >
               Product
             </Link>
@@ -36,10 +165,11 @@ export function Navbar() {
               href="/#integrations"
               className={cn(
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                pathname === "/#integrations"
+                isLinkActive("/#integrations")
                   ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                   : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
               )}
+              onClick={(e) => handleHashLinkClick(e, "integrations")}
             >
               Integrations
             </Link>
@@ -79,10 +209,11 @@ export function Navbar() {
                 href="/#first-feature"
                 className={cn(
                   "rounded-md px-4 py-2.5 text-sm font-medium text-center transition-colors",
-                  pathname === "/#first-feature"
+                  isLinkActive("/#first-feature")
                     ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                     : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                 )}
+                onClick={(e) => handleHashLinkClick(e, "first-feature")}
               >
                 Product
               </Link>
@@ -90,10 +221,11 @@ export function Navbar() {
                 href="/#integrations"
                 className={cn(
                   "rounded-md px-4 py-2.5 text-sm font-medium text-center transition-colors",
-                  pathname === "/#integrations"
+                  isLinkActive("/#integrations")
                     ? "bg-black/5 text-slate-800 font-semibold dark:bg-white/10 dark:text-white"
                     : "text-slate-600 hover:bg-black/5 hover:text-slate-800 hover:font-semibold dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                 )}
+                onClick={(e) => handleHashLinkClick(e, "integrations")}
               >
                 Integrations
               </Link>

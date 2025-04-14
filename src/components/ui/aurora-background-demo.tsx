@@ -1,32 +1,64 @@
 "use client";
 
-import { motion } from "framer-motion";
 import React from "react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 
-export function AuroraBackgroundDemo() {
+export default function AuroraBackgroundDemo() {
   return (
-    <AuroraBackground>
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4"
-      >
-        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
-          Background lights are cool you know.
-        </div>
-        <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
-          And this, is chemical burn.
-        </div>
-        <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
-          Debug now
-        </button>
-      </motion.div>
-    </AuroraBackground>
+    <div className="space-y-8">
+      <h2 className="text-3xl font-bold mb-4">Default Aurora Colors</h2>
+      <div className="h-64 w-full rounded-lg overflow-hidden">
+        <AuroraBackground>
+          <div className="flex items-center justify-center h-full">
+            <p className="text-xl font-medium">Default Aurora</p>
+          </div>
+        </AuroraBackground>
+      </div>
+
+      <h2 className="text-3xl font-bold mb-4">Custom Aurora Colors - Purple/Pink</h2>
+      <div className="h-64 w-full rounded-lg overflow-hidden">
+        <AuroraBackground
+          colorPrimary="rgba(147, 51, 234, 1)"
+          colorSecondary="rgba(236, 72, 153, 1)"
+          colorTertiary="rgba(217, 70, 239, 1)"
+          colorQuaternary="rgba(192, 132, 252, 1)"
+          colorQuinary="rgba(244, 114, 182, 1)"
+        >
+          <div className="flex items-center justify-center h-full">
+            <p className="text-xl font-medium">Purple/Pink Aurora</p>
+          </div>
+        </AuroraBackground>
+      </div>
+
+      <h2 className="text-3xl font-bold mb-4">Custom Aurora Colors - Green/Teal</h2>
+      <div className="h-64 w-full rounded-lg overflow-hidden">
+        <AuroraBackground
+          colorPrimary="rgba(34, 197, 94, 1)"
+          colorSecondary="rgba(16, 185, 129, 1)"
+          colorTertiary="rgba(20, 184, 166, 1)"
+          colorQuaternary="rgba(134, 239, 172, 1)"
+          colorQuinary="rgba(110, 231, 183, 1)"
+        >
+          <div className="flex items-center justify-center h-full">
+            <p className="text-xl font-medium">Green/Teal Aurora</p>
+          </div>
+        </AuroraBackground>
+      </div>
+
+      <h2 className="text-3xl font-bold mb-4">Custom Aurora Colors - Orange/Red</h2>
+      <div className="h-64 w-full rounded-lg overflow-hidden">
+        <AuroraBackground
+          colorPrimary="rgba(249, 115, 22, 1)"
+          colorSecondary="rgba(239, 68, 68, 1)"
+          colorTertiary="rgba(245, 158, 11, 1)"
+          colorQuaternary="rgba(251, 146, 60, 1)"
+          colorQuinary="rgba(248, 113, 113, 1)"
+        >
+          <div className="flex items-center justify-center h-full">
+            <p className="text-xl font-medium">Orange/Red Aurora</p>
+          </div>
+        </AuroraBackground>
+      </div>
+    </div>
   );
 } 
