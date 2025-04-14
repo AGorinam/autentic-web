@@ -6,6 +6,7 @@ import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
 import { ChatUI } from "@/components/ui/chat-ui";
+import { LaunchingSoonBadge } from "@/components/ui/launching-soon-badge";
 
 export function Hero() {
   const [chatVisible] = useState(true);
@@ -88,6 +89,9 @@ export function Hero() {
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-start">
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-8 text-center lg:text-left pt-12 md:pt-16">
+            <div className="mb-2 flex justify-center lg:justify-start">
+              <LaunchingSoonBadge onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })} />
+            </div>
             <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white">
               Solve the <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient">right problems</span>
             </h1>
