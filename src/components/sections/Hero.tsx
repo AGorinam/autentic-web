@@ -67,7 +67,7 @@ export function Hero() {
     calculateInitialPosition();
     window.addEventListener('resize', calculateInitialPosition);
     return () => window.removeEventListener('resize', calculateInitialPosition);
-  }, []);
+  }, [initialChatSize.width]);
 
   // Handler for chat resize
   const handleChatResize = (newSize: { width: number; height: number }) => {
@@ -99,7 +99,7 @@ export function Hero() {
                 href="#demo"
                 className="w-full sm:w-auto"
               >
-                Start builidng
+                Start building
               </RainbowButtonLink>
               <Link
                 href="#video"
