@@ -19,7 +19,7 @@ export function LaunchingSoonBadge({ className, onClick }: LaunchingSoonBadgePro
     >
       <span className="inline-flex items-center gap-1.5">
         <Sparkles className="h-3.5 w-3.5 text-purple-500" />
-        <span className="text-purple-600">Launching Soon —</span> <span className="font-semibold text-purple-600">Join Waitlist</span>
+        <span className="text-purple-600">Launching soon —</span> <span className="font-semibold text-purple-600">Join Waitlist</span>
       </span>
     </div>
   );
