@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="light">
       <body
         className={`${plusJakartaSans.variable} antialiased font-sans bg-white text-black`}
+        suppressHydrationWarning
       >
         <Navbar />
         <div>
