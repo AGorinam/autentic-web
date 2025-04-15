@@ -57,10 +57,10 @@ export function ChatUI() {
   
   // Product questions that the user can select
   const productQuestions = [
-    { id: "q1", text: "What features do users request most often?" },
-    { id: "q2", text: "What pain points do users experience?" },
-    { id: "q3", text: "How do users rate our onboarding experience?" },
-    { id: "q4", text: "What's the user sentiment about our latest release?" },
+    { id: "q1", boldText: "What features do", regularText: "users request most often?" },
+    { id: "q2", boldText: "What pain points do", regularText: "users experience?" },
+    { id: "q3", boldText: "How do users rate", regularText: "our onboarding experience?" },
+    { id: "q4", boldText: "What's the user sentiment", regularText: "about our latest release?" },
   ];
 
   // Prepared responses with sources
@@ -186,7 +186,8 @@ export function ChatUI() {
       
       // Check if input matches any of our product questions
       for (const question of productQuestions) {
-        if (userInput.includes(question.text.toLowerCase()) || 
+        const fullQuestion = `${question.boldText} ${question.regularText}`.toLowerCase()
+        if (userInput.includes(fullQuestion) || 
             (question.id === "q1" && (userInput.includes("feature") || userInput.includes("request"))) ||
             (question.id === "q2" && (userInput.includes("pain") || userInput.includes("problem"))) ||
             (question.id === "q3" && (userInput.includes("onboard") || userInput.includes("start"))) ||
@@ -273,10 +274,10 @@ export function ChatUI() {
     const question = productQuestions.find(q => q.id === questionId)
     if (!question) return
     
-    // Add the question as a user message
+    // Add the question as a user message with combined text
     addMessage({
       id: Date.now(),
-      content: question.text,
+      content: `${question.boldText} ${question.regularText}`,
       sender: "user",
     })
     
@@ -455,18 +456,20 @@ export function ChatUI() {
                 {message.showOptions && (
                   <div className="mt-4 space-y-2">
                     <p className="text-sm text-muted-foreground mb-2">Try asking:</p>
-                    {productQuestions
-                      .filter(q => !message.content.includes(q.text))
-                      .map((question) => (
-                        <Button
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {productQuestions.map((question) => (
+                        <button
                           key={question.id}
-                          variant="outline"
-                          className="w-full mb-2 text-left justify-start h-auto py-2 px-3 cursor-pointer hover:bg-gray-50 whitespace-normal break-words"
+                          className="p-4 text-left bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors cursor-pointer"
                           onClick={() => handleQuestionClick(question.id)}
                         >
-                          {question.text}
-                        </Button>
+                          <div className="text-sm text-gray-800">
+                            <span className="font-bold">{question.boldText}</span>
+                            <span className="font-normal"> {question.regularText}</span>
+                          </div>
+                        </button>
                       ))}
+                    </div>
                   </div>
                 )}
                 
@@ -585,18 +588,21 @@ export function ChatUI() {
           )}
 
           {messages.length === 1 && (
-            <div className="mt-4 space-y-2">
-              <p className="text-sm text-muted-foreground mb-2">Try asking:</p>
-              {productQuestions.map((question) => (
-                <Button
-                  key={question.id}
-                  variant="outline"
-                  className="w-full mb-2 text-left justify-start h-auto py-2 px-3 cursor-pointer hover:bg-gray-50 whitespace-normal break-words"
-                  onClick={() => handleQuestionClick(question.id)}
-                >
-                  {question.text}
-                </Button>
-              ))}
+            <div className="mt-6 mb-4 px-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {productQuestions.map((question) => (
+                  <button
+                    key={question.id}
+                    className="p-4 text-left bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition-colors cursor-pointer"
+                    onClick={() => handleQuestionClick(question.id)}
+                  >
+                    <div className="text-sm text-gray-800">
+                      <span className="font-bold">{question.boldText}</span>
+                      <span className="font-normal"> {question.regularText}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           )}
           
