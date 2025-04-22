@@ -1,18 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
 import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
 import { ChatUI } from "@/components/ui/chat-ui";
 import { LaunchingSoonBadge } from "@/components/ui/launching-soon-badge";
 
+interface FeedbackSource {
+  text: string;
+  icon: string;
+  brand: string;
+}
+
 export function Hero() {
   const [chatVisible] = useState(true);
   const [chatSize, setChatSize] = useState({ width: 560, height: 550 });
   const heroRef = useRef<HTMLDivElement>(null);
   const [bounds, setBounds] = useState<{ top: number; left: number; right: number; bottom: number } | null>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   // Calculate initial position based on viewport
   const [initialPosition, setInitialPosition] = useState({ x: 0, y: 50 });
@@ -24,6 +33,32 @@ export function Hero() {
 
   // Chat reference to access Draggable methods
   const chatRef = useRef<DraggableRef>(null);
+
+  // Rotating text for feedback sources with icons
+  const [sourceIndex, setSourceIndex] = useState(0);
+  
+  const feedbackSources = useMemo<FeedbackSource[]>(
+    () => [
+      { text: "Sales calls", icon: "/images/integrations/gong.png", brand: "Gong" },
+      { text: "CS tickets", icon: "/images/integrations/zendesk.svg", brand: "Zendesk" },
+      { text: "Emails", icon: "/images/integrations/gmail.svg", brand: "Gmail" },
+      { text: "CS calls", icon: "/images/integrations/intercom.svg", brand: "Intercom" },
+      { text: "Reviews", icon: "/images/integrations/appstore.svg", brand: "App Store" }
+    ],
+    []
+  );
+
+  // Update source index on interval
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (sourceIndex === feedbackSources.length - 1) {
+        setSourceIndex(0);
+      } else {
+        setSourceIndex(sourceIndex + 1);
+      }
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [sourceIndex, feedbackSources]);
 
   // Update bounds when window is resized
   useEffect(() => {
@@ -90,10 +125,53 @@ export function Hero() {
           {/* Left column with text content */}
           <div className="flex flex-col justify-center space-y-8 text-center lg:text-left pt-12 md:pt-16">
             <div className="mb-2 flex justify-center lg:justify-start">
-              <LaunchingSoonBadge onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })} />
+              <LaunchingSoonBadge />
             </div>
-            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-white">
-              Solve the <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient">right problems</span>
+            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white text-center lg:text-left">
+              Convert your
+              <div className="relative h-[1.3em] w-full my-4 overflow-hidden">
+                {feedbackSources.map((source, index) => (
+                  <motion.div
+                    key={index}
+                    className="absolute left-0 right-0 text-center lg:text-left text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient flex items-center justify-center lg:justify-start"
+                    initial={{ opacity: 0, y: "-100%" }}
+                    transition={{ type: "spring", stiffness: 50 }}
+                    animate={
+                      sourceIndex === index
+                        ? {
+                            y: 0,
+                            opacity: 1,
+                          }
+                        : {
+                            y: sourceIndex > index ? "-100%" : "100%",
+                            opacity: 0,
+                          }
+                    }
+                  >
+                    <div 
+                      className="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden bg-white border-2 border-gray-200 shadow-sm cursor-pointer transition-all duration-300 hover:shadow-md hover:border-gray-300 mr-4"
+                      onMouseEnter={() => setShowTooltip(true)}
+                      onMouseLeave={() => setShowTooltip(false)}
+                    >
+                      <Image 
+                        src={source.icon} 
+                        alt={source.brand} 
+                        fill 
+                        className="object-contain p-2.5" 
+                      />
+                      {showTooltip && sourceIndex === index && (
+                        <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-white text-black text-sm rounded-xl px-4 py-3 whitespace-nowrap shadow-lg border border-gray-200 flex flex-col items-center">
+                          <span className="font-medium">{source.brand}</span>
+                          <span className="text-gray-500 text-xs">{source.text}</span>
+                          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r border-b border-gray-200 rotate-45"></div>
+                        </div>
+                      )}
+                    </div>
+                    <span className="whitespace-nowrap">{source.text}</span>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="text-spektr-cyan-50">into product feedback</div>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl max-w-[720px] mx-auto lg:mx-0 font-medium text-gray-700 dark:text-gray-200">
               autentic imports product feedback from support tickets, sales calls, interviews, and more — turning it into insights you can chat with.
