@@ -7,11 +7,11 @@ function Hero() {
   const [sourceIndex, setSourceIndex] = useState(0);
   const feedbackSources = useMemo(
     () => [
-      "Sales calls",
-      "CS tickets",
-      "Emails",
-      "CS calls",
-      "Reviews"
+      "calls",
+      "tickets",
+      "emails",
+      "issues",
+      "reviews"
     ],
     []
   );

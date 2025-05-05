@@ -39,11 +39,11 @@ export function Hero() {
   
   const feedbackSources = useMemo<FeedbackSource[]>(
     () => [
-      { text: "Sales calls", icon: "/images/integrations/gong.png", brand: "Gong" },
-      { text: "CS tickets", icon: "/images/integrations/zendesk.svg", brand: "Zendesk" },
-      { text: "Emails", icon: "/images/integrations/gmail.svg", brand: "Gmail" },
-      { text: "CS calls", icon: "/images/integrations/intercom.svg", brand: "Intercom" },
-      { text: "Reviews", icon: "/images/integrations/appstore.svg", brand: "App Store" }
+      { text: "calls", icon: "/images/integrations/gong.png", brand: "Gong" },
+      { text: "tickets", icon: "/images/integrations/zendesk.svg", brand: "Zendesk" },
+      { text: "emails", icon: "/images/integrations/gmail.svg", brand: "Gmail" },
+      { text: "issues", icon: "/images/integrations/intercom.svg", brand: "Intercom" },
+      { text: "reviews", icon: "/images/integrations/appstore.svg", brand: "App Store" }
     ],
     []
   );

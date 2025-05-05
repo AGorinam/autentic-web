@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, ArrowRight } from "lucide-react";
-import Image from "next/image";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -144,9 +143,8 @@ export function Navbar() {
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto py-4">
         <nav className="flex items-center justify-between rounded-[0.625rem] px-3 sm:px-5 py-2 backdrop-blur-md bg-white/30 border border-slate-300/70 dark:border-slate-700/70 shadow-sm">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="Autentic Logo" width={42} height={42} className="rounded-full" />
-            <span className="text-3xl font-bold text-slate-800 dark:text-white md:inline hidden tracking-tight">autentic</span>
+          <Link href="/" className="flex items-center">
+            <span className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">autentic</span>
           </Link>
 
           {/* Desktop Navigation */}
