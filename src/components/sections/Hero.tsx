@@ -9,11 +9,57 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpIcon } from '@/components/ui/icons';
 
+// Add new interface for logo data
+interface LogoData {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 interface FeedbackSource {
   text: string;
   icon: string;
   brand: string;
 }
+
+// Add new LogoCarousel component
+const LogoCarousel = () => {
+  const logos: LogoData[] = [
+    { src: "/images/integrations/gong.png", alt: "Gong", width: 28, height: 28 },
+    { src: "/images/integrations/zendesk.svg", alt: "Zendesk", width: 28, height: 28 },
+    { src: "/images/integrations/gmail.svg", alt: "Gmail", width: 28, height: 28 },
+    { src: "/images/integrations/intercom.svg", alt: "Intercom", width: 28, height: 28 },
+    { src: "/images/integrations/appstore.svg", alt: "App Store", width: 28, height: 28 },
+  ];
+
+  return (
+    <div className="w-full max-w-3xl mx-auto mt-8">
+      <h3 className="text-center text-mid font-medium text-gray-500 dark:text-gray-400 mb-6">
+        Integrates with:
+      </h3>
+      <div className="relative overflow-hidden px-8">
+        <div className="flex space-x-6 animate-scroll py-4">
+          {[...logos, ...logos, ...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 flex items-center justify-center bg-white dark:bg-white rounded-[16px] p-3 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.03)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.03)] cursor-pointer hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06),0_0_0_1px_rgba(0,0,0,0.03)] transition-all duration-200"
+              style={{ width: '52px', height: '52px' }}
+            >
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="object-contain max-h-full opacity-80 hover:opacity-100 transition-all duration-200"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -121,7 +167,7 @@ export function Hero() {
   };
 
   return (
-    <AuroraBackground className="w-full pt-20 pb-24 md:pb-20 lg:pb-24 overflow-hidden">
+    <AuroraBackground className="w-full pt-32 pb-24 md:pb-20 lg:pb-24 overflow-hidden">
       <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
         <div className="flex flex-col items-center justify-center min-h-[600px]">
           {/* Centered content */}
@@ -414,8 +460,34 @@ export function Hero() {
               </button>
             </div>
           </div>
+
+          {/* Add LogoCarousel component */}
+          <LogoCarousel />
         </div>
       </div>
     </AuroraBackground>
   );
+}
+
+// Modify the animation styles
+const styles = `
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+  }
+`;
+
+// Add the styles to the document
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
 }
