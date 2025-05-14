@@ -8,7 +8,10 @@ import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
 import { ChatUI } from "@/components/ui/chat-ui";
-import { LaunchingSoonBadge } from "@/components/ui/launching-soon-badge";
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import { ArrowUpIcon } from '@/components/ui/icons';
 
 interface FeedbackSource {
   text: string;
@@ -118,22 +121,88 @@ export function Hero() {
     }
   };
 
+  const [input, setInput] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(40);
+
+  const FIXED_PREFIX = 'Ask autentic ';
+  const placeholderSuffixes = [
+    'what users think about the onboarding process...',
+    'what users love about the new product...',
+    'to summarize our latest user interviews...',
+    'to identify feature requests...',
+    'what users think about the new feature...'
+  ];
+
+  useEffect(() => {
+    // Auto-focus on textarea when component mounts
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    const typeWriter = () => {
+      const currentText = placeholderSuffixes[placeholderIndex];
+      
+      if (!isDeleting) {
+        setCurrentPlaceholder(currentText.substring(0, currentPlaceholder.length + 1));
+        
+        if (currentPlaceholder.length === currentText.length) {
+          // Start deleting after a shorter pause
+          setTimeout(() => setIsDeleting(true), 1000);
+          return;
+        }
+      } else {
+        setCurrentPlaceholder(currentPlaceholder.substring(0, currentPlaceholder.length - 1));
+        
+        if (currentPlaceholder.length === 0) {
+          setIsDeleting(false);
+          setPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderSuffixes.length);
+          return;
+        }
+      }
+    };
+
+    const timeout = setTimeout(typeWriter, isDeleting ? typingSpeed / 1.5 : typingSpeed);
+    return () => clearTimeout(timeout);
+  }, [currentPlaceholder, isDeleting, placeholderIndex, placeholderSuffixes, typingSpeed]);
+
+  const adjustHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight + 2}px`;
+    }
+  };
+
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(event.target.value);
+    adjustHeight();
+  };
+
+  const handleSubmit = () => {
+    if (input.trim()) {
+      // Here we'll redirect to the app with the input as a query parameter
+      window.location.href = `/app/chat?q=${encodeURIComponent(input)}`;
+    }
+  };
+
   return (
     <AuroraBackground className="w-full pt-20 pb-24 md:pb-20 lg:pb-24 overflow-hidden">
       <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-start">
-          {/* Left column with text content */}
-          <div className="flex flex-col justify-center space-y-8 text-center lg:text-left pt-12 md:pt-16">
-            <div className="mb-2 flex justify-center lg:justify-start">
-              <LaunchingSoonBadge />
-            </div>
-            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white text-center lg:text-left">
+        <div className="flex flex-col items-center justify-center min-h-[600px]">
+          {/* Centered content */}
+          <div className="flex flex-col justify-center space-y-8 text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white text-center">
               Convert your
-              <div className="relative h-[1.3em] w-full my-4 overflow-hidden">
+              <div className="relative h-[2em] sm:h-[1.3em] w-full my-2 sm:my-4 overflow-hidden">
                 {feedbackSources.map((source, index) => (
                   <motion.div
                     key={index}
-                    className="absolute left-0 right-0 text-center lg:text-left text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient flex items-center justify-center lg:justify-start"
+                    className="absolute left-0 right-0 text-center text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 animate-gradient flex items-center justify-center"
                     initial={{ opacity: 0, y: "-100%" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={
@@ -149,15 +218,17 @@ export function Hero() {
                     }
                   >
                     <div 
-                      className="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden bg-white border-2 border-gray-200 shadow-sm cursor-pointer transition-all duration-300 hover:shadow-md hover:border-gray-300 mr-4"
+                      className="group relative w-16 h-16 flex-shrink-0 mr-4 cursor-pointer"
                       onMouseEnter={() => setShowTooltip(true)}
                       onMouseLeave={() => setShowTooltip(false)}
                     >
+                      <div className="absolute inset-0 rounded-xl bg-white border-2 border-gray-200 shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:border-gray-300"></div>
                       <Image 
                         src={source.icon} 
                         alt={source.brand} 
-                        fill 
-                        className="object-contain p-2.5" 
+                        width={64}
+                        height={64}
+                        className="absolute inset-0 object-contain p-3 z-10" 
                       />
                       {showTooltip && sourceIndex === index && (
                         <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-white text-black text-sm rounded-xl px-4 py-3 whitespace-nowrap shadow-lg border border-gray-200 flex flex-col items-center">
@@ -171,12 +242,10 @@ export function Hero() {
                   </motion.div>
                 ))}
               </div>
-              <div className="text-spektr-cyan-50">into product feedback</div>
+              <div className="text-spektr-cyan-50">into Product Feedback</div>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl max-w-[720px] mx-auto lg:mx-0 font-medium text-gray-700 dark:text-gray-200">
-              autentic imports product feedback from support tickets, sales calls, interviews, and more — turning it into insights you can chat with.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start w-full">
+
+            {/* <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center w-full">
               <RainbowButtonLink
                 href="#demo"
                 className="w-full sm:w-auto"
@@ -189,56 +258,244 @@ export function Hero() {
               >
                 Watch video
               </Link>
-            </div>
+            </div> */}
           </div>
 
-          {/* Right column with the chat mockup */}
-          <div className="lg:ml-auto flex items-start justify-center lg:justify-end relative h-[800px] w-full" style={{ zIndex: 30 }}>
-            {/* Draggable chat mockup */}
-            {chatVisible && (
-              <Draggable
-                ref={chatRef}
-                bounds={bounds}
-                dragHandleSelector=".drag-handle"
-                initialPosition={initialPosition}
-                initialSize={initialChatSize}
-                minSize={minChatSize}
-                maxSize={maxChatSize}
-                resizable={true}
-                className="transition-opacity duration-500 opacity-100"
-                onResize={handleChatResize}
-              >
-                <div className="w-full h-full rounded-[0.625rem] overflow-hidden border shadow-lg hover:shadow-xl transition-all duration-300 bg-white flex flex-col">
-                  {/* Top navigation bar - macOS style - make it work with draggable */}
-                  <div className="bg-white p-3 border-b flex justify-between items-center drag-handle cursor-grab select-none hover:bg-gray-50 transition-colors">
-                    <div className="flex space-x-2">
-                      <div className="h-2.5 w-2.5 bg-red-400 rounded-full"></div>
-                      <div className="h-2.5 w-2.5 bg-yellow-400 rounded-full"></div>
-                      <div className="h-2.5 w-2.5 bg-green-400 rounded-full"></div>
-                    </div>
-                    <div className="text-xs text-gray-500 select-none">autentic.ai <span className="text-[10px] opacity-50">{Math.round(chatSize.width)}×{Math.round(chatSize.height)}</span></div>
-                    <div className="w-16 flex justify-end items-center">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          resetChatSize();
-                        }}
-                        className="mr-2 text-[10px] text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full px-1.5 py-0.5 transition-colors cursor-pointer"
-                        title="Reset size"
-                      >
-                        Reset
-                      </button>
-                      <div className="h-1.5 w-5 bg-gray-300 rounded mr-1 mt-1" aria-hidden="true" title="Drag to move"></div>
-                    </div>
-                  </div>
+          {/* Demo Input Section */}
+          <div className="w-full max-w-3xl mx-auto mt-16 px-4">
+            <div className="relative w-full group">
+              <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-pink-500/50 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300" />
+              <div className="absolute -inset-[1px] rounded-xl bg-background" />
+              <div className="absolute inset-0 rounded-xl border-clock-animation"></div>
+              <Textarea
+                ref={textareaRef}
+                placeholder={FIXED_PREFIX + currentPlaceholder}
+                value={input}
+                onChange={handleInput}
+                className="textarea-black-focus relative min-h-[140px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-background py-4 px-4 pr-32 border-transparent shadow-[0_2px_6px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_6px_rgba(0,0,0,0.05)] focus:outline-none focus:ring-2 transition-all duration-300"
+                style={{
+                  paddingTop: '20px',
+                  paddingBottom: '65px',
+                  paddingRight: '160px',
+                  maxWidth: '100%',
+                }}
+                onKeyDown={(event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+                  if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+                    event.preventDefault();
+                    handleSubmit();
+                  }
+                }}
+              />
 
-                  {/* ChatUI component */}
-                  <div className="flex-grow flex overflow-hidden">
-                    <ChatUI />
-                  </div>
-                </div>
-              </Draggable>
-            )}
+              <style jsx global>{`
+                .textarea-black-focus:focus {
+                  --tw-ring-color: oklch(0 0 0);
+                }
+              `}</style>
+
+              <style jsx global>{`
+                @keyframes border-clock-animation {
+                  0% {
+                    border-width: 2px;
+                    border-top-color: rgba(99, 102, 241, 0.8); /* indigo */
+                    border-right-color: rgba(0, 0, 0, 0.1);
+                    border-bottom-color: rgba(0, 0, 0, 0.1);
+                    border-left-color: rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 -3px 10px rgba(99, 102, 241, 0.4);
+                  }
+                  12.5% {
+                    border-width: 2px;
+                    border-top-color: rgba(139, 92, 246, 0.8); /* violet */
+                    border-right-color: rgba(99, 102, 241, 0.8); /* indigo */
+                    border-bottom-color: rgba(0, 0, 0, 0.1);
+                    border-left-color: rgba(0, 0, 0, 0.1);
+                    box-shadow: 3px -3px 10px rgba(139, 92, 246, 0.4);
+                  }
+                  25% {
+                    border-width: 2px;
+                    border-top-color: rgba(0, 0, 0, 0.1);
+                    border-right-color: rgba(192, 132, 252, 0.8); /* purple */
+                    border-bottom-color: rgba(0, 0, 0, 0.1);
+                    border-left-color: rgba(0, 0, 0, 0.1);
+                    box-shadow: 3px 0 10px rgba(192, 132, 252, 0.4);
+                  }
+                  37.5% {
+                    border-width: 2px;
+                    border-top-color: rgba(0, 0, 0, 0.1);
+                    border-right-color: rgba(216, 180, 254, 0.8); /* fuchsia */
+                    border-bottom-color: rgba(192, 132, 252, 0.8); /* purple */
+                    border-left-color: rgba(0, 0, 0, 0.1);
+                    box-shadow: 3px 3px 10px rgba(216, 180, 254, 0.4);
+                  }
+                  50% {
+                    border-width: 2px;
+                    border-top-color: rgba(0, 0, 0, 0.1);
+                    border-right-color: rgba(0, 0, 0, 0.1);
+                    border-bottom-color: rgba(244, 114, 182, 0.8); /* pink */
+                    border-left-color: rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 3px 10px rgba(244, 114, 182, 0.4);
+                  }
+                  62.5% {
+                    border-width: 2px;
+                    border-top-color: rgba(0, 0, 0, 0.1);
+                    border-right-color: rgba(0, 0, 0, 0.1);
+                    border-bottom-color: rgba(236, 72, 153, 0.8); /* pink-500 */
+                    border-left-color: rgba(244, 114, 182, 0.8); /* pink */
+                    box-shadow: -3px 3px 10px rgba(236, 72, 153, 0.4);
+                  }
+                  75% {
+                    border-width: 2px;
+                    border-top-color: rgba(0, 0, 0, 0.1);
+                    border-right-color: rgba(0, 0, 0, 0.1);
+                    border-bottom-color: rgba(0, 0, 0, 0.1);
+                    border-left-color: rgba(147, 51, 234, 0.8); /* purple-600 */
+                    box-shadow: -3px 0 10px rgba(147, 51, 234, 0.4);
+                  }
+                  87.5% {
+                    border-width: 2px;
+                    border-top-color: rgba(79, 70, 229, 0.8); /* indigo-600 */
+                    border-right-color: rgba(0, 0, 0, 0.1);
+                    border-bottom-color: rgba(0, 0, 0, 0.1);
+                    border-left-color: rgba(67, 56, 202, 0.8); /* indigo-700 */
+                    box-shadow: -3px -3px 10px rgba(79, 70, 229, 0.4);
+                  }
+                  100% {
+                    border-width: 2px;
+                    border-top-color: rgba(99, 102, 241, 0.8); /* indigo */
+                    border-right-color: rgba(0, 0, 0, 0.1);
+                    border-bottom-color: rgba(0, 0, 0, 0.1);
+                    border-left-color: rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 -3px 10px rgba(99, 102, 241, 0.4);
+                  }
+                }
+
+                .border-clock-animation {
+                  border-style: solid;
+                  border-color: rgba(0, 0, 0, 0.1);
+                  animation: border-clock-animation 8s linear infinite;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                  @keyframes border-clock-animation {
+                    0% {
+                      border-width: 2px;
+                      border-top-color: rgba(99, 102, 241, 0.8); /* indigo */
+                      border-right-color: rgba(255, 255, 255, 0.1);
+                      border-bottom-color: rgba(255, 255, 255, 0.1);
+                      border-left-color: rgba(255, 255, 255, 0.1);
+                      box-shadow: 0 -3px 10px rgba(99, 102, 241, 0.4);
+                    }
+                    12.5% {
+                      border-width: 2px;
+                      border-top-color: rgba(139, 92, 246, 0.8); /* violet */
+                      border-right-color: rgba(99, 102, 241, 0.8); /* indigo */
+                      border-bottom-color: rgba(255, 255, 255, 0.1);
+                      border-left-color: rgba(255, 255, 255, 0.1);
+                      box-shadow: 3px -3px 10px rgba(139, 92, 246, 0.4);
+                    }
+                    25% {
+                      border-width: 2px;
+                      border-top-color: rgba(255, 255, 255, 0.1);
+                      border-right-color: rgba(192, 132, 252, 0.8); /* purple */
+                      border-bottom-color: rgba(255, 255, 255, 0.1);
+                      border-left-color: rgba(255, 255, 255, 0.1);
+                      box-shadow: 3px 0 10px rgba(192, 132, 252, 0.4);
+                    }
+                    37.5% {
+                      border-width: 2px;
+                      border-top-color: rgba(255, 255, 255, 0.1);
+                      border-right-color: rgba(216, 180, 254, 0.8); /* fuchsia */
+                      border-bottom-color: rgba(192, 132, 252, 0.8); /* purple */
+                      border-left-color: rgba(255, 255, 255, 0.1);
+                      box-shadow: 3px 3px 10px rgba(216, 180, 254, 0.4);
+                    }
+                    50% {
+                      border-width: 2px;
+                      border-top-color: rgba(255, 255, 255, 0.1);
+                      border-right-color: rgba(255, 255, 255, 0.1);
+                      border-bottom-color: rgba(244, 114, 182, 0.8); /* pink */
+                      border-left-color: rgba(255, 255, 255, 0.1);
+                      box-shadow: 0 3px 10px rgba(244, 114, 182, 0.4);
+                    }
+                    62.5% {
+                      border-width: 2px;
+                      border-top-color: rgba(255, 255, 255, 0.1);
+                      border-right-color: rgba(255, 255, 255, 0.1);
+                      border-bottom-color: rgba(236, 72, 153, 0.8); /* pink-500 */
+                      border-left-color: rgba(244, 114, 182, 0.8); /* pink */
+                      box-shadow: -3px 3px 10px rgba(236, 72, 153, 0.4);
+                    }
+                    75% {
+                      border-width: 2px;
+                      border-top-color: rgba(255, 255, 255, 0.1);
+                      border-right-color: rgba(255, 255, 255, 0.1);
+                      border-bottom-color: rgba(255, 255, 255, 0.1);
+                      border-left-color: rgba(147, 51, 234, 0.8); /* purple-600 */
+                      box-shadow: -3px 0 10px rgba(147, 51, 234, 0.4);
+                    }
+                    87.5% {
+                      border-width: 2px;
+                      border-top-color: rgba(79, 70, 229, 0.8); /* indigo-600 */
+                      border-right-color: rgba(255, 255, 255, 0.1);
+                      border-bottom-color: rgba(255, 255, 255, 0.1);
+                      border-left-color: rgba(67, 56, 202, 0.8); /* indigo-700 */
+                      box-shadow: -3px -3px 10px rgba(79, 70, 229, 0.4);
+                    }
+                    100% {
+                      border-width: 2px;
+                      border-top-color: rgba(99, 102, 241, 0.8); /* indigo */
+                      border-right-color: rgba(255, 255, 255, 0.1);
+                      border-bottom-color: rgba(255, 255, 255, 0.1);
+                      border-left-color: rgba(255, 255, 255, 0.1);
+                      box-shadow: 0 -3px 10px rgba(99, 102, 241, 0.4);
+                    }
+                  }
+                }
+              `}</style>
+
+              <div className="absolute right-4 top-[40%] -translate-y-1/2 flex flex-row justify-end items-center gap-2">
+                <Badge 
+                  className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-lg"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  2 sources
+                </Badge>
+                <Button
+                  className="rounded-full size-10 flex items-center justify-center bg-zinc-950 hover:bg-black dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors duration-200 border-none"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleSubmit();
+                  }}
+                  disabled={input.length === 0}
+                >
+                  <ArrowUpIcon size={18} className="text-white" />
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-2 justify-center">
+              <button
+                onClick={() => setInput("What do users love about the new product?")}
+                className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+              >
+                New Product Feedback
+              </button>
+              <button
+                onClick={() => setInput("What users think about the onboarding process?")}
+                className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+              >
+                Onboarding feedback
+              </button>
+              <button
+                onClick={() => setInput("Summarize our latest user interviews")}
+                className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+              >
+                Feature requests
+              </button>
+            </div>
           </div>
         </div>
       </div>
