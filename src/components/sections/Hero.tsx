@@ -220,8 +220,8 @@ export function Hero() {
               </div>
               <div className="text-spektr-cyan-50">into Product Feedback</div>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-4 md:mb-8">
-              Chat with your sources and know what users really want
+            <p className="text-mid sm:text-xl text-gray-600 dark:text-gray-300 mb-4 md:mb-8">
+              Chat with your sources and know what users love
             </p>
           </div>
 
