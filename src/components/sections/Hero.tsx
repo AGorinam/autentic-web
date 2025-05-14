@@ -167,14 +167,14 @@ export function Hero() {
   };
 
   return (
-    <AuroraBackground className="w-full pt-32 pb-24 md:pb-20 lg:pb-24 overflow-hidden">
+    <AuroraBackground className="w-full pt-32 pb-16 md:pb-20 lg:pb-24 overflow-hidden">
       <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
-        <div className="flex flex-col items-center justify-center min-h-[600px]">
+        <div className="flex flex-col items-center justify-center">
           {/* Centered content */}
-          <div className="flex flex-col justify-center space-y-8 text-center max-w-4xl mx-auto">
+          <div className="flex flex-col justify-center space-y-4 md:space-y-8 text-center max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white text-center">
               Convert your
-              <div className="relative h-[2em] sm:h-[1.3em] w-full my-2 sm:my-4 overflow-hidden">
+              <div className="relative h-[2em] sm:h-[1.3em] w-full my-1 sm:my-4 overflow-hidden">
                 {feedbackSources.map((source, index) => (
                   <motion.div
                     key={index}
@@ -220,13 +220,13 @@ export function Hero() {
               </div>
               <div className="text-spektr-cyan-50">into Product Feedback</div>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-4 md:mb-8">
               Chat with your sources and know what users really want
             </p>
           </div>
 
           {/* Demo Input Section */}
-          <div className="w-full max-w-3xl mx-auto mt-16">
+          <div className="w-full max-w-3xl mx-auto mt-4 md:mt-8">
             <div className="relative w-full group">
               <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-pink-500/50 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300" />
               <div className="absolute -inset-[1px] rounded-xl bg-background" />
@@ -439,7 +439,7 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="mt-4 flex gap-2 justify-center overflow-x-auto scrollbar-none pb-1">
+            <div className="mt-6 sm:mt-4 flex gap-2 justify-center overflow-x-auto scrollbar-none pb-1">
               <button
                 onClick={() => setInput("What users think about the onboarding process?")}
                 className="flex-shrink-0 bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
@@ -461,7 +461,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Add LogoCarousel component */}
+          {/* LogoCarousel */}
           <LogoCarousel />
         </div>
       </div>
