@@ -51,6 +51,13 @@ export function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
+  // Add mobile detection function
+  const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      typeof window !== 'undefined' ? window.navigator.userAgent : ''
+    );
+  };
+
   const FIXED_PREFIX = 'Ask autentic ';
   const placeholderSuffixes = useMemo(() => [
     'what users think about the onboarding process...',
@@ -61,8 +68,8 @@ export function Hero() {
   ], []);
 
   useEffect(() => {
-    // Auto-focus on textarea when component mounts
-    if (textareaRef.current) {
+    // Only autofocus on desktop devices
+    if (!isMobileDevice() && textareaRef.current) {
       textareaRef.current.focus();
     }
   }, []);
@@ -167,6 +174,9 @@ export function Hero() {
               </div>
               <div className="text-spektr-cyan-50">into Product Feedback</div>
             </h1>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+              Chat with your sources and know what users really want
+            </p>
           </div>
 
           {/* Demo Input Section */}
