@@ -272,11 +272,10 @@ export function Hero() {
                 placeholder={FIXED_PREFIX + currentPlaceholder}
                 value={input}
                 onChange={handleInput}
-                className="textarea-black-focus relative min-h-[140px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-background py-4 px-4 pr-32 border-transparent shadow-[0_2px_6px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_6px_rgba(0,0,0,0.05)] focus:outline-none focus:ring-2 transition-all duration-300"
+                className="textarea-black-focus relative min-h-[140px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-xl text-base bg-background py-4 px-4 border-transparent shadow-[0_2px_6px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_6px_rgba(0,0,0,0.05)] focus:outline-none focus:ring-2 transition-all duration-300"
                 style={{
                   paddingTop: '20px',
-                  paddingBottom: '65px',
-                  paddingRight: '160px',
+                  paddingBottom: '85px',
                   maxWidth: '100%',
                 }}
                 onKeyDown={(event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -453,7 +452,7 @@ export function Hero() {
                 }
               `}</style>
 
-              <div className="absolute right-4 top-[40%] -translate-y-1/2 flex flex-row justify-end items-center gap-2">
+              <div className="absolute right-4 bottom-4 flex flex-row justify-end items-center gap-2">
                 <Badge 
                   className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-lg"
                 >
