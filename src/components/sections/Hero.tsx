@@ -1,13 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Draggable, DraggableRef } from "@/components/ui/draggable";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { RainbowButtonLink } from "@/components/ui/rainbow-button-link";
-import { ChatUI } from "@/components/ui/chat-ui";
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
@@ -20,22 +16,8 @@ interface FeedbackSource {
 }
 
 export function Hero() {
-  const [chatVisible] = useState(true);
-  const [chatSize, setChatSize] = useState({ width: 560, height: 550 });
   const heroRef = useRef<HTMLDivElement>(null);
-  const [bounds, setBounds] = useState<{ top: number; left: number; right: number; bottom: number } | null>(null);
   const [showTooltip, setShowTooltip] = useState(false);
-
-  // Calculate initial position based on viewport
-  const [initialPosition, setInitialPosition] = useState({ x: 0, y: 50 });
-
-  // Initial and minimum size for the chat window
-  const initialChatSize = { width: 450, height: 600 };
-  const minChatSize = { width: 400, height: 550 };
-  const maxChatSize = { width: 800, height: 800 };
-
-  // Chat reference to access Draggable methods
-  const chatRef = useRef<DraggableRef>(null);
 
   // Rotating text for feedback sources with icons
   const [sourceIndex, setSourceIndex] = useState(0);
@@ -63,79 +45,20 @@ export function Hero() {
     return () => clearTimeout(timeoutId);
   }, [sourceIndex, feedbackSources]);
 
-  // Update bounds when window is resized
-  useEffect(() => {
-    const updateBounds = () => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        const isMobile = window.innerWidth < 768;
-
-        setBounds({
-          top: isMobile ? -200 : -400, // Adjusted for mobile
-          left: isMobile ? 20 : 0, // Added margin for mobile
-          right: isMobile ? 20 : (rect.width - 50), // Added margin for mobile
-          bottom: rect.height - 100,
-        });
-      }
-    };
-
-    updateBounds();
-    window.addEventListener('resize', updateBounds);
-    return () => window.removeEventListener('resize', updateBounds);
-  }, []);
-
-  useEffect(() => {
-    const calculateInitialPosition = () => {
-      const isMobile = window.innerWidth < 768;
-      
-      if (isMobile) {
-        // For mobile, center horizontally and adjust vertical position
-        const availableWidth = window.innerWidth - 40; // Account for margins
-        const centerX = (availableWidth - initialChatSize.width) / 2;
-        setInitialPosition({ 
-          x: Math.max(20, centerX), // Ensure minimum margin
-          y: 50 // Keep chat more visible on mobile
-        });
-      } else {
-        // For larger screens, position it to the right
-        const rightPosition = window.innerWidth * 0.85 - initialChatSize.width;
-        setInitialPosition({ x: rightPosition, y: -250 });
-      }
-    };
-
-    calculateInitialPosition();
-    window.addEventListener('resize', calculateInitialPosition);
-    return () => window.removeEventListener('resize', calculateInitialPosition);
-  }, [initialChatSize.width]);
-
-  // Handler for chat resize
-  const handleChatResize = (newSize: { width: number; height: number }) => {
-    setChatSize(newSize);
-  };
-
-  // Reset chat size to initial dimensions
-  const resetChatSize = () => {
-    setChatSize(initialChatSize);
-    if (chatRef.current && chatRef.current.resetSize) {
-      chatRef.current.resetSize();
-    }
-  };
-
   const [input, setInput] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [currentPlaceholder, setCurrentPlaceholder] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(40);
 
   const FIXED_PREFIX = 'Ask autentic ';
-  const placeholderSuffixes = [
+  const placeholderSuffixes = useMemo(() => [
     'what users think about the onboarding process...',
     'what users love about the new product...',
     'to summarize our latest user interviews...',
     'to identify feature requests...',
     'what users think about the new feature...'
-  ];
+  ], []);
 
   useEffect(() => {
     // Auto-focus on textarea when component mounts
@@ -167,9 +90,9 @@ export function Hero() {
       }
     };
 
-    const timeout = setTimeout(typeWriter, isDeleting ? typingSpeed / 1.5 : typingSpeed);
+    const timeout = setTimeout(typeWriter, isDeleting ? 40 / 1.5 : 40);
     return () => clearTimeout(timeout);
-  }, [currentPlaceholder, isDeleting, placeholderIndex, placeholderSuffixes, typingSpeed]);
+  }, [currentPlaceholder, isDeleting, placeholderIndex, placeholderSuffixes]);
 
   const adjustHeight = () => {
     if (textareaRef.current) {
@@ -244,21 +167,6 @@ export function Hero() {
               </div>
               <div className="text-spektr-cyan-50">into Product Feedback</div>
             </h1>
-
-            {/* <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center w-full">
-              <RainbowButtonLink
-                href="#demo"
-                className="w-full sm:w-auto"
-              >
-                Start building
-              </RainbowButtonLink>
-              <Link
-                href="#video"
-                className="w-full sm:w-auto h-[56px] flex items-center justify-center luma-button bg-white text-black dark:bg-zinc-800 dark:text-white px-8 py-0 text-base rounded-[0.625rem] border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-md hover:scale-105 transition-all duration-300"
-              >
-                Watch video
-              </Link>
-            </div> */}
           </div>
 
           {/* Demo Input Section */}
