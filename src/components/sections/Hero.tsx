@@ -172,9 +172,9 @@ export function Hero() {
         <div className="flex flex-col items-center justify-center">
           {/* Centered content */}
           <div className="flex flex-col justify-center space-y-4 md:space-y-8 text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white text-center">
+            <h1 className="text-[32px] leading-tight xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-white text-center">
               Convert your
-              <div className="relative h-[2em] sm:h-[1.3em] w-full my-1 sm:my-4 overflow-hidden">
+              <div className="relative h-[1.6em] xs:h-[2em] sm:h-[1.3em] w-full my-0.5 xs:my-1 sm:my-4 overflow-hidden">
                 {feedbackSources.map((source, index) => (
                   <motion.div
                     key={index}
@@ -194,7 +194,7 @@ export function Hero() {
                     }
                   >
                     <div 
-                      className="group relative w-16 h-16 flex-shrink-0 mr-4 cursor-pointer"
+                      className="group relative w-12 xs:w-16 h-12 xs:h-16 flex-shrink-0 mr-3 xs:mr-4 cursor-pointer"
                       onMouseEnter={() => setShowTooltip(true)}
                       onMouseLeave={() => setShowTooltip(false)}
                     >
@@ -204,7 +204,7 @@ export function Hero() {
                         alt={source.brand} 
                         width={64}
                         height={64}
-                        className="absolute inset-0 object-contain p-3 z-10" 
+                        className="absolute inset-0 object-contain p-2 xs:p-3 z-10" 
                       />
                       {showTooltip && sourceIndex === index && (
                         <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-white text-black text-sm rounded-xl px-4 py-3 whitespace-nowrap shadow-lg border border-gray-200 flex flex-col items-center">
@@ -214,7 +214,7 @@ export function Hero() {
                         </div>
                       )}
                     </div>
-                    <span className="whitespace-nowrap">{source.text}</span>
+                    <span className="whitespace-nowrap text-[32px] xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl">{source.text}</span>
                   </motion.div>
                 ))}
               </div>
