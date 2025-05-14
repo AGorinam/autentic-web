@@ -180,7 +180,7 @@ export function Hero() {
           </div>
 
           {/* Demo Input Section */}
-          <div className="w-full max-w-3xl mx-auto mt-16 px-4">
+          <div className="w-full max-w-3xl mx-auto mt-16">
             <div className="relative w-full group">
               <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-pink-500/50 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300" />
               <div className="absolute -inset-[1px] rounded-xl bg-background" />
@@ -393,24 +393,24 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2 justify-center">
-              <button
-                onClick={() => setInput("What do users love about the new product?")}
-                className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
-              >
-                New Product Feedback
-              </button>
+            <div className="mt-4 flex gap-2 justify-center overflow-x-auto scrollbar-none pb-1">
               <button
                 onClick={() => setInput("What users think about the onboarding process?")}
-                className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+                className="flex-shrink-0 bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
               >
                 Onboarding feedback
               </button>
               <button
                 onClick={() => setInput("Summarize our latest user interviews")}
-                className="bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+                className="flex-shrink-0 bg-white dark:bg-zinc-900 flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
               >
                 Feature requests
+              </button>
+              <button
+                onClick={() => setInput("What do users love about the new product?")}
+                className="hidden sm:flex flex-shrink-0 bg-white dark:bg-zinc-900 items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-[0.625rem] hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md hover:scale-105 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-200 cursor-pointer"
+              >
+                New Product Feedback
               </button>
             </div>
           </div>
