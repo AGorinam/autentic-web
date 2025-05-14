@@ -34,7 +34,7 @@ const LogoCarousel = () => {
   ];
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-8">
+    <div className="w-full max-w-3xl mx-auto mt-4">
       <h3 className="text-center text-mid font-medium text-gray-500 dark:text-gray-400 mb-3">
         Integrates with:
       </h3>
