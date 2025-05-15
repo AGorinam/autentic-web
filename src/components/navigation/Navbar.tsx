@@ -20,7 +20,7 @@ export function Navbar() {
                 className="object-contain"
               />
             </div>
-            <span className="text-3xl font-semibold text-black tracking-tight hidden sm:inline">
+            <span className="text-3xl font-extrabold text-black tracking-tight hidden sm:inline">
               autentic
             </span>
           </Link>
