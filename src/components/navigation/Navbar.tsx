@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export function Navbar() {
@@ -9,8 +10,19 @@ export function Navbar() {
       <div className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto py-4">
         <nav className="flex items-center justify-between rounded-[0.625rem] px-3 sm:px-5 py-2 backdrop-blur-md bg-white/30 border border-slate-300/70 dark:border-slate-700/70 shadow-sm">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <span className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">autentic</span>
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-12 h-12 relative">
+              <Image
+                src="/images/logo-autentic.svg"
+                alt="Autentic Logo"
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
+            <span className="text-3xl font-extrabold text-black tracking-tight hidden sm:inline">
+              autentic
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
