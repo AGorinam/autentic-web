@@ -161,8 +161,8 @@ export function Hero() {
 
   const handleSubmit = () => {
     if (input.trim()) {
-      // Here we'll redirect to the app with the input as a query parameter
-      window.location.href = `/app/chat?q=${encodeURIComponent(input)}`;
+      // Redirect to Calendly instead of the chat
+      window.location.href = "https://calendly.com/danidiestre";
     }
   };
 
@@ -427,7 +427,7 @@ export function Hero() {
                   2 sources
                 </Badge>
                 <Button
-                  className="rounded-full size-10 flex items-center justify-center bg-zinc-950 hover:bg-black dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors duration-200 border-none"
+                  className="rounded-full size-10 flex items-center justify-center bg-zinc-950 hover:bg-black dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors duration-200 border-none cursor-pointer"
                   onClick={(event) => {
                     event.preventDefault();
                     handleSubmit();

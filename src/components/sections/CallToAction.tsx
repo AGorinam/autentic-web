@@ -19,7 +19,7 @@ export function CallToAction() {
               Start free trial
             </Link>
             <Link 
-              href="#contact"
+              href="https://calendly.com/danidiestre"
               className="luma-button luma-button-secondary px-8 py-4 text-base rounded-[0.625rem]"
             >
               Schedule a demo
