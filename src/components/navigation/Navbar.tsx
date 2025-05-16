@@ -34,7 +34,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             {/* Login link is commented out */}
             <Link
-              href="https://calendly.com/danidiestre"
+              href="https://cal.com/danidiestre"
               className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90 dark:bg-white dark:text-slate-800 dark:hover:bg-white/90 inline-flex items-center transition-colors"
             >
               <span className="hidden sm:inline">Book a demo</span>

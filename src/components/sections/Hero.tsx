@@ -161,8 +161,8 @@ export function Hero() {
 
   const handleSubmit = () => {
     if (input.trim()) {
-      // Redirect to Calendly instead of the chat
-      window.location.href = "https://calendly.com/danidiestre";
+      // Redirect to Cal.com instead of Calendly
+      window.location.href = "https://cal.com/danidiestre";
     }
   };
 
