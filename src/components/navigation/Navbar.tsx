@@ -13,7 +13,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 relative">
               <Image
-                src="/images/logo-autentic.svg"
+                src="/images/logo-autentic-1.svg"
                 alt="Autentic Logo"
                 fill
                 priority
