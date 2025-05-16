@@ -167,12 +167,12 @@ export function Hero() {
   };
 
   return (
-    <AuroraBackground className="w-full pt-0 sm:pt-4 md:pt-32 pb-16 md:pb-20 lg:pb-24 overflow-hidden">
-      <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto -mt-10 sm:mt-0">
+    <AuroraBackground className="w-full pt-32 pb-16 md:pb-20 lg:pb-24 overflow-hidden">
+      <div ref={heroRef} className="container px-4 md:px-6 max-w-[96%] md:max-w-[85%] mx-auto">
         <div className="flex flex-col items-center justify-center">
           {/* Centered content */}
           <div className="flex flex-col justify-center space-y-4 md:space-y-8 text-center max-w-4xl mx-auto">
-            <h1 className="text-[32px] leading-tight xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black sm:font-bold tracking-tighter text-black dark:text-white text-center">
+          <h1 className="text-[32px] leading-tight xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold sm:font-bold tracking-tighter text-black dark:text-white text-center">
               Convert your
               <div className="relative h-[1.6em] xs:h-[2em] sm:h-[1.3em] w-full my-0.5 xs:my-1 sm:my-4 overflow-hidden">
                 {feedbackSources.map((source, index) => (
