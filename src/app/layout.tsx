@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "autentic.ai helps Product teams uncover real user needs by turning scattered feedback into actionable insights — with source clips and full context, just a chat away.",
   icons: {
     icon: [
-      { url: '/favicon.ico' },
+      { url: '/icon.ico', sizes: '48x48' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
