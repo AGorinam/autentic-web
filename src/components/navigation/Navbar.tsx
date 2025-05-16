@@ -11,9 +11,9 @@ export function Navbar() {
         <nav className="flex items-center justify-between rounded-[0.625rem] px-3 sm:px-5 py-2 backdrop-blur-md bg-white/30 border border-slate-300/70 dark:border-slate-700/70 shadow-sm">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-12 h-12 relative">
+            <div className="w-10 h-10 relative">
               <Image
-                src="/images/logo-autentic.png"
+                src="/images/logo-autentic.svg"
                 alt="Autentic Logo"
                 fill
                 priority
